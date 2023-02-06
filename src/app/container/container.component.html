@@ -2,6 +2,10 @@
     <app-page-location></app-page-location>
 </div>
 
-<div class="container">
+<div class="container" *ngIf="formNumber == 1">
     <app-customer-form></app-customer-form>    
+</div>
+
+<div class="container" *ngIf="formNumber != 1">
+    <app-item-form></app-item-form>    
 </div>

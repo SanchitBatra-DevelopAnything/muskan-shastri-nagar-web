@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilityService } from '../services/utility.service';
 
 @Component({
   selector: 'app-item-form',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemFormComponent implements OnInit {
 
-  constructor() { }
+
+
+  constructor(private utilityService : UtilityService) { }
 
   ngOnInit(): void {
+
+  }
+
+  goBack()
+  {
+    this.utilityService.formChange.next(1);
   }
 
 }

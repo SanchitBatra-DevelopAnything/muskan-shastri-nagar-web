@@ -10,7 +10,11 @@ import { ItemFormComponent } from './item-form/item-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
 
+const appRoutes : Routes = [
+  {path : '' , component : ContainerComponent},
+]
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +31,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     NgxMaterialTimepickerModule,
     BrowserAnimationsModule,
 
+    RouterModule.forRoot(appRoutes,{useHash: true}),
   ],
   providers: [],
   bootstrap: [AppComponent]

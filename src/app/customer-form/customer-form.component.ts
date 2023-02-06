@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { UtilityService } from '../services/utility.service';
 
 @Component({
   selector: 'app-customer-form',
@@ -10,7 +12,7 @@ export class CustomerFormComponent implements OnInit {
 
   customerForm:FormGroup;
 
-  constructor() { }
+  constructor(private utilityService : UtilityService) { }
 
   ngOnInit(): void {
     this.customerForm = new FormGroup({
@@ -20,13 +22,14 @@ export class CustomerFormComponent implements OnInit {
       'bookingDate' : new FormControl('',[Validators.required]),
       'deliveryDate' : new FormControl('' , [Validators.required]),
       'deliveryTime' : new FormControl('',[Validators.required]),
-      'deliveryType' : new FormControl('0',[Validators.required])
+      'deliveryType' : new FormControl('',[Validators.required])
    });
   }
 
   print() : void
   {
     console.log(this.customerForm.value);
+    this.utilityService.formChange.next(2);
   }
 
 }
