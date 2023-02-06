@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+  }

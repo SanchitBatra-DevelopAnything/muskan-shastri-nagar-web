@@ -1,0 +1,18 @@
+
+<div class="page-location">
+    <ul>
+      <li>
+        <div *ngIf="formStep > '1'" class="uitk-icon uitk-icon-checkmark_filled bigger"></div>
+        <div *ngIf="formStep === '1'" class="number-mark circle-color-active">1</div>
+        <span [ngClass]="formStep === '1' ? 'active' : 'inactive'">Order Information</span>
+      </li>
+      <li>
+        <div *ngIf="formStep > '2'" class="uitk-icon uitk-icon-checkmark_filled bigger"></div>
+        <div *ngIf="formStep === '1' || formStep === '2'"
+             [ngClass]="formStep === '1' ? 'number-mark circle-color-inactive' : 'number-mark circle-color-active'">2</div>
+        <span [ngClass]="formStep === '2' ? 'active' : 'inactive'">Customer Information</span>
+      </li>
+    </ul>
+  </div>
+  
+    <div class="page-location-gradient"></div>  

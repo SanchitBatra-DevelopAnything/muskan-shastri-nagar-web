@@ -1,0 +1,46 @@
+<form [formGroup] = "customerForm" novalidate class = "page-spacer">
+    <h2>Customer Information</h2>
+    <p>Please fill in the customer details</p>
+    <legend>
+    <span>Name</span>
+    <div style = "width:50%;">
+        <input type = "text" class = "form-control" formControlName="customerName">
+    </div>
+
+    <span>Contact</span>
+    <div style = "width:50%;">
+        <input type = "text" class = "form-control" formControlName="Contact">
+    </div>
+
+    <span>Address</span>
+    <div style = "width:50%;">
+        <input type = "text" class = "form-control" formControlName="Address">
+    </div>
+
+    <span>Booking Date</span>
+    <div style = "width:50%;">
+        <input type = "text" class = "form-control" formControlName="bookingDate">
+    </div>
+
+    <span>Delivery Date</span>
+    <div style = "width:50%;">
+        <input type = "text" class = "form-control" formControlName="deliveryDate">
+    </div>
+
+    <span>Delivery Time</span>
+    <div style = "width:50%;">
+        <input type = "text" class = "form-control" formControlName="deliveryTime">
+    </div>
+
+    <span>Delivery Type</span>
+    <div style = "width:50%;">
+        <input type = "radio" id = "selfDeliveryType" name = "deliveryType" formControlName = "deliveryType" [value] = "0">
+        <label for = "selfDeliveryType">SELF</label>
+    </div>
+
+    <div style = "width:50%;">
+        <input type = "radio" id = "hdDeliveryType" name = "deliveryType" formControlName = "deliveryType" [value] = "1">
+        <label for = "hdDeliveryType">HOME DELIVERY</label>
+    </div>
+    </legend>
+</form>
