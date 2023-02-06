@@ -24,4 +24,9 @@ export class CustomerFormComponent implements OnInit {
    });
   }
 
+  print() : void
+  {
+    console.log(this.customerForm.value);
+  }
+
 }

@@ -2,45 +2,71 @@
     <h2>Customer Information</h2>
     <p>Please fill in the customer details</p>
     <legend>
-    <span>Name</span>
+    <div class="form-group">
+        <span>Name</span>
     <div style = "width:50%;">
         <input type = "text" class = "form-control" formControlName="customerName">
     </div>
-
-    <span>Contact</span>
+    </div>
+    
+    <div class="form-group">
+        <span>Contact</span>
     <div style = "width:50%;">
         <input type = "text" class = "form-control" formControlName="Contact">
     </div>
 
-    <span>Address</span>
+    </div>
+    
+    <div class="form-group">
+        <span>Address</span>
     <div style = "width:50%;">
         <input type = "text" class = "form-control" formControlName="Address">
     </div>
-
-    <span>Booking Date</span>
+    </div>
+    
+    <div class="form-group">
+        <span>Booking Date</span>
     <div style = "width:50%;">
-        <input type = "text" class = "form-control" formControlName="bookingDate">
+        <input type = "date" formControlName="bookingDate">
     </div>
 
-    <span>Delivery Date</span>
+    </div>
+    
+    <div class="form-group">
+        <span>Delivery Date</span>
     <div style = "width:50%;">
-        <input type = "text" class = "form-control" formControlName="deliveryDate">
+        <input type = "date" formControlName="deliveryDate">
     </div>
 
-    <span>Delivery Time</span>
-    <div style = "width:50%;">
-        <input type = "text" class = "form-control" formControlName="deliveryTime">
     </div>
+    
+    <div class="form-group">
+        <span>Delivery Time</span>
+    <div style = "width:50%;">
+        <input [ngxTimepicker]="picker" formControlName="deliveryTime">
+<ngx-material-timepicker #picker></ngx-material-timepicker>
+    </div>
+    </div>
+    
 
-    <span>Delivery Type</span>
+    <div class="form-group">
+        <span>Delivery Type</span>
     <div style = "width:50%;">
         <input type = "radio" id = "selfDeliveryType" name = "deliveryType" formControlName = "deliveryType" [value] = "0">
         <label for = "selfDeliveryType">SELF</label>
     </div>
+    
 
-    <div style = "width:50%;">
-        <input type = "radio" id = "hdDeliveryType" name = "deliveryType" formControlName = "deliveryType" [value] = "1">
-        <label for = "hdDeliveryType">HOME DELIVERY</label>
+        <div style = "width:50%;">
+            <input type = "radio" id = "hdDeliveryType" name = "deliveryType" formControlName = "deliveryType" [value] = "1">
+            <label for = "hdDeliveryType">HOME DELIVERY</label>
+        </div>
     </div>
+    
     </legend>
+
+    <button class = "btn btn-success" style = "display: inline-block; margin-right:25px;">Go Back</button>
+
+    <button class = "btn btn-success" style = "display: inline-block;" (click)="print()">Submit</button>
+
 </form>
