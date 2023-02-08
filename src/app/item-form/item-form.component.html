@@ -1,1 +1,96 @@
-<button class = "btn btn-danger" (click) = "goBack()">Go Back</button>
+<form [formGroup] = "itemForm" novalidate class = "page-spacer">
+    <h2>Order Details</h2>
+    <p>Please fill in the order details</p>
+
+    <legend>
+  
+    <div class="form-group">
+        <span>Weight</span>
+    <div style = "width:50%;">
+        <input type = "text" class = "form-control" formControlName="weight">
+    </div>
+
+    </div>
+    
+    <div class="form-group">
+        <span>Quantity</span>
+    <div style = "width:50%;">
+        <input type = "text" class = "form-control" formControlName="quantity">
+    </div>
+    </div>
+    
+    <div class="form-group">
+        <span>Price</span>
+    <div style = "width:50%;">
+        <input type = "text" class = "form-control" formControlName="price">
+    </div>
+
+    </div>
+    
+    <div class="form-group">
+        <span>Total Amount</span>
+    <div style = "width:50%;">
+        <input type = "text" class = "form-control" formControlName="totalAmount">
+    </div>
+    </div>
+    <div class="form-group">
+        <span>Design Charges</span>
+    <div style = "width:50%;">
+        <input type = "text" class = "form-control" formControlName="designCharges">
+    </div>
+    </div>
+    <div class="form-group">
+        <span>Advance Amount</span>
+    <div style = "width:50%;">
+        <input type = "text" class = "form-control" formControlName="advanceAmount">
+    </div>
+    </div>
+
+    <div class="form-group">
+        <span>Balance Amount</span>
+    <div style = "width:50%;">
+        <input type = "text" class = "form-control" formControlName="balanceAmount">
+    </div>
+    </div>
+
+    <div class="form-group">
+        <span>Message On Item</span>
+    <div style = "width:50%;">
+        <input type = "textarea" class = "form-control" formControlName="message">
+    </div>
+
+    </div>
+
+    <div class="form-group">
+        <span>Particulars</span>
+    <div style = "width:50%;">
+        <input type = "text" class = "form-control" formControlName="particulars">
+    </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col xs-12 md-6">
+            <div class="form-group">
+                <span>Item Photo</span>
+            <div style = "width:50%;">
+                <input type = "file" accept="image/*" (change) = "onFileChange($event)">
+            </div>
+        </div>
+        <div class="col xs-12 md-6">
+            <div class = "display_image">
+                <img [src]="imageUrl" *ngIf="imageUrl" class = "display_image">
+            </div>
+        </div>
+    </div>
+    
+    </div>
+    
+    </legend>
+    <button class = "btn btn-danger" (click) = "goBack()">Go Back</button>
+</form>
+
+
+
+
+
