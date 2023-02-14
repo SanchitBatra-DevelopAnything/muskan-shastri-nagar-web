@@ -14,9 +14,12 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { OrderTypeSelectionComponent } from './order-type-selection/order-type-selection.component';
+import { RegularOrderFormComponent } from './regular-order-form/regular-order-form.component';
 
 const appRoutes : Routes = [
-  {path : '' , component : ContainerComponent},
+  {path : '' , component : OrderTypeSelectionComponent},
+  {path : 'order/:orderType',component:ContainerComponent},
 ]
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ const appRoutes : Routes = [
     ContainerComponent,
     PageLocationComponent,
     CustomerFormComponent,
-    ItemFormComponent
+    ItemFormComponent,
+    OrderTypeSelectionComponent,
+    RegularOrderFormComponent
   ],
   imports: [
     BrowserModule,
