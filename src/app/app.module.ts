@@ -16,10 +16,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { OrderTypeSelectionComponent } from './order-type-selection/order-type-selection.component';
 import { RegularOrderFormComponent } from './regular-order-form/regular-order-form.component';
+import { InventoryFormComponent } from './inventory-form/inventory-form.component';
+import { InventoryListComponent } from './inventory-list/inventory-list.component';
+import { InventoryItemComponent } from './inventory-item/inventory-item.component';
 
 const appRoutes : Routes = [
   {path : '' , component : OrderTypeSelectionComponent},
   {path : 'order/:orderType',component:ContainerComponent},
+  {path : 'inventory' , component : InventoryFormComponent}
 ]
 @NgModule({
   declarations: [
@@ -30,7 +34,10 @@ const appRoutes : Routes = [
     CustomerFormComponent,
     ItemFormComponent,
     OrderTypeSelectionComponent,
-    RegularOrderFormComponent
+    RegularOrderFormComponent,
+    InventoryFormComponent,
+    InventoryListComponent,
+    InventoryItemComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,33 @@
+<div class="container" style = "text-align:center;">
+    <div class = "jumbotron">
+        <h3>Add Your Items Here!!</h3>
+        
+        <form [formGroup] = "inventoryForm" (ngSubmit) = "onSubmit()"> 
+            <div class="form-group">
+    
+                    <label for = "shopName">Item Name</label>
+                    <input type = "text"
+                    id="itemName"
+                    class = "form-control"
+                    formControlName="itemName">
+            </div>
+
+            <div class="form-group">
+    
+                <label for = "price">Price</label>
+                <input type = "number"
+                id="price"
+                class = "form-control"
+                formControlName="price">
+        </div>
+
+            <button type = "submit" class = "btn btn-success btn-bold-text" *ngIf = "!isInsertingItem" [disabled] = "inventoryForm.pending|| inventoryForm.invalid">Add This Item</button>
+            <button *ngIf = "isInsertingItem" class = "btn btn-success">
+                <div class="loader loader-button">
+    
+                </div>
+            </button>
+        </form>
+    </div>
+    
+</div>
