@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-inventory-form',
@@ -10,7 +11,7 @@ export class InventoryFormComponent implements OnInit {
 
   inventoryForm:FormGroup;
   isInsertingItem:boolean = false;
-  constructor() { }
+  constructor(private apiService:ApiService) { }
 
   ngOnInit(): void {
     this.inventoryForm = new FormGroup({
@@ -21,7 +22,9 @@ export class InventoryFormComponent implements OnInit {
 
   onSubmit()
   {
-    console.log(this.inventoryForm.value);
+    this.apiService.addItemToInventory(this.inventoryForm.value).subscribe((_)=>{
+      this.isInsertingItem = false;
+    })
   }
 
 }

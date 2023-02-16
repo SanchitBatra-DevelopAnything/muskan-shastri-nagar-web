@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {AngularFireStorageModule} from '@angular/fire/compat/storage';
 import {AngularFireModule} from '@angular/fire/compat';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -44,6 +45,7 @@ const appRoutes : Routes = [
     FormsModule,
     ReactiveFormsModule,
     NgxMaterialTimepickerModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
