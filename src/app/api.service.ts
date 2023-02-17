@@ -13,4 +13,12 @@ export class ApiService {
   {
     return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/inventory.json',item);
   }
+
+  public getInventoryItems() : Observable<any> {
+    return this.http.get('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/inventory.json');
+  }
+
+  public deleteItemFromInventory(key:any):Observable<any> {
+    return this.http.delete('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/inventory/'+key+'.json');
+  }
 }

@@ -22,6 +22,7 @@ export class InventoryFormComponent implements OnInit {
 
   onSubmit()
   {
+    this.isInsertingItem = true;
     this.apiService.addItemToInventory(this.inventoryForm.value).subscribe((_)=>{
       this.isInsertingItem = false;
     })

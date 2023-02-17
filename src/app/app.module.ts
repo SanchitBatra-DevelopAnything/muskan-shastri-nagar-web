@@ -24,7 +24,8 @@ import { InventoryItemComponent } from './inventory-item/inventory-item.componen
 const appRoutes : Routes = [
   {path : '' , component : OrderTypeSelectionComponent},
   {path : 'order/:orderType',component:ContainerComponent},
-  {path : 'inventory' , component : InventoryFormComponent}
+  {path : 'inventory' , component : InventoryListComponent},
+  {path : 'inventory/add' , component : InventoryFormComponent}
 ]
 @NgModule({
   declarations: [
