@@ -22,7 +22,7 @@ import { InventoryListComponent } from './inventory-list/inventory-list.componen
 import { InventoryItemComponent } from './inventory-item/inventory-item.component';
 
 const appRoutes : Routes = [
-  {path : '' , component : OrderTypeSelectionComponent},
+  {path : '' , component : OrderTypeSelectionComponent,pathMatch:"full"},
   {path : 'order/:orderType',component:ContainerComponent},
   {path : 'inventory' , component : InventoryListComponent},
   {path : 'inventory/form/:key' , component : InventoryFormComponent}
