@@ -29,4 +29,9 @@ export class ApiService {
   public editInventoryItem(key:any , item:any) : Observable<any> {
     return this.http.put('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/inventory/'+key+'.json',item);
   }
+
+  public addCustomOrder(order:any) : Observable<any> {
+    let bookingDate = order.bookingDate;
+    return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/customOrders/'+bookingDate+'.json',order);
+  }
 }

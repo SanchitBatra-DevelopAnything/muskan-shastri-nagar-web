@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { finalize } from 'rxjs';
+import { Router } from '@angular/router';
+import { finalize, Observable } from 'rxjs';
+import { ApiService } from '../api.service';
 import { UtilityService } from '../services/utility.service';
 
 @Component({
@@ -17,9 +19,10 @@ export class ItemFormComponent implements OnInit {
   isUploading:boolean = false;
   selectedImage:any;
   selectedPhotoOnCake:any;
+  isLoading:boolean = false;
 
 
-  constructor(private storage : AngularFireStorage,private utilityService : UtilityService) { }
+  constructor(private storage : AngularFireStorage,private utilityService : UtilityService,private apiService : ApiService,private router:Router) { }
 
   ngOnInit(): void {
     this.itemForm = new FormGroup({
@@ -72,6 +75,7 @@ export class ItemFormComponent implements OnInit {
   }
 
   onFileChange(event:any) {
+    // this.isLoading = true;
     const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
@@ -79,11 +83,15 @@ export class ItemFormComponent implements OnInit {
       reader.onload = () => {
         this.imageUrl = reader.result;
         this.selectedImage = event.target.files[0];
+        console.log("calling upload");
+        this.onUpload();
       };
     }
+    
   }
 
   onPhotoFileChange(event:any) {
+    this.isLoading = true;
     const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
@@ -91,15 +99,17 @@ export class ItemFormComponent implements OnInit {
       reader.onload = () => {
         this.photoUrl = reader.result;
         this.selectedPhotoOnCake = event.target.files[0];
+        console.log("Calling photo upload");
+        this.onPhotoUpload();
       };
     }
   }
 
   onUpload()
   {
-    this.isUploading = true;
-    if(this.itemForm.valid)
-    {
+    console.log("UPLOAD CALLED");
+      
+    
       var filePath = `customCakes/${this.selectedImage.name}_${new Date().getTime()}`;
       var fileRef = this.storage.ref(filePath);
       this.storage.upload(filePath,this.selectedImage).snapshotChanges().pipe(
@@ -110,21 +120,18 @@ export class ItemFormComponent implements OnInit {
               'imgUrl' : url
             });
             console.log(url);
-            this.isUploading = false;
+            this.isLoading = false;
           });
         })
       ).subscribe();
-    }
+    
   }
 
-  onPhotoUpload()
-  {
-    this.isUploading = true;
-    if(this.itemForm.valid)
-    {
+  onPhotoUpload():any
+  { 
       var filePath = `customCakes/${this.selectedPhotoOnCake.name}_${new Date().getTime()}`;
       var fileRef = this.storage.ref(filePath);
-      this.storage.upload(filePath,this.selectedImage).snapshotChanges().pipe(
+      return this.storage.upload(filePath,this.selectedImage).snapshotChanges().pipe(
         finalize(()=>{
           //RETRIEVING THE UPLOADED IMAGE URL.
           fileRef.getDownloadURL().subscribe((url)=>{
@@ -132,16 +139,29 @@ export class ItemFormComponent implements OnInit {
               'photoUrl' : url
             });
             console.log(url);
-            this.isUploading = false;
+            this.isLoading = false;
           });
         })
       ).subscribe();
-    }
   }
 
   submitForm()
   {
+    this.isLoading = true;
+    sessionStorage.setItem("customOrderDetails" , JSON.stringify(this.itemForm.value));
+    let customerInfo = JSON.parse(sessionStorage.getItem("customerInfo")+"");
+    let customOrderInfo = JSON.parse(sessionStorage.getItem("customOrderDetails")+"");
 
+    const customOrder = {
+      ...customerInfo,
+      ...customOrderInfo
+    };
+
+    this.apiService.addCustomOrder(customOrder).subscribe(()=>{
+      sessionStorage.clear();
+      this.isLoading = false;
+      this.router.navigate(['/']);
+    }); 
   }
   
 

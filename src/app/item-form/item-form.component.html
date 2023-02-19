@@ -1,4 +1,8 @@
-<form [formGroup] = "itemForm" novalidate class = "page-spacer">
+<div *ngIf = "isLoading" class="loader">
+
+</div>
+
+<form *ngIf = "!isLoading" [formGroup] = "itemForm" novalidate class = "page-spacer">
     <h2>Order Details</h2>
     <p>Please fill in the order details</p>
 
