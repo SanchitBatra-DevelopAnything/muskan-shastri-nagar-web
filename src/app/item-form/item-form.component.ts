@@ -35,12 +35,40 @@ export class ItemFormComponent implements OnInit {
       'designCharges' : new FormControl(null),
       'particulars' : new FormControl(''),
     });
+
+    if(!this.firstTime())
+    {
+      let customOrderInfo = null;
+    if(sessionStorage.getItem("customOrderDetails")!=null)
+    {
+      customOrderInfo = JSON.parse(sessionStorage.getItem("customOrderDetails")+"");
+      console.log("DETAILS = ");
+      console.log(customOrderInfo);
+    }
+    this.itemForm.patchValue({
+      'weight' : customOrderInfo.weight,
+      'quantity' : customOrderInfo.quantity,
+      'price' : customOrderInfo.price,
+      'totalAmount' : customOrderInfo.totalAmount,
+      'balanceAmount' : customOrderInfo.balanceAmount,
+      'message' : customOrderInfo.message,
+      'designCharges' : customOrderInfo.designCharges,
+      'particulars' : customOrderInfo.particulars
+    });
+    }
+  }
+
+  firstTime()
+  {
+    return sessionStorage.getItem("customOrderDetails")==null||undefined;
   }
 
   goBack()
   {
+    console.log(JSON.stringify(this.itemForm.value));
+    console.log(this.itemForm.value);
+    sessionStorage.setItem("customOrderDetails",JSON.stringify(this.itemForm.value));
     this.utilityService.formChange.next(1);
-    sessionStorage.setItem("customOrderDetails",this.itemForm.value);
   }
 
   onFileChange(event:any) {
