@@ -75,7 +75,7 @@ export class ItemFormComponent implements OnInit {
   }
 
   onFileChange(event:any) {
-    // this.isLoading = true;
+    this.isLoading = true;
     const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
