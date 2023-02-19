@@ -40,6 +40,7 @@ export class ItemFormComponent implements OnInit {
   goBack()
   {
     this.utilityService.formChange.next(1);
+    sessionStorage.setItem("customOrderDetails",this.itemForm.value);
   }
 
   onFileChange(event:any) {
@@ -112,7 +113,7 @@ export class ItemFormComponent implements OnInit {
 
   submitForm()
   {
-    
+
   }
   
 

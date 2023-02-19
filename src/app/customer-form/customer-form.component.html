@@ -64,6 +64,6 @@
     </div>
     
     </legend>
-    <button type = "button" class = "btn btn-success" style = "display: inline-block;" (click)="print()">Next Page</button>
+    <button type = "button" class = "btn btn-success" style = "display: inline-block;" (click)="nextPage()" [disabled] = "this.customerForm.invalid || this.customerForm.pending">Next Page</button>
 
 </form>

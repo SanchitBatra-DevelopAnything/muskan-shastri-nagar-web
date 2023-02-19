@@ -24,11 +24,34 @@ export class CustomerFormComponent implements OnInit {
       'deliveryTime' : new FormControl('',[Validators.required]),
       'deliveryType' : new FormControl('',[Validators.required])
    });
+
+   if(!this.firstTime())
+   {
+    let customerInfo = null;
+    if(sessionStorage.getItem("customerInfo")!=null)
+    {
+      customerInfo = JSON.parse(sessionStorage.getItem("customerInfo")+"");
+    }
+    this.customerForm.patchValue({
+      'customerName' : customerInfo.customerName,
+      'Address' : customerInfo.Address,
+      'Contact' : customerInfo.Contact,
+      'bookingDate' : customerInfo.bookingDate,
+      'deliveryDate' : customerInfo.deliveryDate,
+      'deliveryType' : customerInfo.deliveryType,
+      'deliveryTime' : customerInfo.deliveryTime
+    });
+   }
   }
 
-  print() : void
+  firstTime()
   {
-    console.log(this.customerForm.value);
+    return sessionStorage.getItem("customerInfo")==null||undefined;
+  }
+
+  nextPage() : void
+  {
+    sessionStorage.setItem("customerInfo",JSON.stringify(this.customerForm.value));
     this.utilityService.formChange.next(2);
   }
 
