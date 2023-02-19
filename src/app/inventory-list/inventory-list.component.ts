@@ -38,7 +38,7 @@ export class InventoryListComponent implements OnInit {
 
   addNewItem()
   {
-    this.router.navigate(['/inventory/add']);
+    this.router.navigate(['/inventory/form/new']);
   }
 
   deleteItem(index:number)
@@ -55,7 +55,7 @@ export class InventoryListComponent implements OnInit {
     let item = this.items[index].itemName;
     let sp = this.items[index].price;
     let key = this.itemKeys[index];
-    this.router.navigate(['/inventory/edit/'+key]);
+    this.router.navigate(['/inventory/form/'+key]);
   }
 
 }

@@ -25,7 +25,7 @@ const appRoutes : Routes = [
   {path : '' , component : OrderTypeSelectionComponent},
   {path : 'order/:orderType',component:ContainerComponent},
   {path : 'inventory' , component : InventoryListComponent},
-  {path : 'inventory/add' , component : InventoryFormComponent}
+  {path : 'inventory/form/:key' , component : InventoryFormComponent}
 ]
 @NgModule({
   declarations: [
