@@ -1,0 +1,29 @@
+ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .product-name {
+    flex-grow: 2;
+    font-weight: bold;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .edit-button,
+  .delete-button {
+    margin-left: 10px;
+  }
+  

@@ -3,12 +3,14 @@
     <button class = "btn btn-success" style = "display: inline-block;" (click) = "addNewItem()">Add a new item</button>
     <hr>
     <div class="loader" *ngIf = "isLoading"></div>
-    <ul class="list-group list-group-flush" *ngIf = "!isLoading">
-        <li class="list-group-item" style ="height:150px;" *ngFor = "let item of items; let i = index;"><h4>{{item.itemName | uppercase}}</h4>
-            <h5 style = "display: inline-block;">Shop Price : {{item.price}}</h5>
-            <br>
-            <button class = "btn btn-primary" style = "margin-right: 5px;" (click) = "editItem(i)">Edit</button>
-            <button class = "btn btn-danger" (click) = "deleteItem(i)">Delete</button>
+      <ul class = "list-group list-group-flush" *ngIf = "!isLoading">
+        <li *ngFor = "let item of items;let i = index">
+          <span class="product-name">{{item.itemName | uppercase}} , Rs.{{item.price}}</span>
+          <div class="buttons">
+            <button class="btn btn-primary" style = "margin-right: 2px;" (click) = "editItem(i)">Edit</button>
+            <button class="btn btn-danger" (click) = "deleteItem(i)">Delete</button>
+          </div>
         </li>
       </ul>
+      
 </div>
