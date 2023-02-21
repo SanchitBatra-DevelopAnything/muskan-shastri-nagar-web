@@ -15,6 +15,7 @@ export class RegularOrderFormComponent implements OnInit {
 
   cities:City[];
   selectedCities:City[];
+  isLoading = false;
 
 
 

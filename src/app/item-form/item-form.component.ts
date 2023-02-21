@@ -157,11 +157,38 @@ export class ItemFormComponent implements OnInit {
       ...customOrderInfo
     };
 
-    this.apiService.addCustomOrder(customOrder).subscribe(()=>{
-      sessionStorage.clear();
+    this.apiService.addCustomOrder(customOrder).subscribe((orderId)=>{
+      //sessionStorage.clear();
       this.isLoading = false;
+      
+      this.sendWhatsapp(orderId)
+      sessionStorage.clear();
       this.router.navigate(['/']);
     }); 
+  }
+
+  sendWhatsapp(orderId:any)
+  {
+    let customerInfo = JSON.parse(sessionStorage.getItem("customerInfo")+"");
+    let customerOrderDetails = JSON.parse(sessionStorage.getItem("customOrderDetails")+"");
+    let name = customerInfo.customerName;
+    let phoneNumber = customerInfo.Contact;
+
+    let bookingDate = customerInfo.bookingDate.replace("/","-");
+    let deliveryDate = customerInfo.deliveryDate.replace("/","-");
+    let deliveryTime = customerInfo.deliveryTime;
+
+    let total = customerOrderDetails.totalAmount;
+    let advance = customerOrderDetails.advanceAmount;
+    let balance = customerOrderDetails.balanceAmount;
+
+    let id = orderId['name'];
+
+    let allDetails = "https://muskan-admin-app.web.app";
+
+
+    let message = `Hi ${name},\nYour order with ID : ${id} is accepted.\nPlease find details.\n\nTotal:Rs.${total}\nAdvance:Rs.${advance}\nBalance:Rs.${balance}\n\nBooked On:${bookingDate}\nDeliver Date:${deliveryDate}\nDelivery Time:${deliveryTime}\nOther Details:${allDetails}\n\nThanks for ordering from Muskan Bakery And Sweets`;
+    window.open(`https://wa.me/+91${phoneNumber}/?text=${encodeURI(message)}`);
   }
   
 
