@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {AngularFireStorageModule} from '@angular/fire/compat/storage';
 import {AngularFireModule} from '@angular/fire/compat';
 import { HttpClientModule } from '@angular/common/http';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -50,6 +51,7 @@ const appRoutes : Routes = [
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
+    MultiSelectModule,
 
     RouterModule.forRoot(appRoutes,{useHash: true}),
   ],

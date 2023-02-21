@@ -32,6 +32,9 @@
             ],
             "styles": [
               "../muskan-shastri-nagar/node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "../muskan-shastri-nagar/node_modules/primeicons/primeicons.css",
+              "../muskan-shastri-nagar/node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "../muskan-shastri-nagar/node_modules/primeng/resources/primeng.min.css",
               "src/styles.scss"
             ],
             "scripts": []
