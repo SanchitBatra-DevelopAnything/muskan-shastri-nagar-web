@@ -60,7 +60,8 @@ export class RegularOrderFormComponent implements OnInit {
       this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice});
     }
     this.currentQuantity = 0;
-    this.currentPound = 0;  
+    this.currentPound = 0; 
+    this.selectedItem = {};
   }
 
   checkValueChange()
