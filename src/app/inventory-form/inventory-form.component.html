@@ -23,6 +23,11 @@
                 class = "form-control"
                 formControlName="price">
         </div>
+        <div class="form-group">
+            <label for = "type">Category</label>
+            <p></p>
+            <p-dropdown [options]="itemTypeOptions" optionLabel = "type" formControlName = "type" placeholder="Select a Category" optionLabel="type" [showClear]="true"></p-dropdown>
+        </div>
 
             <button type = "submit" class = "btn btn-success btn-bold-text" *ngIf = "!isInsertingItem && !isEditForm" [disabled] = "inventoryForm.pending|| inventoryForm.invalid">Add This Item</button>
             <button type = "submit" class = "btn btn-success btn-bold-text" *ngIf = "!isInsertingItem && isEditForm" [disabled] = "inventoryForm.pending|| inventoryForm.invalid">Edit This Item</button>

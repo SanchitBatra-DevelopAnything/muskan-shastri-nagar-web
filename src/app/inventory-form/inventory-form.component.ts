@@ -15,12 +15,14 @@ export class InventoryFormComponent implements OnInit {
   isLoading:boolean = false;
   isEditForm:boolean = false;
   itemKey:any = "new";
+  itemTypeOptions:any = [{'type' : 'CAKES & PASTRIES'},{type : 'SNACKS & PATTIES'}];
   constructor(private apiService:ApiService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.inventoryForm = new FormGroup({
       'itemName' : new FormControl(null,[Validators.required]),
-      'price' : new FormControl(null,[Validators.required])
+      'price' : new FormControl(null,[Validators.required]),
+      'type' : new FormControl(null,[Validators.required])
     })
 
     this.itemKey = this.route.snapshot.params['key'];
@@ -36,7 +38,8 @@ export class InventoryFormComponent implements OnInit {
       this.apiService.getInventoryItem(this.itemKey).subscribe((item)=>{
         this.inventoryForm.patchValue(({
           'itemName' : item['itemName'],
-          'price' : item['price']
+          'price' : item['price'],
+          'type' : {'type' : item['type']}
         }));
         this.isLoading = false;
       });
@@ -46,6 +49,7 @@ export class InventoryFormComponent implements OnInit {
   onSubmit()
   {
     this.isInsertingItem = true;
+    this.updateFormValue();
     if(!this.isEditForm && this.itemKey=="new")
     {
       this.apiService.addItemToInventory(this.inventoryForm.value).subscribe((_)=>{
@@ -60,6 +64,14 @@ export class InventoryFormComponent implements OnInit {
         this.inventoryForm.reset();
       })
     }
+  }
+
+  updateFormValue()
+  {
+    console.log(this.inventoryForm.value['type'].type);
+    this.inventoryForm.patchValue({
+      'type' : this.inventoryForm.value['type'].type,
+    })
   }
 
 }
