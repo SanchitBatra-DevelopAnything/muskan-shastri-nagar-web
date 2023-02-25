@@ -1,5 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
+
+// @Pipe({
+//   name: 'indexOf'
+// })
+// export class IndexOfPipe implements PipeTransform {
+
+//   transform(items:any[] , item:any): any {
+//     return items.indexOf(item);
+//   }
+
+// }
 
 
 @Component({
@@ -20,13 +33,20 @@ export class RegularOrderFormComponent implements OnInit {
 
   products:any;
 
+  regularOrderForm:FormGroup;
 
 
 
-  constructor(private apiService:ApiService) { 
+
+  constructor(private apiService:ApiService , private router : Router) { 
   }
 
   ngOnInit(): void {
+    this.regularOrderForm = new FormGroup({
+      'totalAmount' : new FormControl({value : 0 , disabled : true},[Validators.required]),
+      'advanceAmount' : new FormControl(null , [Validators.required]),
+      'balanceAmount' : new FormControl(null,[Validators.required])
+    });
     this.items = [];
     this.products = [];
     this.loadInventoryItems();
@@ -62,6 +82,20 @@ export class RegularOrderFormComponent implements OnInit {
     this.currentQuantity = 0;
     this.currentPound = 0; 
     this.selectedItem = {};
+    this.showPoundInput = false;
+    this.updateTotal();
+  }
+
+  updateTotal()
+  {
+    let totalAmt = 0;
+    this.products.forEach((element : any)=>{
+      totalAmt+=element.total;
+    });
+    console.log("total hua" + totalAmt);
+    this.regularOrderForm.patchValue({
+      'totalAmount' : totalAmt,
+    })
   }
 
   checkValueChange()
@@ -75,6 +109,37 @@ export class RegularOrderFormComponent implements OnInit {
     {
       this.showPoundInput = false;
     }
+  }
+
+  createRegularOrder()
+  {
+    let regularOrderInformation = {...this.regularOrderForm.getRawValue() , 'items' : this.products};
+    this.isLoading = true;
+    sessionStorage.setItem("regularOrderDetails" , JSON.stringify(regularOrderInformation));
+    let customerInfo = JSON.parse(sessionStorage.getItem("customerInfo")+"");
+    let regularOrderInfo = JSON.parse(sessionStorage.getItem("regularOrderDetails")+"");
+
+    const regularOrder = {
+      ...customerInfo,
+      ...regularOrderInfo
+    };
+
+    // this.apiService.addCustomOrder(customOrder).subscribe((orderId)=>{
+    //   //sessionStorage.clear();
+    //   this.isLoading = false;
+      
+    //   this.sendWhatsapp(orderId)
+    //   sessionStorage.clear();
+    //   this.router.navigate(['/']);
+    // });
+
+
+    this.apiService.addRegularOrder(regularOrder).subscribe((orderId)=>{
+      this.isLoading = false;
+      // this.sendWhatsapp(orderId);
+      sessionStorage.clear();
+      this.router.navigate(['/']);
+    })
   }
 
 }

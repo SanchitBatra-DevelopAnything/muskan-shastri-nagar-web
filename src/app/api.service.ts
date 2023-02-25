@@ -31,7 +31,12 @@ export class ApiService {
   }
 
   public addCustomOrder(order:any) : Observable<any> {
-    let bookingDate = order.bookingDate;
-    return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/customOrders/'+bookingDate+'.json',order);
+    let deliveryDate = order.deliveryDate;
+    return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/customOrders/'+deliveryDate+'.json',order);
+  }
+
+  public addRegularOrder(order:any) : Observable<any> {
+    let deliveryDate = order.deliveryDate;
+    return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/regularOrders/'+deliveryDate+'.json',order);
   }
 }
