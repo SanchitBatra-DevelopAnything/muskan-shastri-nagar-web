@@ -4,6 +4,7 @@ import {AngularFireStorageModule} from '@angular/fire/compat/storage';
 import {AngularFireModule} from '@angular/fire/compat';
 import { HttpClientModule } from '@angular/common/http';
 import {MultiSelectModule} from 'primeng/multiselect';
+import {DropdownModule} from 'primeng/dropdown';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -52,6 +53,7 @@ const appRoutes : Routes = [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     MultiSelectModule,
+    DropdownModule,
 
     RouterModule.forRoot(appRoutes,{useHash: true}),
   ],

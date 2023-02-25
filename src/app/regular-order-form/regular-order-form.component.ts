@@ -13,21 +13,30 @@ interface City {
 
 export class RegularOrderFormComponent implements OnInit {
 
-  cities:City[];
-  selectedCities:City[];
+  items:any;
+  selectedItem:any;
   isLoading = false;
 
 
 
 
   constructor() { 
-    this.cities = [
-      {name: 'New York', code: 'NY'},
-      {name: 'Rome', code: 'RM'},
-      {name: 'London', code: 'LDN'},
-      {name: 'Istanbul', code: 'IST'},
-      {name: 'Paris', code: 'PRS'}
-  ];
+  this.items = [{
+    'itemName' : 'patties6pc',
+    'price' : 720
+  } , 
+  {
+    'itemName' : 'chocolate cake',
+    'price' : 72
+  } ,
+  {
+    'itemName' : 'strawberry cake',
+    'price' : 70
+  } ,
+  {
+    'itemName' : 'patties9pc',
+    'price' : 725
+  } ,]
   }
 
   ngOnInit(): void {
