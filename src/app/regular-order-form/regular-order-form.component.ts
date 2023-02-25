@@ -32,6 +32,7 @@ export class RegularOrderFormComponent implements OnInit {
   currentPound = 0;
 
   products:any;
+  paymentOptions:any;
 
   regularOrderForm:FormGroup;
 
@@ -45,10 +46,12 @@ export class RegularOrderFormComponent implements OnInit {
     this.regularOrderForm = new FormGroup({
       'totalAmount' : new FormControl({value : 0 , disabled : true},[Validators.required]),
       'advanceAmount' : new FormControl(null , [Validators.required]),
-      'balanceAmount' : new FormControl(null,[Validators.required])
+      'balanceAmount' : new FormControl(null,[Validators.required]),
+      'advancePaymentMode' : new FormControl('CARD',[Validators.required]),
     });
     this.items = [];
     this.products = [];
+    this.paymentOptions = [{'name' : 'CARD'},{'name' : 'ONLINE'},{'name' : 'CASH'}];
     this.loadInventoryItems();
   }
 
@@ -113,6 +116,7 @@ export class RegularOrderFormComponent implements OnInit {
 
   createRegularOrder()
   {
+    this.updateFormValue();
     let regularOrderInformation = {...this.regularOrderForm.getRawValue() , 'items' : this.products};
     this.isLoading = true;
     sessionStorage.setItem("regularOrderDetails" , JSON.stringify(regularOrderInformation));
@@ -140,6 +144,11 @@ export class RegularOrderFormComponent implements OnInit {
       sessionStorage.clear();
       this.router.navigate(['/']);
     })
+  }
+
+  updateFormValue()
+  {
+
   }
 
 }
