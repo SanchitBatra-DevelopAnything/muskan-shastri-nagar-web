@@ -3,15 +3,15 @@
     <div class="row">
         <div class="col-xs-2">
             <p>Quantity</p>
-            <input type = "number">
+            <input type = "number" [(ngModel)] = "currentQuantity">
         </div>
-        <div class="col-xs-2">
+        <div class="col-xs-2" *ngIf = "showPoundInput">
             <p>Pounds</p>
-            <input type = "number">
+            <input type = "number" [(ngModel)] = "currentPound">
         </div>
         <div class = "col-xs-4">
             <p>Item list</p>   
-            <p-dropdown [options]="items" [(ngModel)]="selectedItem" optionLabel="itemName" [filter]="true" filterBy="itemName" [showClear]="true" placeholder="Select an Item" style = "width:900px;">
+            <p-dropdown (onChange) = "checkValueChange()" [options]="items" [(ngModel)]="selectedItem" optionLabel="itemName" [filter]="true" filterBy="itemName" [showClear]="true" placeholder="Select an Item" style = "width:900px;">
                 <ng-template pTemplate="selectedItem">
                     <div class="country-item country-item-value" *ngIf="selectedItem">
                         <div>{{selectedItem.itemName}}</div>
@@ -26,9 +26,31 @@
         </div>
         <div class="col xs-4">
             <p>Add it here..</p>
-            <button class = "btn btn-primary">Add</button>
+            <button class = "btn btn-primary" (click) = "addProduct()">Add</button>
         </div>
     </div>
+
+    <h3>Item Details.</h3>
+    <p-table [value]="products" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Name</th>
+                <th>Price per item</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.name}}</td>
+                <td>{{product.pricePerProduct}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.total}}</td>
+                <td><button class = "btn btn-danger">Delete</button></td>
+            </tr>
+        </ng-template>
+    </p-table>
     
     
 </div>

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-interface City {
-  name: string,
-  code: string
-}
+import { ApiService } from '../api.service';
+
 
 @Component({
   selector: 'app-regular-order-form',
@@ -16,31 +14,66 @@ export class RegularOrderFormComponent implements OnInit {
   items:any;
   selectedItem:any;
   isLoading = false;
+  showPoundInput:boolean= false;
+  currentQuantity = 0;
+  currentPound = 0;
+
+  products:any;
 
 
 
 
-  constructor() { 
-  this.items = [{
-    'itemName' : 'patties6pc',
-    'price' : 720
-  } , 
-  {
-    'itemName' : 'chocolate cake',
-    'price' : 72
-  } ,
-  {
-    'itemName' : 'strawberry cake',
-    'price' : 70
-  } ,
-  {
-    'itemName' : 'patties9pc',
-    'price' : 725
-  } ,]
+  constructor(private apiService:ApiService) { 
   }
 
   ngOnInit(): void {
-    
+    this.items = [];
+    this.products = [];
+    this.loadInventoryItems();
+  }
+
+  loadInventoryItems()
+  {
+    this.isLoading = true;
+    this.apiService.getInventoryItems().subscribe((items)=>{
+      this.items = Object.values(items);
+      this.isLoading = false;
+    });
+  }
+
+  addProduct()
+  {
+    if(this.showPoundInput)
+    {
+      let formedName = `${this.currentPound}Pd. ${this.selectedItem.itemName}`;
+      let productPrice = this.currentPound * this.selectedItem.price;
+      let quantity = this.currentQuantity;
+      let totalPrice = this.currentQuantity * productPrice;
+      this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice});
+    }
+    else
+    {
+      let formedName = this.selectedItem.itemName;
+      let productPrice = this.selectedItem.price;
+      let quantity = this.currentQuantity;
+      let totalPrice = quantity * productPrice;
+      this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice});
+    }
+    this.currentQuantity = 0;
+    this.currentPound = 0;  
+  }
+
+  checkValueChange()
+  {
+    console.log(this.selectedItem);
+    if(this.selectedItem.type.includes("CAKES"))
+    {
+      this.showPoundInput = true;
+    }
+    else
+    {
+      this.showPoundInput = false;
+    }
   }
 
 }
