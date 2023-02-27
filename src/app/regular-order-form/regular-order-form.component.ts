@@ -116,7 +116,7 @@ export class RegularOrderFormComponent implements OnInit {
 
   createRegularOrder()
   {
-    this.updateFormValue();
+    // this.updateFormValue();
     let regularOrderInformation = {...this.regularOrderForm.getRawValue() , 'items' : this.products};
     this.isLoading = true;
     sessionStorage.setItem("regularOrderDetails" , JSON.stringify(regularOrderInformation));
@@ -146,9 +146,12 @@ export class RegularOrderFormComponent implements OnInit {
     })
   }
 
-  updateFormValue()
+  deleteProduct(product:any)
   {
-
+    this.products = this.products.filter((p:any)=>{
+      return JSON.stringify(p)!=JSON.stringify(product);
+    });
+    this.updateTotal();
   }
 
 }
