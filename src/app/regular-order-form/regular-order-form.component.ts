@@ -141,8 +141,9 @@ export class RegularOrderFormComponent implements OnInit {
     this.apiService.addRegularOrder(regularOrder).subscribe((orderId)=>{
       this.isLoading = false;
       // this.sendWhatsapp(orderId);
-      sessionStorage.clear();
       this.router.navigate(['/']);
+      this.apiService.sendWhatsapp(orderId,true);
+      sessionStorage.clear();
     })
   }
 
@@ -153,5 +154,7 @@ export class RegularOrderFormComponent implements OnInit {
     });
     this.updateTotal();
   }
+
+  
 
 }
