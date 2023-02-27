@@ -46,7 +46,7 @@ export class RegularOrderFormComponent implements OnInit {
     this.regularOrderForm = new FormGroup({
       'totalAmount' : new FormControl({value : 0 , disabled : true},[Validators.required]),
       'advanceAmount' : new FormControl(null , [Validators.required]),
-      'balanceAmount' : new FormControl(null,[Validators.required]),
+      'balanceAmount' : new FormControl({value : 0 , disabled : true},[Validators.required]),
       'advancePaymentMode' : new FormControl('CARD',[Validators.required]),
     });
     this.items = [];
@@ -87,6 +87,10 @@ export class RegularOrderFormComponent implements OnInit {
     this.selectedItem = {};
     this.showPoundInput = false;
     this.updateTotal();
+    this.regularOrderForm.patchValue({
+      'advanceAmount' : 0,
+      'balanceAmount' : this.regularOrderForm.getRawValue().totalAmount,
+    });
   }
 
   updateTotal()
@@ -95,7 +99,6 @@ export class RegularOrderFormComponent implements OnInit {
     this.products.forEach((element : any)=>{
       totalAmt+=element.total;
     });
-    console.log("total hua" + totalAmt);
     this.regularOrderForm.patchValue({
       'totalAmount' : totalAmt,
     })
@@ -103,7 +106,6 @@ export class RegularOrderFormComponent implements OnInit {
 
   checkValueChange()
   {
-    console.log(this.selectedItem);
     if(this.selectedItem.type.includes("CAKES"))
     {
       this.showPoundInput = true;
@@ -153,6 +155,15 @@ export class RegularOrderFormComponent implements OnInit {
       return JSON.stringify(p)!=JSON.stringify(product);
     });
     this.updateTotal();
+  }
+
+  updateBalance(advancePaid : any)
+  {
+    let adv = Number(advancePaid.target.value);
+    let total = this.regularOrderForm.getRawValue().totalAmount;
+    this.regularOrderForm.patchValue({
+      'balanceAmount' : total - adv,
+    });
   }
 
   
