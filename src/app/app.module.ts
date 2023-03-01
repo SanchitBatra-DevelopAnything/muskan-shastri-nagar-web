@@ -23,6 +23,7 @@ import { RegularOrderFormComponent } from './regular-order-form/regular-order-fo
 import { InventoryFormComponent } from './inventory-form/inventory-form.component';
 import { InventoryListComponent } from './inventory-list/inventory-list.component';
 import { InventoryItemComponent } from './inventory-item/inventory-item.component';
+import { DailyReportComponent } from './daily-report/daily-report.component';
 
 const appRoutes : Routes = [
   {path : '' , component : OrderTypeSelectionComponent,pathMatch:"full"},
@@ -42,7 +43,8 @@ const appRoutes : Routes = [
     RegularOrderFormComponent,
     InventoryFormComponent,
     InventoryListComponent,
-    InventoryItemComponent
+    InventoryItemComponent,
+    DailyReportComponent
   ],
   imports: [
     BrowserModule,

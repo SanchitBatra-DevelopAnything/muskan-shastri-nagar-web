@@ -1,0 +1,36 @@
+<div class="container">
+    <h3>
+        Active Orders!
+    </h3>
+    <p style = "font-weight: bold;">Click on the Order for viewing its BILL</p>
+    <hr>
+
+    <div class="loader" *ngIf = "isLoading">
+
+    </div>
+
+    <h3>Regular Orders</h3>
+    <hr>
+    <div class="row">
+
+        <div *ngFor = "let order of activeOrders; let i = index;" class = "col-xs-2 w3-card pointer order-card">
+            <p style = "font-weight: bold;">{{order.customerName | uppercase}}</p>
+            <p style = "font-weight: bold;">{{order.Contact}}</p>
+            <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>
+        </div>
+
+    </div>
+
+    <hr>
+    <h3>Custom Orders</h3>
+    <hr>
+
+    <div class="row">
+        <div *ngFor = "let order of customOrders; let i = index;" class = "col-xs-2 w3-card pointer order-card-custom">
+            <p style = "font-weight: bold;">{{order.customerName | uppercase}}</p>
+            <p style = "font-weight: bold;">{{order.Contact | uppercase}}</p>
+            <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>
+        </div>
+    </div>
+    
+</div>

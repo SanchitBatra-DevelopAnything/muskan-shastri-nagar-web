@@ -32,12 +32,14 @@ export class ApiService {
 
   public addCustomOrder(order:any) : Observable<any> {
     let deliveryDate = order.deliveryDate;
-    return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/customOrders/'+deliveryDate+'.json',order);
+    let modifiedOrder = {...order , 'orderType' : "custom"};
+    return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+deliveryDate+'.json',modifiedOrder);
   }
 
   public addRegularOrder(order:any) : Observable<any> {
     let deliveryDate = order.deliveryDate;
-    return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/regularOrders/'+deliveryDate+'.json',order);
+    let modifiedOrder = {...order , 'orderType' : "regular"};
+    return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+deliveryDate+'.json',modifiedOrder);
   }
 
   public sendWhatsapp(orderId:any , isRegular:boolean)
@@ -62,5 +64,9 @@ export class ApiService {
 
     let message = `Hi ${name},\nYour order with ID : ${id} is accepted.\nPlease find details.\n\nTotal:Rs.${total}\nAdvance:Rs.${advance}\nBalance:Rs.${balance}\n\nBooked On:${bookingDate}\nDeliver Date:${deliveryDate}\nDelivery Time:${deliveryTime}\nOther Details:${allDetails}\n\nThanks for ordering from Muskan Bakers And Sweets`;
     window.open(`https://wa.me/+91${phoneNumber}/?text=${encodeURI(message)}`);
+  }
+
+  public getActiveOrders(date : String) : Observable<any> {
+    return this.http.get('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+date+'.json');
   }
 }
