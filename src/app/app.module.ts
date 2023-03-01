@@ -29,7 +29,8 @@ const appRoutes : Routes = [
   {path : '' , component : OrderTypeSelectionComponent,pathMatch:"full"},
   {path : 'order/:orderType',component:ContainerComponent},
   {path : 'inventory' , component : InventoryListComponent},
-  {path : 'inventory/form/:key' , component : InventoryFormComponent}
+  {path : 'inventory/form/:key' , component : InventoryFormComponent},
+  {path : 'viewOrders' , component : DailyReportComponent},
 ]
 @NgModule({
   declarations: [

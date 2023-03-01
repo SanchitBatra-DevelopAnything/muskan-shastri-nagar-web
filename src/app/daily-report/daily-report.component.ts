@@ -21,6 +21,7 @@ export class DailyReportComponent implements OnInit {
 
   ngOnInit(): void {
     this.todaysDate = this.getTodaysDate();
+    this.getActiveOrders();
 
   }
 
