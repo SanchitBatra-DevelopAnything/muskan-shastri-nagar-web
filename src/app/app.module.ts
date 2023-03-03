@@ -31,6 +31,7 @@ const appRoutes : Routes = [
   {path : 'inventory' , component : InventoryListComponent},
   {path : 'inventory/form/:key' , component : InventoryFormComponent},
   {path : 'viewOrders' , component : DailyReportComponent},
+  {path : 'editOrder/:date/regular/:key' , component : RegularOrderFormComponent},
 ]
 @NgModule({
   declarations: [

@@ -1,6 +1,6 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 
 // @Pipe({
@@ -31,6 +31,8 @@ export class RegularOrderFormComponent implements OnInit {
   currentQuantity = 0;
   currentPound = 0;
 
+  isEditMode : boolean = false;
+
   products:any;
   paymentOptions:any;
 
@@ -39,7 +41,7 @@ export class RegularOrderFormComponent implements OnInit {
 
 
 
-  constructor(private apiService:ApiService , private router : Router) { 
+  constructor(private apiService:ApiService , private router : Router , private route:ActivatedRoute) { 
   }
 
   ngOnInit(): void {
@@ -53,6 +55,30 @@ export class RegularOrderFormComponent implements OnInit {
     this.products = [];
     this.paymentOptions = [{'name' : 'CARD'},{'name' : 'ONLINE'},{'name' : 'CASH'}];
     this.loadInventoryItems();
+
+    let selectedDate = this.route.snapshot.params['date'];
+    let orderKey = this.route.snapshot.params['key'];
+    if(orderKey!=null || orderKey!=undefined)
+    {
+      this.isEditMode = true;
+      this.loadOnEditMode(selectedDate , orderKey);
+    }
+  }
+
+  loadOnEditMode(date : any , key : any)
+  {
+    this.isLoading = true;
+    this.apiService.getOrder(date , key).subscribe((order : any)=>{
+      sessionStorage.setItem("orderOnUpdate",JSON.stringify(order));
+      this.regularOrderForm.patchValue({
+        'totalAmount' : order.totalAmount,
+        'advanceAmount' : order.advanceAmount,
+        'balanceAmount' : order.balanceAmount,
+        'advancePaymentMode' : order.advancePaymentMode
+      });
+      this.products = order.items;
+      this.isLoading = false;
+    });
   }
 
   loadInventoryItems()
@@ -163,6 +189,21 @@ export class RegularOrderFormComponent implements OnInit {
     let total = this.regularOrderForm.getRawValue().totalAmount;
     this.regularOrderForm.patchValue({
       'balanceAmount' : total - adv,
+    });
+  }
+
+  updateRegularOrder()
+  {
+    this.isLoading = true;
+    let selectedDate = this.route.snapshot.params['date'];
+    let orderKey = this.route.snapshot.params['key'];
+    let regularOrderInfo = {...this.regularOrderForm.getRawValue() , 'items' : this.products};
+    this.apiService.updateOrder(selectedDate , orderKey , regularOrderInfo).subscribe(()=>{
+      this.isLoading = false;
+      this.router.navigate(['/']);
+      this.apiService.sendUpdateOrderWhatsapp(orderKey , true);
+      sessionStorage.clear();
+      //send whatsapp here.
     });
   }
 

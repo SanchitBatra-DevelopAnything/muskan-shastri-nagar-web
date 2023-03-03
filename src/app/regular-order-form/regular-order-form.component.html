@@ -81,6 +81,7 @@
     
     <legend style = "margin-top: 15px;"></legend>
 
-    <button class = "btn btn-success" (click) = "createRegularOrder()">Submit</button>
+    <button class = "btn btn-success" (click) = "createRegularOrder()" *ngIf = "!isEditMode">Submit</button>
+    <button class = "btn btn-danger" (click) = "updateRegularOrder()" *ngIf = "isEditMode">Update</button>
     
 </div>

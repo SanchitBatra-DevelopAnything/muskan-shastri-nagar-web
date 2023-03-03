@@ -13,7 +13,7 @@
     <hr>
     <div class="row">
 
-        <div *ngFor = "let order of activeOrders; let i = index;" class = "col-xs-2 w3-card pointer order-card">
+        <div *ngFor = "let order of activeOrders; let i = index;" class = "col-xs-2 w3-card pointer order-card" (click) = "editOrder(activeOrders[i] , i)">
             <p style = "font-weight: bold;">{{order.customerName | uppercase}}</p>
             <p style = "font-weight: bold;">{{order.Contact}}</p>
             <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>

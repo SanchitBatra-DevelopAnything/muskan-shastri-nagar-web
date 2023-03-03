@@ -82,4 +82,11 @@ export class DailyReportComponent implements OnInit {
     });
   }
 
+  editOrder(order : any , index : any)
+  {
+    let deliveryDate = order.deliveryDate;
+    let key = this.activeOrderKeys[index];
+    this.router.navigate(['/editOrder/'+deliveryDate+'/regular/'+key]);
+  }
+
 }

@@ -66,7 +66,26 @@ export class ApiService {
     window.open(`https://wa.me/+91${phoneNumber}/?text=${encodeURI(message)}`);
   }
 
+  public sendUpdateOrderWhatsapp(orderKey:any , isRegular:boolean)
+  {
+    let mobile = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").Contact;
+    let name = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").customerName;
+    let allDetails = "https://muskan-admin-app.web.app";
+    let message = `Hi ${name},\nYour order with ID : ${orderKey} is updated.\n\nNew Details:${allDetails}\n\nThanks for ordering from Muskan Bakers And Sweets`;
+    let encoded = encodeURI(message);
+    window.open("https://wa.me/+91"+mobile+"/?text="+encoded);
+  }
+
   public getActiveOrders(date : String) : Observable<any> {
     return this.http.get('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+date+'.json');
+  }
+
+  public getOrder(date : any , key : any) : Observable<any>
+  {
+    return this.http.get('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+date+'/'+key+'.json');
+  }
+
+  public updateOrder(date : any , key : any , orderInfo : any) : Observable<any> {
+    return this.http.patch('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+date+'/'+key+'.json',orderInfo);
   }
 }
