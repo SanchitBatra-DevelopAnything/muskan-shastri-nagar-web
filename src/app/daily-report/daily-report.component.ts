@@ -15,6 +15,8 @@ export class DailyReportComponent implements OnInit {
   customOrderKeys : any = [];
   isLoading : boolean;
   todaysDate : string;
+  selectedDate: any;
+  mobileNumber:any;
 
 
   constructor(private apiService:ApiService , private router : Router) { }
@@ -22,7 +24,8 @@ export class DailyReportComponent implements OnInit {
   ngOnInit(): void {
     this.todaysDate = this.getTodaysDate();
     this.getActiveOrders();
-
+    this.selectedDate = this.todaysDate;
+    this.mobileNumber = "";
   }
 
   getTodaysDate()
@@ -87,6 +90,43 @@ export class DailyReportComponent implements OnInit {
     let deliveryDate = order.deliveryDate;
     let key = this.activeOrderKeys[index];
     this.router.navigate(['/editOrder/'+deliveryDate+'/regular/'+key]);
+  }
+
+  filterOrders()
+  {
+    this.isLoading = true;
+    this.activeOrders = [];
+    this.activeOrderKeys = [];
+    this.customOrderKeys = [];
+    this.customOrderKeys = [];
+    this.apiService.getActiveOrders(this.selectedDate).subscribe((orders)=>{
+      if(orders == null)
+      {
+        console.log(null);
+        this.isLoading = false;
+        this.activeOrderKeys = [];
+        this.activeOrders = [];
+        this.customOrderKeys = [];
+        this.customOrders = [];
+        return;
+      }
+      let temp_activeOrders : any = Object.values(orders);
+      let temp_activeOrderKeys : any = Object.keys(orders);
+      for(let i=0;i<temp_activeOrders.length;i++)
+      {
+        if(temp_activeOrders[i].orderType!=null  && temp_activeOrders[i].orderType.toLowerCase() === "custom")
+        {
+          this.customOrders.push(temp_activeOrders[i]);
+          this.customOrderKeys.push(temp_activeOrderKeys[i]);
+        }
+        else
+        {
+          this.activeOrders.push(temp_activeOrders[i]);
+          this.activeOrderKeys.push(temp_activeOrderKeys[i]);
+        }
+      }
+      this.isLoading = false;
+    });
   }
 
 }

@@ -9,6 +9,16 @@
 
     </div>
 
+    <div class="container">
+        <h5>Order Filter</h5>
+        <p>Select Date</p>
+        <input type = "date" [(ngModel)] = "selectedDate">
+        <p>Enter mobile number</p>
+        <input type = "text" [(ngModel)] = "mobileNumber">
+
+        <button type = "button" (click) = "filterOrders()">Search Orders</button>
+    </div>
+
     <h3>Regular Orders</h3>
     <hr>
     <div class="row">

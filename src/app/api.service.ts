@@ -79,7 +79,7 @@ export class ApiService {
   public getActiveOrders(date : String) : Observable<any> {
     return this.http.get('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+date+'.json');
   }
-
+  
   public getOrder(date : any , key : any) : Observable<any>
   {
     return this.http.get('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+date+'/'+key+'.json');
