@@ -97,7 +97,7 @@ export class DailyReportComponent implements OnInit {
     this.isLoading = true;
     this.activeOrders = [];
     this.activeOrderKeys = [];
-    this.customOrderKeys = [];
+    this.customOrders = [];
     this.customOrderKeys = [];
     this.apiService.getActiveOrders(this.selectedDate).subscribe((orders)=>{
       if(orders == null)
@@ -125,8 +125,50 @@ export class DailyReportComponent implements OnInit {
           this.activeOrderKeys.push(temp_activeOrderKeys[i]);
         }
       }
+      if(this.mobileNumber != "")
+      {
+        this.filterRegular();
+        this.filterCustom();
+      }
       this.isLoading = false;
     });
   }
 
+  filterRegular()
+  {
+    let filteredRegularOrders = [];
+    let filteredRegularKeys: any[] = [];
+    let regIndex=0;
+    filteredRegularOrders = this.activeOrders.filter((order:any)=>{
+      if(order.Contact.toString() == this.mobileNumber)
+      {
+        filteredRegularKeys.push(this.activeOrderKeys[regIndex]);
+        return true;
+      }
+      regIndex++;
+      return false;
+    });
+    this.activeOrders = [...filteredRegularOrders];
+    this.activeOrderKeys = [...filteredRegularKeys]; 
+  }
+
+  filterCustom()
+  {
+    let filteredCustomOrders = [];
+    let filteredCustomKeys: any[] = [];
+    let customIndex=0;
+    console.log(this.customOrders.length+" custom orders found in total  , starting filtering");
+    filteredCustomOrders = this.customOrders.filter((order:any)=>{
+      if(order.Contact.toString() == this.mobileNumber)
+      {
+        filteredCustomKeys.push(this.customOrderKeys[customIndex]);
+        return true;
+      }
+      customIndex++;
+      return false;
+    });
+    console.log(filteredCustomOrders);
+    this.customOrders = [...filteredCustomOrders];
+    this.customOrderKeys = [...filteredCustomKeys]; 
+  }
 }
