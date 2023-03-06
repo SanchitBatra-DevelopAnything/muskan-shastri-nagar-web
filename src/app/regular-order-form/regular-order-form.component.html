@@ -2,6 +2,16 @@
 
 </div>
 
+<div class = "contaiber jumbotron" style = "margin: 10px;" *ngIf = "isEditMode">
+    <div *ngIf = "!isDelivered">
+        <label>Delivered To :</label>
+    <input type = "text" [(ngModel)] = "deliveredTo">
+    <button class = "btn btn-lg btn-success" style = "margin:10px;" (click) = "deliverOrder()">DELIVER</button>
+    </div>
+    
+    <p *ngIf = "isDelivered" style = "color : green; font-weight: 300; text-align: center;">ORDER IS DELIVERED TO : {{deliveredTo | uppercase}}</p>
+</div>
+
 <div class="container" *ngIf = "!isLoading">
     <h3>Add items for your order.</h3>
     <div class="row">
@@ -82,6 +92,6 @@
     <legend style = "margin-top: 15px;"></legend>
 
     <button class = "btn btn-success" (click) = "createRegularOrder()" *ngIf = "!isEditMode">Submit</button>
-    <button class = "btn btn-danger" (click) = "updateRegularOrder()" *ngIf = "isEditMode">Update</button>
+    <button class = "btn btn-danger" (click) = "updateRegularOrder()" *ngIf = "isEditMode && !isDelivered">Update</button>
     
 </div>

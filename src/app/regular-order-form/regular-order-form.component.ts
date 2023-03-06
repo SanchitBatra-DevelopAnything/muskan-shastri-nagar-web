@@ -32,6 +32,8 @@ export class RegularOrderFormComponent implements OnInit {
   currentPound = 0;
 
   isEditMode : boolean = false;
+  deliveredTo:string = "";
+  isDelivered:boolean = false;
 
   products:any;
   paymentOptions:any;
@@ -77,6 +79,15 @@ export class RegularOrderFormComponent implements OnInit {
         'advancePaymentMode' : order.advancePaymentMode
       });
       this.products = order.items;
+      if(order.status == "D")
+      {
+        this.isDelivered = true;
+        this.deliveredTo = order.deliveredTo;
+      }
+      else
+      {
+        this.isDelivered = false;
+      }
       this.isLoading = false;
     });
   }
@@ -204,6 +215,18 @@ export class RegularOrderFormComponent implements OnInit {
       this.apiService.sendUpdateOrderWhatsapp(orderKey , true);
       sessionStorage.clear();
       //send whatsapp here.
+    });
+  }
+
+  deliverOrder()
+  {
+    this.isLoading = true;
+    let selectedDate = this.route.snapshot.params['date'];
+    let orderKey = this.route.snapshot.params['key'];
+    this.apiService.updateOrder(selectedDate,orderKey,{'status' : "D" , 'deliveredTo' : this.deliveredTo}).subscribe(()=>{
+      this.loadOnEditMode(selectedDate,orderKey);
+      this.apiService.sendDeliveryMessage(orderKey,true,this.deliveredTo);
+      sessionStorage.clear();
     });
   }
 

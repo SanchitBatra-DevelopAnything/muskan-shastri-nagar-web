@@ -32,13 +32,13 @@ export class ApiService {
 
   public addCustomOrder(order:any) : Observable<any> {
     let deliveryDate = order.deliveryDate;
-    let modifiedOrder = {...order , 'orderType' : "custom"};
+    let modifiedOrder = {...order , 'orderType' : "custom" , 'status' : "ND"};
     return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+deliveryDate+'.json',modifiedOrder);
   }
 
   public addRegularOrder(order:any) : Observable<any> {
     let deliveryDate = order.deliveryDate;
-    let modifiedOrder = {...order , 'orderType' : "regular"};
+    let modifiedOrder = {...order , 'orderType' : "regular" , 'status' : "ND"};
     return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+deliveryDate+'.json',modifiedOrder);
   }
 
@@ -72,6 +72,16 @@ export class ApiService {
     let name = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").customerName;
     let allDetails = "https://muskan-admin-app.web.app";
     let message = `Hi ${name},\nYour order with ID : ${orderKey} is updated.\n\nNew Details:${allDetails}\n\nThanks for ordering from Muskan Bakers And Sweets`;
+    let encoded = encodeURI(message);
+    window.open("https://wa.me/+91"+mobile+"/?text="+encoded);
+  }
+
+  public sendDeliveryMessage(orderKey : any , isRegular:boolean , deliveredTo:string)
+  {
+    let mobile = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").Contact;
+    let name = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").customerName;
+    let allDetails = "https://muskan-admin-app.web.app";
+    let message = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered to ${deliveredTo}.\n\nThanks for ordering from Muskan Bakers And Sweets`;
     let encoded = encodeURI(message);
     window.open("https://wa.me/+91"+mobile+"/?text="+encoded);
   }
