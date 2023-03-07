@@ -1,0 +1,44 @@
+<div style = "text-align: center;">Order Details</div>
+<div class="loader" *ngIf = "isLoading">
+
+</div>
+
+<div class = "container">
+    <div class="row">
+        <div class="col-xs-12">
+            Total Amount : Rs.{{loadedOrder.totalAmount}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            Advance Paid : Rs.{{loadedOrder.advanceAmount}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            Balance Amount : Rs.{{loadedOrder.balanceAmount}}
+        </div>
+    </div>
+    <div class="row" *ngIf = "isRegularOrder">
+        <div class="col-xs-12">
+            Items:
+            <ul>
+                <li *ngFor = "let item of loadedOrder.items">{{item.quantity}} x {{item.name}}</li>
+            </ul>
+        </div>  
+    </div>
+
+    <div class = "row" *ngIf = "!isRegularOrder">
+        <div class="col-xs-12">
+            Cake Photo : 
+            <img src="{{loadedOrder.imgUrl}}" class="img-thumbnail" alt="Cake Photo" style = "width: 800px; height : 800px;">
+        </div>
+    </div>
+
+    <div class = "row" *ngIf = "!isRegularOrder">
+        <div class="col-xs-12">
+             Photo On Cake : 
+            <img src="{{loadedOrder.photoUrl}}" class="img-thumbnail" alt="Cake Photo" style = "width:800px; height:800px;">
+        </div>
+    </div>
+</div>

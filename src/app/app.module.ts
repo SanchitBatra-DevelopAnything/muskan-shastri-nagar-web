@@ -24,6 +24,7 @@ import { InventoryFormComponent } from './inventory-form/inventory-form.componen
 import { InventoryListComponent } from './inventory-list/inventory-list.component';
 import { InventoryItemComponent } from './inventory-item/inventory-item.component';
 import { DailyReportComponent } from './daily-report/daily-report.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 const appRoutes : Routes = [
   {path : '' , component : OrderTypeSelectionComponent,pathMatch:"full"},
@@ -32,6 +33,7 @@ const appRoutes : Routes = [
   {path : 'inventory/form/:key' , component : InventoryFormComponent},
   {path : 'viewOrders' , component : DailyReportComponent},
   {path : 'editOrder/:date/regular/:key' , component : RegularOrderFormComponent},
+  {path : 'detail/:date/:orderKey' , component : OrderDetailComponent},
 ]
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ const appRoutes : Routes = [
     InventoryFormComponent,
     InventoryListComponent,
     InventoryItemComponent,
-    DailyReportComponent
+    DailyReportComponent,
+    OrderDetailComponent,
   ],
   imports: [
     BrowserModule,
