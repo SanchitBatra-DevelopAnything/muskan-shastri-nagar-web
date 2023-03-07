@@ -59,20 +59,24 @@ export class ApiService {
 
     let id = orderId['name'];
 
-    let allDetails = "https://muskan-admin-app.web.app";
+    let allDetails = `https://shastri-nagar-shop-app.web.app/#/detail/${deliveryDate}/${id}`;
+
+    let baseUrl = allDetails.split("#")[0];
+    allDetails = baseUrl+`#/detail/${deliveryDate}/${id}`;
 
 
     let message = `Hi ${name},\nYour order with ID : ${id} is accepted.\nPlease find details.\n\nTotal:Rs.${total}\nAdvance:Rs.${advance}\nBalance:Rs.${balance}\n\nBooked On:${bookingDate}\nDeliver Date:${deliveryDate}\nDelivery Time:${deliveryTime}\nOther Details:${allDetails}\n\nThanks for ordering from Muskan Bakers And Sweets`;
-    window.open(`https://wa.me/+91${phoneNumber}/?text=${encodeURI(message)}`);
+    window.open(`https://wa.me/+91${phoneNumber}/?text=${encodeURIComponent(message)}`);
   }
 
   public sendUpdateOrderWhatsapp(orderKey:any , isRegular:boolean)
   {
     let mobile = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").Contact;
     let name = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").customerName;
-    let allDetails = "https://muskan-admin-app.web.app";
+    let deliveryDate = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").deliveryDate;
+    let allDetails = "https://shastri-nagar-shop-app.web.app/#/detail/"+deliveryDate+"/"+orderKey;
     let message = `Hi ${name},\nYour order with ID : ${orderKey} is updated.\n\nNew Details:${allDetails}\n\nThanks for ordering from Muskan Bakers And Sweets`;
-    let encoded = encodeURI(message);
+    let encoded = encodeURIComponent(message);
     window.open("https://wa.me/+91"+mobile+"/?text="+encoded);
   }
 
