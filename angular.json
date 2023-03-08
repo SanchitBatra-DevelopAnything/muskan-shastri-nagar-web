@@ -37,7 +37,10 @@
               "../muskan-shastri-nagar/node_modules/primeng/resources/primeng.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "../muskan-shastri-nagar/node_modules/jquery/dist/jquery.min.js",
+              "../muskan-shastri-nagar/node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {

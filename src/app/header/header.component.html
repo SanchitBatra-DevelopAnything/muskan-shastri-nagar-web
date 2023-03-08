@@ -1,4 +1,4 @@
-<nav class = "navbar navbar-default sticky">
+<!-- <nav class = "navbar navbar-default sticky">
     <div class="container-fluid">
         <div class="navbar-header">
                 <img src = "../../assets/muskan.png" class = "navbar-brand">
@@ -14,5 +14,25 @@
                 <li><a routerLink = "/viewOrders">View Orders</a></li>
             </ul>
         </div>
+    </div>
+</nav> -->
+
+
+<nav class = "navbar navbar-default">
+    <div class="navbar-header">
+        <img src = "../../assets/muskan.png" class = "navbar-brand">
+        <button type = "button" class = "navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+        </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id = "menu">
+        <ul class="nav navbar-nav">
+            <li><a routerLink = "/">Add Order</a></li>
+            <li><a routerLink = "/inventory">Inventory</a></li>
+            <li><a routerLink = "/viewOrders">View Orders</a></li>
+        </ul>
     </div>
 </nav>
