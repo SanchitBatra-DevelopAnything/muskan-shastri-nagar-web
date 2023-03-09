@@ -2,14 +2,24 @@
 
 </div>
 
-<div class = "contaiber jumbotron" style = "margin: 10px;" *ngIf = "isEditMode">
-    <div *ngIf = "!isDelivered">
+<div class = "contaiber jumbotron" style = "margin: 10px;" *ngIf = "isEditMode" style = "text-align: center;">
+    <div *ngIf = "!isDelivered && !isCancelled">
         <label>Delivered To :</label>
     <input type = "text" [(ngModel)] = "deliveredTo">
+    
     <button class = "btn btn-lg btn-success" style = "margin:10px;" (click) = "deliverOrder()">DELIVER</button>
+    
+    
+    <button *ngIf = "!isPrepared" class = "btn btn-lg btn-primary" style = "margin:10px;" (click) = "markAsPrepared()">PREPARED</button>
+    
+    
+        <button *ngIf = "!isPrepared" class = "btn btn-lg btn-danger" style = "margin: 10px;" (click) = "cancelOrder()">CANCEL</button>
+    
     </div>
     
-    <p *ngIf = "isDelivered" style = "color : green; font-weight: 300; text-align: center;">ORDER IS DELIVERED TO : {{deliveredTo | uppercase}}</p>
+    <p *ngIf = "isDelivered && !isPrepared && !isCancelled" style = "color : green; font-weight: 300; text-align: center;">ORDER IS DELIVERED TO : {{deliveredTo | uppercase}}</p>
+    <p *ngIf = "isCancelled && !isDelivered && !isPrepared" style = "color:red; font-weight: 300; text-align: center;">ORDER IS CANCELLED.</p>
+    <p *ngIf = "isPrepared" style = "color:green; font-weight: 300; text-align: center;">ORDER IS PREPARED. READY TO DELIVER.</p>
 </div>
 
 <div class="container" *ngIf = "!isLoading">
@@ -106,6 +116,6 @@
     
     <legend style = "margin-top: 15px;"></legend>
     <button class = "btn btn-success" (click) = "createRegularOrder()" *ngIf = "!isEditMode">Submit</button>
-    <button class = "btn btn-danger" (click) = "updateRegularOrder()" *ngIf = "isEditMode && !isDelivered">Update</button>
+    <button class = "btn btn-danger" (click) = "updateRegularOrder()" *ngIf = "isEditMode && !isDelivered && !isCancelled">Update</button>
     
 </div>

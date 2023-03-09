@@ -90,6 +90,16 @@ export class ApiService {
     window.open("https://wa.me/+91"+mobile+"/?text="+encoded);
   }
 
+  public sendCancelMessage(orderKey : any , isRegular:boolean)
+  {
+    let mobile = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").Contact;
+    let name = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").customerName;
+    let allDetails = "https://muskan-admin-app.web.app";
+    let message = `Hi ${name},\nYour order with ID : ${orderKey} is Cancelled.\n\nThanks for ordering from Muskan Bakers And Sweets`;
+    let encoded = encodeURI(message);
+    window.open("https://wa.me/+91"+mobile+"/?text="+encoded);
+  }
+
   public getActiveOrders(date : String) : Observable<any> {
     return this.http.get('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+date+'.json');
   }

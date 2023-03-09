@@ -40,6 +40,9 @@ export class RegularOrderFormComponent implements OnInit {
 
   regularOrderForm:FormGroup;
 
+  isCancelled:boolean = false;
+  isPrepared:boolean = false;
+
 
 
 
@@ -85,9 +88,25 @@ export class RegularOrderFormComponent implements OnInit {
       {
         this.isDelivered = true;
         this.deliveredTo = order.deliveredTo;
+        this.isPrepared = false;
+        this.isCancelled = false;
+      }
+      else if(order.status == "C")
+      {
+        this.isDelivered = false;
+        this.isPrepared = false;
+        this.isCancelled = true;
+      }
+      else if(order.status == "P")
+      {
+        this.isDelivered = false;
+        this.isPrepared = true;
+        this.isCancelled = false;
       }
       else
-      {
+      { //not delivered and no action yet.
+        this.isCancelled = false;
+        this.isPrepared = false;
         this.isDelivered = false;
       }
       this.isLoading = false;
@@ -222,6 +241,29 @@ export class RegularOrderFormComponent implements OnInit {
     this.apiService.updateOrder(selectedDate,orderKey,{'status' : "D" , 'deliveredTo' : this.deliveredTo}).subscribe(()=>{
       this.loadOnEditMode(selectedDate,orderKey);
       this.apiService.sendDeliveryMessage(orderKey,true,this.deliveredTo);
+      sessionStorage.clear();
+    });
+  }
+
+  markAsPrepared()
+  {
+    this.isLoading = true;
+    let selectedDate = this.route.snapshot.params['date'];
+    let orderKey = this.route.snapshot.params['key'];
+    this.apiService.updateOrder(selectedDate,orderKey,{'status' : "P"}).subscribe(()=>{
+      this.loadOnEditMode(selectedDate,orderKey);
+      sessionStorage.clear();
+    });
+  }
+
+  cancelOrder()
+  {
+    this.isLoading = true;
+    let selectedDate = this.route.snapshot.params['date'];
+    let orderKey = this.route.snapshot.params['key'];
+    this.apiService.updateOrder(selectedDate,orderKey,{'status' : "C" }).subscribe(()=>{
+      this.loadOnEditMode(selectedDate,orderKey);
+      this.apiService.sendCancelMessage(orderKey,true);
       sessionStorage.clear();
     });
   }
