@@ -52,6 +52,7 @@ export class RegularOrderFormComponent implements OnInit {
       'advanceAmount' : new FormControl(null , [Validators.required]),
       'balanceAmount' : new FormControl({value : 0 , disabled : true},[Validators.required]),
       'advancePaymentMode' : new FormControl('CARD',[Validators.required]),
+      'particulars' : new FormControl(''),
     });
     this.items = [];
     this.products = [];
@@ -76,7 +77,8 @@ export class RegularOrderFormComponent implements OnInit {
         'totalAmount' : order.totalAmount,
         'advanceAmount' : order.advanceAmount,
         'balanceAmount' : order.balanceAmount,
-        'advancePaymentMode' : order.advancePaymentMode
+        'advancePaymentMode' : order.advancePaymentMode,
+        'particulars' : order.particulars,
       });
       this.products = order.items;
       if(order.status == "D")
@@ -155,7 +157,8 @@ export class RegularOrderFormComponent implements OnInit {
 
   createRegularOrder()
   {
-    // this.updateFormValue();
+
+    console.log(this.regularOrderForm.getRawValue());
     let regularOrderInformation = {...this.regularOrderForm.getRawValue() , 'items' : this.products};
     this.isLoading = true;
     sessionStorage.setItem("regularOrderDetails" , JSON.stringify(regularOrderInformation));
@@ -167,14 +170,7 @@ export class RegularOrderFormComponent implements OnInit {
       ...regularOrderInfo
     };
 
-    // this.apiService.addCustomOrder(customOrder).subscribe((orderId)=>{
-    //   //sessionStorage.clear();
-    //   this.isLoading = false;
-      
-    //   this.sendWhatsapp(orderId)
-    //   sessionStorage.clear();
-    //   this.router.navigate(['/']);
-    // });
+    
 
 
     this.apiService.addRegularOrder(regularOrder).subscribe((orderId)=>{

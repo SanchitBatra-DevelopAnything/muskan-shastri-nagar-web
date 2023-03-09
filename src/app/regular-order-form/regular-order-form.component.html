@@ -44,9 +44,11 @@
         </div>
     </div>
 
+
+    
     <div *ngIf = "products.length!=0">
     <h3>Item Details.</h3>
-    <p-table [value]="products" [tableStyle]="{'min-width': '50rem'}">
+    <p-table [value]="products" [tableStyle]="{'min-width': ''}">
         <ng-template pTemplate="header">
             <tr>
                 <th>Name</th>
@@ -67,6 +69,17 @@
         </ng-template>
     </p-table>
     </div>
+
+    <div class = "row">
+        <form [formGroup] = "regularOrderForm">
+            <div class="col-xs-6">
+                <h3>particulars : </h3>
+                <input type = "text" class = "form-control" formControlName = "particulars">
+            </div>
+        </form>
+    </div>
+
+
     <legend style = "margin-top: 15px;"></legend>
     <div class="row">
         <form [formGroup] = "regularOrderForm">
@@ -90,7 +103,6 @@
     </div>
     
     <legend style = "margin-top: 15px;"></legend>
-
     <button class = "btn btn-success" (click) = "createRegularOrder()" *ngIf = "!isEditMode">Submit</button>
     <button class = "btn btn-danger" (click) = "updateRegularOrder()" *ngIf = "isEditMode && !isDelivered">Update</button>
     
