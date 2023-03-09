@@ -27,7 +27,7 @@
     <div class="form-group">
         <span>Booking Date</span>
     <div style = "width:50%;">
-        <input type = "date" formControlName="bookingDate">
+        <input type = "date" formControlName="bookingDate" [min] = "today">
     </div>
 
     </div>
@@ -35,7 +35,7 @@
     <div class="form-group">
         <span>Delivery Date</span>
     <div style = "width:50%;">
-        <input type = "date" formControlName="deliveryDate">
+        <input type = "date" formControlName="deliveryDate" [min] = "today">
     </div>
 
     </div>

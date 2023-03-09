@@ -11,6 +11,7 @@ import { UtilityService } from '../services/utility.service';
 export class CustomerFormComponent implements OnInit {
 
   customerForm:FormGroup;
+  today:any;
 
   constructor(private utilityService : UtilityService) { }
 
@@ -24,6 +25,9 @@ export class CustomerFormComponent implements OnInit {
       'deliveryTime' : new FormControl('',[Validators.required]),
       'deliveryType' : new FormControl('',[Validators.required])
    });
+
+   this.today = new Date().toISOString().split('T')[0];
+
 
    if(!this.firstTime())
    {
