@@ -25,6 +25,7 @@ import { InventoryListComponent } from './inventory-list/inventory-list.componen
 import { InventoryItemComponent } from './inventory-item/inventory-item.component';
 import { DailyReportComponent } from './daily-report/daily-report.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { EditCustomOrderComponent } from './edit-custom-order/edit-custom-order.component';
 
 const appRoutes : Routes = [
   {path : '' , component : OrderTypeSelectionComponent,pathMatch:"full"},
@@ -50,6 +51,7 @@ const appRoutes : Routes = [
     InventoryItemComponent,
     DailyReportComponent,
     OrderDetailComponent,
+    EditCustomOrderComponent,
   ],
   imports: [
     BrowserModule,

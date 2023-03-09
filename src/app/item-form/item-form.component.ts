@@ -20,6 +20,7 @@ export class ItemFormComponent implements OnInit {
   selectedImage:any;
   selectedPhotoOnCake:any;
   isLoading:boolean = false;
+  paymentOptions:any;
 
 
   constructor(private storage : AngularFireStorage,private utilityService : UtilityService,private apiService : ApiService,private router:Router) { }
@@ -34,7 +35,10 @@ export class ItemFormComponent implements OnInit {
       'advanceAmount' : new FormControl(null,[Validators.required]),
       'message' : new FormControl(''),
       'particulars' : new FormControl(''),
+      'advancePaymentMode' : new FormControl('CARD' , [Validators.required]),
     });
+
+    this.paymentOptions = [{'name' : 'CARD'},{'name' : 'ONLINE'},{'name' : 'CASH'}];
 
     if(!this.firstTime())
     {
