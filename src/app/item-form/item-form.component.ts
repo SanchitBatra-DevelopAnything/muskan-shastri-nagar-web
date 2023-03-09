@@ -29,13 +29,10 @@ export class ItemFormComponent implements OnInit {
       'imgUrl' : new FormControl(''),
       'photoUrl' : new FormControl('not-uploaded'),
       'weight' : new FormControl(1,[Validators.required]),
-      'quantity' : new FormControl(null , [Validators.required]),
-      'price' : new FormControl(null,[Validators.required]),
       'totalAmount' : new FormControl(null,[Validators.required]),
       'balanceAmount' : new FormControl(null,[Validators.required]),
       'advanceAmount' : new FormControl(null,[Validators.required]),
       'message' : new FormControl(''),
-      'designCharges' : new FormControl(null),
       'particulars' : new FormControl(''),
     });
 
@@ -50,12 +47,9 @@ export class ItemFormComponent implements OnInit {
     }
     this.itemForm.patchValue({
       'weight' : customOrderInfo.weight,
-      'quantity' : customOrderInfo.quantity,
-      'price' : customOrderInfo.price,
       'totalAmount' : customOrderInfo.totalAmount,
       'balanceAmount' : customOrderInfo.balanceAmount,
       'message' : customOrderInfo.message,
-      'designCharges' : customOrderInfo.designCharges,
       'particulars' : customOrderInfo.particulars
     });
     }
