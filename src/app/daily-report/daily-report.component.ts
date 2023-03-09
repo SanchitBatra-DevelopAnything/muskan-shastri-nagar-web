@@ -171,4 +171,25 @@ export class DailyReportComponent implements OnInit {
     this.customOrders = [...filteredCustomOrders];
     this.customOrderKeys = [...filteredCustomKeys]; 
   }
+
+  getStatus(shortForm:string)
+  {
+    if(shortForm == "D")
+    {
+      return "DELIVERED";
+    }
+    if(shortForm == "ND")
+    {
+      return "IN PROGRESS";
+    }
+    if(shortForm == "P")
+    {
+      return "PREPARED";
+    }
+    if(shortForm == "C")
+    {
+      return "CANCELLED";
+    }
+    return "";
+  }
 }
