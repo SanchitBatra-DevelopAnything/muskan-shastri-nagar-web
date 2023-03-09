@@ -18,7 +18,7 @@ export class CustomerFormComponent implements OnInit {
   ngOnInit(): void {
     this.customerForm = new FormGroup({
       'customerName' : new FormControl('',[Validators.required]),
-      'Address' : new FormControl('',[Validators.required]),
+      'Address' : new FormControl(''),
       'Contact' : new FormControl('',[Validators.required]),
       'bookingDate' : new FormControl('',[Validators.required]),
       'deliveryDate' : new FormControl('' , [Validators.required]),
