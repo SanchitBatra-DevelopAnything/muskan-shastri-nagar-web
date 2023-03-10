@@ -1,4 +1,4 @@
-<div style = "text-align: center;">Order Details</div>
+<div style = "text-align: center;"><h3>Order Details</h3></div>
 <div class="loader" *ngIf = "isLoading">
 
 </div>
@@ -6,39 +6,51 @@
 <div class = "container">
     <div class="row">
         <div class="col-xs-12">
-            Total Amount : Rs.{{loadedOrder.totalAmount}}
+            <p>Total Amount : Rs.{{loadedOrder.totalAmount}}</p>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            Advance Paid : Rs.{{loadedOrder.advanceAmount}}
+            <p>Advance Paid : Rs.{{loadedOrder.advanceAmount}}</p>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            Balance Amount : Rs.{{loadedOrder.balanceAmount}}
+            <p>Balance Amount : Rs.{{loadedOrder.balanceAmount}}</p>
         </div>
     </div>
     <div class="row" *ngIf = "isRegularOrder">
         <div class="col-xs-12">
             Items:
             <ul>
-                <li *ngFor = "let item of loadedOrder.items">{{item.quantity}} x {{item.name}}</li>
+                <li *ngFor = "let item of loadedOrder.items"><p>{{item.quantity}} x {{item.name}}</p></li>
             </ul>
         </div>  
     </div>
-
-    <div class = "row" *ngIf = "!isRegularOrder">
+    <div class="row" *ngIf = "isRegularOrder">
         <div class="col-xs-12">
-            Cake Photo : 
-            <img src="{{loadedOrder.imgUrl}}" class="img-thumbnail" alt="Cake Photo" style = "width: 800px; height : 800px;">
+            <p>{{loadedOrder.particulars}}</p>
         </div>
     </div>
 
     <div class = "row" *ngIf = "!isRegularOrder">
-        <div class="col-xs-12">
-             Photo On Cake : 
-            <img src="{{loadedOrder.photoUrl}}" class="img-thumbnail" alt="Cake Photo" style = "width:800px; height:800px;">
+        <div class="col-xs-12 col-md-6">
+            Cake Photo : 
+            <img src="{{loadedOrder.imgUrl}}" class="img-thumbnail" alt="Cake Photo" style = "max-width: 304px; max-height : 236px;">
         </div>
+    
+
+    
+        <div class="col-xs-12 col-md-6">
+             Photo On Cake : 
+            <img src="{{loadedOrder.photoUrl}}" class="img-thumbnail" alt="Cake Photo" style = "max-width:304px; max-height:236px;">
+        </div>
+    </div>
+
+    <legend style = "margin: 10px;"></legend>
+
+    <div class="row" *ngIf = "!isRegularOrder">
+        <h4>Message On Cake : </h4>
+        <p>{{loadedOrder.message}}</p>
     </div>
 </div>
