@@ -28,7 +28,7 @@
             <p style = "font-weight: bold;">{{order.customerName | uppercase}}</p>
             <p style = "font-weight: bold;">{{order.Contact}}</p>
             <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>
-            <p style = "font-size:10px;">{{getStatus(order.status)}}</p>
+            <p style = "font-size:12px; font-weight: 400;">{{getStatus(order.status)}}</p>
         </div>
 
     </div>
@@ -38,10 +38,11 @@
     <hr>
 
     <div class="row">
-        <div *ngFor = "let order of customOrders; let i = index;" class = "col-md-2 col-xs-4 w3-card pointer order-card-custom">
+        <div *ngFor = "let order of customOrders; let i = index;" class = "col-md-2 col-xs-4 w3-card pointer order-card-custom" (click)= "editCustomOrder(customOrders[i] , i)">
             <p style = "font-weight: bold;">{{order.customerName | uppercase}}</p>
             <p style = "font-weight: bold;">{{order.Contact | uppercase}}</p>
             <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>
+            <p style = "font-size:12px; font-weight: 400;">{{getStatus(order.status)}}</p>
         </div>
     </div>
     

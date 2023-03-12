@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { StringMapWithRename } from '@angular/compiler/src/compiler_facade_interface';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 
@@ -12,6 +13,7 @@ export class OrderDetailComponent implements OnInit {
   isLoading:boolean = false;
   loadedOrder:any = {};
   isRegularOrder:boolean = true;
+
   constructor(private router:Router , private route:ActivatedRoute , private apiService:ApiService) { }
 
   ngOnInit(): void {

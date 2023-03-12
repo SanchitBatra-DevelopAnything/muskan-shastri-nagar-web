@@ -92,6 +92,13 @@ export class DailyReportComponent implements OnInit {
     this.router.navigate(['/editOrder/'+deliveryDate+'/regular/'+key]);
   }
 
+  editCustomOrder(order:any , index:any)
+  {
+    let deliveryDate = order.deliveryDate;
+    let key = this.customOrderKeys[index];
+    this.router.navigate(['editOrder/'+deliveryDate+'/custom/'+key]);
+  }
+
   filterOrders()
   {
     this.isLoading = true;

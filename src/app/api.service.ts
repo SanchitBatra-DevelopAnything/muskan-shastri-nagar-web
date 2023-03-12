@@ -84,7 +84,6 @@ export class ApiService {
   {
     let mobile = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").Contact;
     let name = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").customerName;
-    let allDetails = "https://muskan-admin-app.web.app";
     let message = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered to ${deliveredTo}.\n\nThanks for ordering from Muskan Bakers And Sweets`;
     let encoded = encodeURI(message);
     window.open("https://wa.me/+91"+mobile+"/?text="+encoded);
@@ -94,7 +93,6 @@ export class ApiService {
   {
     let mobile = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").Contact;
     let name = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").customerName;
-    let allDetails = "https://muskan-admin-app.web.app";
     let message = `Hi ${name},\nYour order with ID : ${orderKey} is Cancelled.\n\nThanks for ordering from Muskan Bakers And Sweets`;
     let encoded = encodeURI(message);
     window.open("https://wa.me/+91"+mobile+"/?text="+encoded);
