@@ -49,8 +49,11 @@ export class ApiService {
     let name = customerInfo.customerName;
     let phoneNumber = customerInfo.Contact;
 
-    let bookingDate = customerInfo.bookingDate.replace("/","-");
-    let deliveryDate = customerInfo.deliveryDate.replace("/","-");
+    let deliveryDate1 = customerInfo.deliveryDate.replace("/","-");
+    let bookingDateArray = customerInfo.bookingDate.replace("/","-").split("-");
+    let deliveryDateArray = customerInfo.deliveryDate.replace("/","-").split("-");
+    let deliveryDate = deliveryDateArray[2]+"-"+deliveryDateArray[1]+"-"+deliveryDateArray[0];
+    let bookingDate = bookingDateArray[2]+"-"+bookingDateArray[1]+"-"+bookingDateArray[0];
     let deliveryTime = customerInfo.deliveryTime;
 
     let total = customerOrderDetails.totalAmount;
@@ -59,10 +62,10 @@ export class ApiService {
 
     let id = orderId['name'];
 
-    let allDetails = `https://shastri-nagar-shop-app.web.app/#/detail/${deliveryDate}/${id}`;
+    let allDetails = `https://shastri-nagar-shop-app.web.app/#/detail/${deliveryDate1}/${id}`;
 
     let baseUrl = allDetails.split("#")[0];
-    allDetails = baseUrl+`#/detail/${deliveryDate}/${id}`;
+    allDetails = baseUrl+`#/detail/${deliveryDate1}/${id}`;
 
 
     let message = `Hi ${name},\nYour order with ID : ${id} is accepted.\nPlease find details.\n\nTotal:Rs.${total}\nAdvance:Rs.${advance}\nBalance:Rs.${balance}\n\nBooked On:${bookingDate}\nDeliver Date:${deliveryDate}\nDelivery Time:${deliveryTime}\nOther Details:${allDetails}\n\nThanks for ordering from Muskan Bakers And Sweets`;
@@ -75,6 +78,8 @@ export class ApiService {
     let name = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").customerName;
     let deliveryDate = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").deliveryDate;
     let allDetails = "https://shastri-nagar-shop-app.web.app/#/detail/"+deliveryDate+"/"+orderKey;
+    let deliveryDateArray = deliveryDate.split("-");
+    deliveryDate = deliveryDateArray[2]+"-"+deliveryDateArray[1]+"-"+deliveryDateArray[0];
     let message = `Hi ${name},\nYour order with ID : ${orderKey} is updated.\n\nNew Details:${allDetails}\n\nThanks for ordering from Muskan Bakers And Sweets`;
     let encoded = encodeURIComponent(message);
     window.open("https://wa.me/+91"+mobile+"/?text="+encoded);
