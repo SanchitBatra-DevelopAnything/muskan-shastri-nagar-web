@@ -9,9 +9,11 @@ import { ApiService } from '../api.service';
 })
 export class InventoryListComponent implements OnInit {
 
-  items : {itemName : string , price : number}[];
+  items : any;
+  filteredItems : any;
   itemKeys : string[];
   isLoading : boolean;
+  searchFor:string;
 
   constructor(private apiService:ApiService,private router:Router) { }
 
@@ -27,13 +29,28 @@ export class InventoryListComponent implements OnInit {
       {
         this.itemKeys = [];
         this.items = [];
+        this.filteredItems =[];
         this.isLoading = false;
         return;
       }
       this.items = Object.values(allItems);
       this.itemKeys = Object.keys(allItems);
+      this.addItemKeys();
+      this.filteredItems = [...this.items];
       this.isLoading = false;
     });
+  }
+
+  addItemKeys()
+  {
+    for(let i=0;i<this.items.length;i++)
+    {
+      this.items[i] = {...this.items[i] , "itemKey" : this.itemKeys[i]};
+    }
+    for(let i=0;i<this.items.length;i++)
+    {
+      console.log(JSON.stringify(this.items[i]));
+    }
   }
 
   addNewItem()
@@ -44,18 +61,38 @@ export class InventoryListComponent implements OnInit {
   deleteItem(index:number)
   {
     this.isLoading = true;
-    this.apiService.deleteItemFromInventory(this.itemKeys[index]).subscribe((_)=>{
+    this.apiService.deleteItemFromInventory(this.filteredItems[index].itemKey).subscribe((_)=>{
       this.getAllItems();
       this.isLoading = false;
     }); 
+    this.searchFor = "";
   }
 
   editItem(index:number)
   {
-    let item = this.items[index].itemName;
-    let sp = this.items[index].price;
-    let key = this.itemKeys[index];
+    console.log(JSON.stringify(this.filteredItems[index]));
+    let item = this.filteredItems[index].itemName;
+    let sp = this.filteredItems[index].price;
+    let key = this.filteredItems[index].itemKey;
+    this.searchFor = "";
     this.router.navigate(['/inventory/form/'+key]);
+  }
+
+  filterInventory()
+  {
+    
+    if(this.searchFor.toString().trim().length == 0)
+    {
+      this.filteredItems = [...this.items];
+      return;
+    }
+    this.filteredItems = this.items.filter((itemObj : any)=>{
+      if(itemObj.itemName.toString().trim().toLowerCase().includes(this.searchFor.toString().trim().toLowerCase()))
+      {
+        return true;
+      }
+      return false;
+    });
   }
 
 }
