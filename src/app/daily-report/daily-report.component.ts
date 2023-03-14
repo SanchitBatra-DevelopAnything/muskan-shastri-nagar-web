@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -17,15 +17,17 @@ export class DailyReportComponent implements OnInit {
   todaysDate : string;
   selectedDate: any;
   mobileNumber:any;
+  type : string;
 
 
-  constructor(private apiService:ApiService , private router : Router) { }
+  constructor(private apiService:ApiService , private router : Router , private route:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.todaysDate = this.getTodaysDate();
     this.getActiveOrders();
     this.selectedDate = this.todaysDate;
     this.mobileNumber = "";
+    this.type = this.route.snapshot.params['type'];
   }
 
   getTodaysDate()
@@ -198,5 +200,10 @@ export class DailyReportComponent implements OnInit {
       return "CANCELLED";
     }
     return "";
+  }
+
+  sendToChef()
+  {
+    this.apiService.sendOrdersToWorker();
   }
 }

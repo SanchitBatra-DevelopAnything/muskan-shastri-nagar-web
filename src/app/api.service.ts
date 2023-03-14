@@ -103,6 +103,15 @@ export class ApiService {
     window.open("https://wa.me/+91"+mobile+"/?text="+encoded);
   }
 
+  sendOrdersToWorker()
+  {
+    let link = 'https://shastri-nagar-shop-app.web.app/#/viewOrders/chef';
+    let message = `Please click this link for Today's Orders : \n\n ${link}`;
+    let encoded = encodeURIComponent(message);
+
+    window.open("https://wa.me/?text="+encoded);
+  }
+
   public getActiveOrders(date : String) : Observable<any> {
     return this.http.get('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+date+'.json');
   }

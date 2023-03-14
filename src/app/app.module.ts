@@ -32,7 +32,7 @@ const appRoutes : Routes = [
   {path : 'order/:orderType',component:ContainerComponent},
   {path : 'inventory' , component : InventoryListComponent},
   {path : 'inventory/form/:key' , component : InventoryFormComponent},
-  {path : 'viewOrders' , component : DailyReportComponent},
+  {path : 'viewOrders/:type' , component : DailyReportComponent},
   {path : 'editOrder/:date/regular/:key' , component : RegularOrderFormComponent},
   {path : 'editOrder/:date/custom/:key' , component : EditCustomOrderComponent},
   {path : 'detail/:date/:orderKey' , component : OrderDetailComponent},
