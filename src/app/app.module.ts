@@ -33,8 +33,8 @@ const appRoutes : Routes = [
   {path : 'inventory' , component : InventoryListComponent},
   {path : 'inventory/form/:key' , component : InventoryFormComponent},
   {path : 'viewOrders/:type' , component : DailyReportComponent},
-  {path : 'editOrder/:date/regular/:key' , component : RegularOrderFormComponent},
-  {path : 'editOrder/:date/custom/:key' , component : EditCustomOrderComponent},
+  {path : 'editOrder/:date/regular/:key/:type' , component : RegularOrderFormComponent},
+  {path : 'editOrder/:date/custom/:key/:type' , component : EditCustomOrderComponent},
   {path : 'detail/:date/:orderKey' , component : OrderDetailComponent},
 ]
 @NgModule({

@@ -20,6 +20,7 @@ export class DailyReportComponent implements OnInit {
   type : string;
 
 
+
   constructor(private apiService:ApiService , private router : Router , private route:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -91,14 +92,14 @@ export class DailyReportComponent implements OnInit {
   {
     let deliveryDate = order.deliveryDate;
     let key = this.activeOrderKeys[index];
-    this.router.navigate(['/editOrder/'+deliveryDate+'/regular/'+key]);
+    this.router.navigate(['/editOrder/'+deliveryDate+'/regular/'+key+"/"+this.type]);
   }
 
   editCustomOrder(order:any , index:any)
   {
     let deliveryDate = order.deliveryDate;
     let key = this.customOrderKeys[index];
-    this.router.navigate(['editOrder/'+deliveryDate+'/custom/'+key]);
+    this.router.navigate(['editOrder/'+deliveryDate+'/custom/'+key+"/"+this.type]);
   }
 
   filterOrders()

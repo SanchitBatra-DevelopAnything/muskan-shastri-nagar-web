@@ -43,6 +43,7 @@ export class RegularOrderFormComponent implements OnInit {
   isCancelled:boolean = false;
   isPrepared:boolean = false;
 
+  type:string;
 
 
 
@@ -68,6 +69,11 @@ export class RegularOrderFormComponent implements OnInit {
     {
       this.isEditMode = true;
       this.loadOnEditMode(selectedDate , orderKey);
+    }
+    this.type = this.route.snapshot.params['type'];
+    if(this.type == null || this.type == undefined)
+    {
+      this.type = "owner";
     }
   }
 

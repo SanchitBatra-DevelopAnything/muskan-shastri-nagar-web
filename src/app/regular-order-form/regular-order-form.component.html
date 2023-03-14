@@ -4,16 +4,19 @@
 
 <div class = "contaiber jumbotron" style = "margin: 10px;" *ngIf = "isEditMode" style = "text-align: center;">
     <div *ngIf = "!isDelivered && !isCancelled">
-        <label>Delivered To :</label>
+        <div *ngIf = "type == 'owner'">
+            <label>Delivered To :</label>
     <input type = "text" [(ngModel)] = "deliveredTo">
+        </div>
+        
     
-    <button class = "btn btn-lg btn-success" style = "margin:10px;" (click) = "deliverOrder()">DELIVER</button>
+    <button *ngIf= "type == 'owner'" class = "btn btn-lg btn-success" style = "margin:10px;" (click) = "deliverOrder()">DELIVER</button>
     
     
-    <button *ngIf = "!isPrepared" class = "btn btn-lg btn-primary" style = "margin:10px;" (click) = "markAsPrepared()">PREPARED</button>
+    <button *ngIf = "!isPrepared && type == 'chef'" class = "btn btn-lg btn-primary" style = "margin:10px;" (click) = "markAsPrepared()">PREPARED</button>
     
     
-        <button *ngIf = "!isPrepared" class = "btn btn-lg btn-danger" style = "margin: 10px;" (click) = "cancelOrder()">CANCEL</button>
+        <button *ngIf = "!isPrepared && type == 'owner'" class = "btn btn-lg btn-danger" style = "margin: 10px;" (click) = "cancelOrder()">CANCEL</button>
     
     </div>
     
@@ -23,8 +26,8 @@
 </div>
 
 <div class="container" *ngIf = "!isLoading">
-    <h3>Add items for your order.</h3>
-    <div class="row">
+    <h3 *ngIf = "type == 'owner'">Add items for your order.</h3>
+    <div class="row" *ngIf = "type == 'owner'">
         <div class="col-xs-6 col-md-2">
             <p>Quantity</p>
             <input type = "number" [(ngModel)] = "currentQuantity" class = "form-control">
@@ -75,7 +78,7 @@
                 <td>{{product.pricePerProduct}}</td>
                 <td>{{product.quantity}}</td>
                 <td>{{product.total}}</td>
-                <td><button class = "btn btn-danger" (click) = "deleteProduct(product)">Delete</button></td>
+                <td><button class = "btn btn-danger" (click) = "deleteProduct(product)" [disabled] = "type == 'chef'">Delete</button></td>
             </tr>
         </ng-template>
     </p-table>
@@ -86,14 +89,15 @@
         <form [formGroup] = "regularOrderForm">
             <div class="col-xs-6">
                 <h3>particulars : </h3>
-                <input type = "text" class = "form-control" formControlName = "particulars">
+                <input *ngIf = "type == 'owner'" type = "text" class = "form-control" formControlName = "particulars">
+                <p *ngIf = "type == 'chef'">{{regularOrderForm.controls['particulars'].value}}</p>
             </div>
         </form>
     </div>
 
 
     <legend style = "margin-top: 15px;"></legend>
-    <div class="row">
+    <div class="row" *ngIf = "type == 'owner'">
         <form [formGroup] = "regularOrderForm">
         <div class="col-xs-6 col-md-3">
             <p>Total Amount</p>
@@ -116,6 +120,6 @@
     
     <legend style = "margin-top: 15px;"></legend>
     <button class = "btn btn-success" (click) = "createRegularOrder()" *ngIf = "!isEditMode">Submit</button>
-    <button class = "btn btn-danger" (click) = "updateRegularOrder()" *ngIf = "isEditMode && !isDelivered && !isCancelled">Update</button>
+    <button class = "btn btn-danger" (click) = "updateRegularOrder()" *ngIf = "isEditMode && !isDelivered && !isCancelled && type == 'owner'">Update</button>
     
 </div>

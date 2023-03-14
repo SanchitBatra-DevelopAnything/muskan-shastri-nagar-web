@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         // Check the current route here
-        if (this.router.url.includes("/detail")) {
+        if (this.router.url.includes("/detail") || this.router.url.includes("/chef")) {
           this.showHeader = false; // Set a boolean flag to hide something
         } else {
           this.showHeader = true; // Set the flag to show something
