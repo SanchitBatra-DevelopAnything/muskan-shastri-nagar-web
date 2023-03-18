@@ -2,7 +2,7 @@
 
 </div>
 
-<div class = "contaiber jumbotron" style = "margin: 10px;" *ngIf = "isEditMode" style = "text-align: center;">
+<div class = "container jumbotron" style = "margin: 10px;" *ngIf = "isEditMode" style = "text-align: center;">
     <div *ngIf = "!isDelivered && !isCancelled">
         <div *ngIf = "type == 'owner'">
             <label>Delivered To :</label>
@@ -73,12 +73,19 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product>
-            <tr>
+            <tr *ngIf = "type == 'owner'">
                 <td>{{product.name}}</td>
                 <td>{{product.pricePerProduct}}</td>
                 <td>{{product.quantity}}</td>
                 <td>{{product.total}}</td>
-                <td><button class = "btn btn-danger" (click) = "deleteProduct(product)" [disabled] = "type == 'chef'">Delete</button></td>
+                <td><button class = "btn btn-danger" (click) = "deleteProduct(product)">Delete</button></td>
+            </tr>
+            <tr *ngIf = "type == 'chef'">
+                <td>{{product.name}}</td>
+                <td>--</td>
+                <td>{{product.quantity}}</td>
+                <td>--</td>
+                <td><button class = "btn btn-danger" (click) = "deleteProduct(product)" [disabled] = "true">Delete</button></td>
             </tr>
         </ng-template>
     </p-table>

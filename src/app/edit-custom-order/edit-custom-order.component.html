@@ -1,15 +1,18 @@
-<div class = "contaiber jumbotron" style = "margin: 10px;" style = "text-align: center;">
+<div class = "container jumbotron" style = "margin: 10px;" style = "text-align: center;">
     <div *ngIf = "!isDelivered && !isCancelled">
-        <label>Delivered To :</label>
+        <div *ngIf = "type == 'owner'">
+            <label>Delivered To :</label>
     <input type = "text" [(ngModel)] = "deliveredTo">
+        </div>
+        
     
-    <button class = "btn btn-lg btn-success" style = "margin:10px;" (click) = "deliverOrder()">DELIVER</button>
+    <button *ngIf= "type == 'owner'" class = "btn btn-lg btn-success" style = "margin:10px;" (click) = "deliverOrder()">DELIVER</button>
     
     
-    <button *ngIf = "!isPrepared" class = "btn btn-lg btn-primary" style = "margin:10px;" (click) = "markAsPrepared()">PREPARED</button>
+    <button *ngIf = "!isPrepared && type == 'chef'" class = "btn btn-lg btn-primary" style = "margin:10px;" (click) = "markAsPrepared()">PREPARED</button>
     
     
-        <button *ngIf = "!isPrepared" class = "btn btn-lg btn-danger" style = "margin: 10px;" (click) = "cancelOrder()">CANCEL</button>
+        <button *ngIf = "!isPrepared && type == 'owner'" class = "btn btn-lg btn-danger" style = "margin: 10px;" (click) = "cancelOrder()">CANCEL</button>
     
     </div>
     

@@ -16,6 +16,8 @@ export class EditCustomOrderComponent implements OnInit {
   isLoading:boolean = false;
   loadedOrder:any = {};
   isRegularOrder:boolean = false;
+  type:string;
+
 
 
   constructor(private route : ActivatedRoute , private apiService:ApiService) { }
@@ -24,6 +26,12 @@ export class EditCustomOrderComponent implements OnInit {
     let key = this.route.snapshot.params['key'];
     let date = this.route.snapshot.params['date'];
     this.getOrderDetails(date , key);
+
+    this.type = this.route.snapshot.params['type'];
+    if(this.type == null || this.type == undefined)
+    {
+      this.type = "owner";
+    }
   }
 
 
