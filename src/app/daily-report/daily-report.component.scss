@@ -1,9 +1,25 @@
 .order-card{
-    margin-top:15px; min-height:70px; padding-top:20px; text-align: center; background-color:pink; margin-right: 3px; color:black; display : flex; flex-direction: column; border-radius: 10px;
+    margin-top:15px; min-height:70px; padding-top:20px; text-align: center; margin-right: 3px; color:black; display : flex; flex-direction: column; border-radius: 10px;
 }
 
 .order-card-custom{
-    margin-top:15px; min-height:70px; padding-top:20px; text-align: center; background-color:greenyellow; margin-right: 3px; color:black; display : flex; flex-direction: column; border-radius:10px;
+    margin-top:15px; min-height:70px; padding-top:20px; text-align: center; margin-right: 3px; color:black; display : flex; flex-direction: column; border-radius:10px;
+}
+
+.delivered{
+    background-color: lightblue;
+}
+
+.prepared {
+    background-color: lightgreen;
+}
+
+.cancel{
+    background-color: lightcoral;
+}
+
+.inprogress{
+    background-color: yellow;
 }
 
 .flex-container {
@@ -11,3 +27,7 @@
     flex-direction: column;
     min-height: 70px;
   }
+
+.parchi {
+    color: white;
+}

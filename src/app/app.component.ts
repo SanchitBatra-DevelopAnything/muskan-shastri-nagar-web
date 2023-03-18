@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
 
 @Component({
@@ -27,5 +27,4 @@ export class AppComponent implements OnInit {
       }
     });
   }
-
 }

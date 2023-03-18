@@ -21,7 +21,8 @@ export class DailyReportComponent implements OnInit {
 
 
 
-  constructor(private apiService:ApiService , private router : Router , private route:ActivatedRoute) { }
+  constructor(private apiService:ApiService , private router : Router , private route:ActivatedRoute) {
+   }
 
   ngOnInit(): void {
     this.todaysDate = this.getTodaysDate();
