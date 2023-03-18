@@ -43,6 +43,9 @@ export class RegularOrderFormComponent implements OnInit {
   isCancelled:boolean = false;
   isPrepared:boolean = false;
 
+  deliveryDate:string;
+  deliveryTime:string;
+
   type:string;
 
 
@@ -90,6 +93,8 @@ export class RegularOrderFormComponent implements OnInit {
         'particulars' : order.particulars,
       });
       this.products = order.items;
+      this.deliveryDate = order.deliveryDate;
+      this.deliveryTime = order.deliveryTime;
       if(order.status == "D")
       {
         this.isDelivered = true;

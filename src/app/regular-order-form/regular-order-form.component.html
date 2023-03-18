@@ -25,6 +25,18 @@
     <p *ngIf = "isPrepared" style = "color:green; font-weight: 300; text-align: center;">ORDER IS PREPARED. READY TO DELIVER.</p>
 </div>
 
+<div class = "container" *ngIf = "isEditMode">
+    <div class="row">
+        <div class="col-xs-12">
+            <h5>Delivery Date : {{deliveryDate}}</h5>
+        </div>
+
+        <div class="col-xs-12">
+            <h5>Delivery Time : {{deliveryTime}}</h5>
+        </div>
+    </div>
+</div>
+
 <div class="container" *ngIf = "!isLoading">
     <h3 *ngIf = "type == 'owner'">Add items for your order.</h3>
     <div class="row" *ngIf = "type == 'owner'">

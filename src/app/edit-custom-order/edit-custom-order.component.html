@@ -1,3 +1,5 @@
+<!--isRegularOrder hmesha false hai. chhapke kara hai , ignore karo.-->
+
 <div class = "container jumbotron" style = "margin: 10px;" style = "text-align: center;">
     <div *ngIf = "!isDelivered && !isCancelled">
         <div *ngIf = "type == 'owner'">
@@ -31,17 +33,17 @@
 </div>
 
 <div class = "container">
-    <div class="row">
+    <div class="row" *ngIf = "type == 'owner'">
         <div class="col-xs-12">
             <p>Total Amount : Rs.{{loadedOrder.totalAmount}}</p>
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf = "type == 'owner'">
         <div class="col-xs-12">
             <p>Advance Paid : Rs.{{loadedOrder.advanceAmount}}</p>
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf = "type == 'owner'">
         <div class="col-xs-12">
             <p>Balance Amount : Rs.{{loadedOrder.balanceAmount}}</p>
         </div>
@@ -79,6 +81,16 @@
     <div class="row" *ngIf = "!isRegularOrder">
         <h4>Message On Cake : </h4>
         <p>{{loadedOrder.message}}</p>
+    </div>
+
+    <div class="row" *ngIf = "!isRegularOrder">
+        <h4>Delivery Date : </h4>
+        <p>{{loadedOrder.deliveryDate}}</p>
+    </div>
+
+    <div class="row" *ngIf = "!isRegularOrder">
+        <h4>Delivery Time : </h4>
+        <p>{{loadedOrder.deliveryTime}}</p>
     </div>
 </div>
 
