@@ -85,7 +85,7 @@
 
     <div class="row" *ngIf = "!isRegularOrder">
         <h4>Delivery Date : </h4>
-        <p>{{loadedOrder.deliveryDate}}</p>
+        <p>{{getDeliveryDate(loadedOrder.deliveryDate)}}</p>
     </div>
 
     <div class="row" *ngIf = "!isRegularOrder">

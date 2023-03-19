@@ -124,4 +124,10 @@ export class ApiService {
   public updateOrder(date : any , key : any , orderInfo : any) : Observable<any> {
     return this.http.patch('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+date+'/'+key+'.json',orderInfo);
   }
+
+  public getUserFormatDate(date:string)
+  {
+    let d = date.replace("/","-").split("-");
+    return d[2]+"-"+d[1]+"-"+d[0];
+  }
 }

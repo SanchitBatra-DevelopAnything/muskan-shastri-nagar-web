@@ -44,4 +44,9 @@ export class OrderDetailComponent implements OnInit {
     });
   }
 
+  getDeliveryDate(date:string)
+  {
+    return this.apiService.getUserFormatDate(date);
+  }
+
 }

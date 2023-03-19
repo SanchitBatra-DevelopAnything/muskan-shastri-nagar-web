@@ -279,6 +279,8 @@ export class RegularOrderFormComponent implements OnInit {
     });
   }
 
-  
-
+  getDeliveryDate(date:string)
+  {
+    return this.apiService.getUserFormatDate(date);
+  }
 }

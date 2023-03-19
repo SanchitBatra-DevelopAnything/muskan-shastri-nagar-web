@@ -113,5 +113,10 @@ export class EditCustomOrderComponent implements OnInit {
     });
   }
 
+  getDeliveryDate(date:string)
+  {
+    return this.apiService.getUserFormatDate(date);
+  }
+
 
 }
