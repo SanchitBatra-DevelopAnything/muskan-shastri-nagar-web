@@ -32,14 +32,22 @@ export class ApiService {
 
   public addCustomOrder(order:any) : Observable<any> {
     let deliveryDate = order.deliveryDate;
-    let modifiedOrder = {...order , 'orderType' : "custom" , 'status' : "ND"};
-    return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+deliveryDate+'.json',modifiedOrder);
+    let dateSplitter = deliveryDate.split("-");
+    let date = dateSplitter[2];
+    let month = dateSplitter[1];
+    let year = dateSplitter[0];
+    let modifiedOrder = {...order , 'orderType' : "regular" , 'status' : "ND" , "cakesSeenBy" : "" , "snacksSeenBy" : ""};
+    return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'.json',modifiedOrder);
   }
 
   public addRegularOrder(order:any) : Observable<any> {
     let deliveryDate = order.deliveryDate;
-    let modifiedOrder = {...order , 'orderType' : "regular" , 'status' : "ND"};
-    return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+deliveryDate+'.json',modifiedOrder);
+    let dateSplitter = deliveryDate.split("-");
+    let date = dateSplitter[2];
+    let month = dateSplitter[1];
+    let year = dateSplitter[0];
+    let modifiedOrder = {...order , 'orderType' : "regular" , 'status' : "ND" , "cakesSeenBy" : "" , "snacksSeenBy" : ""};
+    return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'.json',modifiedOrder);
   }
 
   public sendWhatsapp(orderId:any , isRegular:boolean)

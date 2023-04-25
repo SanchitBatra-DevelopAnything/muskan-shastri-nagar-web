@@ -141,7 +141,7 @@ export class RegularOrderFormComponent implements OnInit {
       let productPrice = this.currentPound * this.selectedItem.price;
       let quantity = this.currentQuantity;
       let totalPrice = this.currentQuantity * productPrice;
-      this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice});
+      this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice , 'prepared' : 'NO' , "itemType" : "CAKES"});
     }
     else
     {
@@ -149,7 +149,7 @@ export class RegularOrderFormComponent implements OnInit {
       let productPrice = this.selectedItem.price;
       let quantity = this.currentQuantity;
       let totalPrice = quantity * productPrice;
-      this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice});
+      this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice , 'prepared' : 'NO' , "itemType" : "SNACKS"});
     }
     this.currentQuantity = 0;
     this.currentPound = 0; 

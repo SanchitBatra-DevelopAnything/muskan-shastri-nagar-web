@@ -23,7 +23,8 @@ export class CustomerFormComponent implements OnInit {
       'bookingDate' : new FormControl('',[Validators.required]),
       'deliveryDate' : new FormControl('' , [Validators.required]),
       'deliveryTime' : new FormControl('',[Validators.required]),
-      'deliveryType' : new FormControl('',[Validators.required])
+      'deliveryType' : new FormControl('',[Validators.required]),
+      'sendChef' : new FormControl('',[Validators.required]),
    });
 
    this.today = new Date().toISOString().split('T')[0];
@@ -43,7 +44,8 @@ export class CustomerFormComponent implements OnInit {
       'bookingDate' : customerInfo.bookingDate,
       'deliveryDate' : customerInfo.deliveryDate,
       'deliveryType' : customerInfo.deliveryType,
-      'deliveryTime' : customerInfo.deliveryTime
+      'deliveryTime' : customerInfo.deliveryTime,
+      'sendChef' : customerInfo.sendChef,
     });
    }
   }
