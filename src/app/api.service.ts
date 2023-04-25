@@ -120,8 +120,12 @@ export class ApiService {
     window.open("https://wa.me/?text="+encoded);
   }
 
-  public getActiveOrders(date : String) : Observable<any> {
-    return this.http.get('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+date+'.json');
+  public getActiveOrders(dateInput : String) : Observable<any> {
+    let dateSplitter = dateInput.split("-");
+    let date = dateSplitter[2];
+    let month = dateSplitter[1];
+    let year = dateSplitter[0];
+    return this.http.get('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'.json');
   }
   
   public getOrder(date : any , key : any) : Observable<any>
