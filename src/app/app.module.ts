@@ -26,6 +26,7 @@ import { InventoryItemComponent } from './inventory-item/inventory-item.componen
 import { DailyReportComponent } from './daily-report/daily-report.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { EditCustomOrderComponent } from './edit-custom-order/edit-custom-order.component';
+import { KotPrintingComponent } from './kot-printing/kot-printing.component';
 
 const appRoutes : Routes = [
   {path : '' , component : OrderTypeSelectionComponent,pathMatch:"full"},
@@ -33,7 +34,7 @@ const appRoutes : Routes = [
   {path : 'inventory' , component : InventoryListComponent},
   {path : 'inventory/form/:key' , component : InventoryFormComponent},
   {path : 'viewOrders/:type' , component : DailyReportComponent},
-  {path : 'editOrder/:date/regular/:key/:type' , component : RegularOrderFormComponent},
+  {path : 'editOrder/:date/regular/:key/:type' , component : KotPrintingComponent},
   {path : 'editOrder/:date/custom/:key/:type' , component : EditCustomOrderComponent},
   {path : 'detail/:date/:orderKey' , component : OrderDetailComponent},
 ]
@@ -53,6 +54,7 @@ const appRoutes : Routes = [
     DailyReportComponent,
     OrderDetailComponent,
     EditCustomOrderComponent,
+    KotPrintingComponent,
   ],
   imports: [
     BrowserModule,
