@@ -56,4 +56,20 @@ export class KotPrintingComponent implements OnInit {
     })
   }
 
+  deliverOrder()
+  {
+    this.order.status = "D";
+    this.apiService.updateOrder(this.date,this.orderKey,this.order).subscribe((_)=>{
+      this.apiService.sendDeliveryMessage(this.orderKey , true,this.order.Contact,this.order.customerName);
+    });
+  }
+
+  cancelOrder()
+  {
+    this.order.status = "C";
+    this.apiService.updateOrder(this.date,this.orderKey,this.order).subscribe((_)=>{
+      this.apiService.sendCancelMessage(this.orderKey,true,this.order.Contact,this.order.customerName);
+    });
+  }
+
 }

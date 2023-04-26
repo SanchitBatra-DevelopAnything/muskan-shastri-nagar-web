@@ -137,7 +137,7 @@ export class RegularOrderFormComponent implements OnInit {
   {
     if(this.showPoundInput)
     {
-      let formedName = `${this.currentPound}Pd. ${this.selectedItem.itemName}`;
+      let formedName = `${this.currentPound}Pound. ${this.selectedItem.itemName}`;
       let productPrice = this.currentPound * this.selectedItem.price;
       let quantity = this.currentQuantity;
       let totalPrice = this.currentQuantity * productPrice;
@@ -246,14 +246,7 @@ export class RegularOrderFormComponent implements OnInit {
 
   deliverOrder()
   {
-    this.isLoading = true;
-    let selectedDate = this.route.snapshot.params['date'];
-    let orderKey = this.route.snapshot.params['key'];
-    this.apiService.updateOrder(selectedDate,orderKey,{'status' : "D" , 'deliveredTo' : this.deliveredTo}).subscribe(()=>{
-      this.loadOnEditMode(selectedDate,orderKey);
-      this.apiService.sendDeliveryMessage(orderKey,true,this.deliveredTo);
-      sessionStorage.clear();
-    });
+    
   }
 
   markAsPrepared()
@@ -269,14 +262,7 @@ export class RegularOrderFormComponent implements OnInit {
 
   cancelOrder()
   {
-    this.isLoading = true;
-    let selectedDate = this.route.snapshot.params['date'];
-    let orderKey = this.route.snapshot.params['key'];
-    this.apiService.updateOrder(selectedDate,orderKey,{'status' : "C" }).subscribe(()=>{
-      this.loadOnEditMode(selectedDate,orderKey);
-      this.apiService.sendCancelMessage(orderKey,true);
-      sessionStorage.clear();
-    });
+    
   }
 
   getDeliveryDate(date:string)

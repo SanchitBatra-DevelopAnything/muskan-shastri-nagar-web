@@ -93,19 +93,15 @@ export class ApiService {
     window.open("https://wa.me/+91"+mobile+"/?text="+encoded);
   }
 
-  public sendDeliveryMessage(orderKey : any , isRegular:boolean , deliveredTo:string)
+  public sendDeliveryMessage(orderKey : any , isRegular:boolean , mobile:any , name : any)
   {
-    let mobile = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").Contact;
-    let name = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").customerName;
-    let message = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered to ${deliveredTo}.\n\nThanks for ordering from Muskan Bakers And Sweets`;
+    let message = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered .\n\nThanks for ordering from Muskan Bakers And Sweets`;
     let encoded = encodeURI(message);
     window.open("https://wa.me/+91"+mobile+"/?text="+encoded);
   }
 
-  public sendCancelMessage(orderKey : any , isRegular:boolean)
+  public sendCancelMessage(orderKey : any , isRegular:boolean , mobile:any , name:any)
   {
-    let mobile = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").Contact;
-    let name = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").customerName;
     let message = `Hi ${name},\nYour order with ID : ${orderKey} is Cancelled.\n\nThanks for ordering from Muskan Bakers And Sweets`;
     let encoded = encodeURI(message);
     window.open("https://wa.me/+91"+mobile+"/?text="+encoded);

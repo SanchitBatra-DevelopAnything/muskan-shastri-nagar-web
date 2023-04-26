@@ -25,11 +25,17 @@
     </div>
 
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-3">
             <h5>Cakes seen by : {{order.cakesSeenBy}}</h5>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-3">
             <h5>Snacks seen by : {{order.snacksSeenBy}}</h5>
+        </div>
+        <div class="col-xs-3" *ngIf = "order.status == 'ND'">
+            <button class = "btn btn-success" (click) = "deliverOrder()">Deliver</button>
+        </div>
+        <div class="col-xs-3" *ngIf = "order.status == 'ND'">
+            <button class = "btn btn-danger" (click)="cancelOrder()">Cancel</button>
         </div>
     </div>
 

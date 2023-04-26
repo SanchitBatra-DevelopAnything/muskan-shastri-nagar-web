@@ -42,7 +42,7 @@ export class EditCustomOrderComponent implements OnInit {
     let orderKey = this.route.snapshot.params['key'];
     this.apiService.updateOrder(selectedDate,orderKey,{'status' : "D" , 'deliveredTo' : this.deliveredTo}).subscribe(()=>{
       this.getOrderDetails(selectedDate,orderKey);
-      this.apiService.sendDeliveryMessage(orderKey,false,this.deliveredTo);
+      this.apiService.sendDeliveryMessage(orderKey,false,this.loadedOrder.Contact,this.loadedOrder.customerName);
       sessionStorage.clear();
     });
   }
@@ -65,7 +65,7 @@ export class EditCustomOrderComponent implements OnInit {
     let orderKey = this.route.snapshot.params['key'];
     this.apiService.updateOrder(selectedDate,orderKey,{'status' : "C" }).subscribe(()=>{
       this.getOrderDetails(selectedDate,orderKey);
-      this.apiService.sendCancelMessage(orderKey,false);
+      this.apiService.sendCancelMessage(orderKey,false , this.loadedOrder.Contact , this.loadedOrder.customerName);
       sessionStorage.clear();
     });
   }
