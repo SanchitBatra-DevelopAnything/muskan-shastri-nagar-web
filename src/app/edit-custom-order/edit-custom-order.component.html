@@ -2,10 +2,6 @@
 
 <div class = "container jumbotron" style = "margin: 10px;" style = "text-align: center;">
     <div *ngIf = "!isDelivered && !isCancelled">
-        <div *ngIf = "type == 'owner'">
-            <label>Delivered To :</label>
-    <input type = "text" [(ngModel)] = "deliveredTo">
-        </div>
         
     
     <button *ngIf= "type == 'owner'" class = "btn btn-lg btn-success" style = "margin:10px;" (click) = "deliverOrder()">DELIVER</button>
@@ -18,7 +14,6 @@
     
     </div>
     
-    <p *ngIf = "isDelivered && !isPrepared && !isCancelled" style = "color : green; font-weight: 300; text-align: center;">ORDER IS DELIVERED TO : {{deliveredTo | uppercase}}</p>
     <p *ngIf = "isCancelled && !isDelivered && !isPrepared" style = "color:red; font-weight: 300; text-align: center;">ORDER IS CANCELLED.</p>
     <p *ngIf = "isPrepared" style = "color:green; font-weight: 300; text-align: center;">ORDER IS PREPARED. READY TO DELIVER.</p>
 </div>
