@@ -36,7 +36,7 @@ export class ApiService {
     let date = dateSplitter[2];
     let month = dateSplitter[1];
     let year = dateSplitter[0];
-    let modifiedOrder = {...order , 'orderType' : "regular" , 'status' : "ND" , "cakesSeenBy" : "" , "snacksSeenBy" : ""};
+    let modifiedOrder = {...order , 'orderType' : "custom" , 'status' : "ND" , "cakesSeenBy" : "" , "snacksSeenBy" : ""};
     return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'.json',modifiedOrder);
   }
 
