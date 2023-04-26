@@ -14,6 +14,7 @@ export class KotPrintingComponent implements OnInit {
   date:any;
   orderKey:any;
   isLoading:boolean = false;
+  itemList:any;
 
   constructor(private route:ActivatedRoute , private apiService : ApiService) { }
   ngOnInit(): void {
@@ -33,9 +34,24 @@ export class KotPrintingComponent implements OnInit {
       {
         this.order = {};
         this.isLoading = false;
+        this.itemList = [];
         return;
       }
       this.order = order;
+      this.itemList = this.order.items;
+      this.isLoading = false;
+    })
+  }
+
+  updateBalance()
+  {
+    this.isLoading = true;
+    let originalBalance = this.order.balanceAmount;
+    this.order.balanceAmount = 0;
+    this.apiService.updateOrder(this.date,this.orderKey,this.order).subscribe((_)=>{
+      this.isLoading = false;
+    } , (err)=>{
+      this.order.balanceAmount = originalBalance;
       this.isLoading = false;
     })
   }

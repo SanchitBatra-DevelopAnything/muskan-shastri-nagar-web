@@ -137,8 +137,12 @@ export class ApiService {
     return this.http.get('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'/'+key+'.json');
   }
 
-  public updateOrder(date : any , key : any , orderInfo : any) : Observable<any> {
-    return this.http.patch('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+date+'/'+key+'.json',orderInfo);
+  public updateOrder(dateInput : any , key : any , orderInfo : any) : Observable<any> {
+    let dateSplitter = dateInput.split("-");
+    let date = dateSplitter[2];
+    let month = dateSplitter[1];
+    let year = dateSplitter[0];
+    return this.http.patch('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'/'+key+'.json' , orderInfo);
   }
 
   public getUserFormatDate(date:string)

@@ -4,4 +4,56 @@
 
 <div class="container" *ngIf = "!isLoading">
     <h1>Order Details</h1>
+    <div class="row">
+        <div class="col-xs-4">
+            <h4>Order Id : {{orderKey}}</h4>
+        </div>
+        <div class="col-xs-4">
+            <h4>Name : {{order.customerName}}</h4>
+        </div>
+        <div class="col-xs-2">
+            <h4>Balance : Rs.{{order.balanceAmount}}</h4>
+        </div>
+        <div class="col-xs-2">
+            <button class = "btn btn-primary" (click) = "updateBalance()" *ngIf = "order.balanceAmount!=0">Collect Balance</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h5>Particulars : {{order.particulars}}</h5>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <p-table [value]="itemList" [tableStyle]="{ 'min-width': '100%' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.total }}</td>
+                    <td *ngIf = "item.prepared == 'YES'">
+                        <div class="green-dot">
+                            
+                        </div>
+                    </td>
+                    <td *ngIf = "item.prepared == 'NO'">
+                        <div class = "red-dot">
+
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    
+
 </div>
