@@ -24,6 +24,15 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-xs-6">
+            <h5>Cakes seen by : {{order.cakesSeenBy}}</h5>
+        </div>
+        <div class="col-xs-6">
+            <h5>Snacks seen by : {{order.snacksSeenBy}}</h5>
+        </div>
+    </div>
+
 
     <div class="card">
         <p-table [value]="itemList" [tableStyle]="{ 'min-width': '100%' }">
@@ -42,7 +51,7 @@
                     <td>{{ item.total }}</td>
                     <td *ngIf = "item.prepared == 'YES'">
                         <div class="green-dot">
-                            
+
                         </div>
                     </td>
                     <td *ngIf = "item.prepared == 'NO'">
