@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { throws } from 'assert';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -9,14 +10,23 @@ import { ApiService } from '../api.service';
 export class MonthlySalesComponent implements OnInit {
 
   dateObjectFromUI:any;
-  date:any;
+  //date:any;
   isLoading:boolean = false;
   loadedOrders:any = [];
   selectedOrderTypeForSales:any = [];
+  items:any;
+  selectedItem:any;
+  enteredPounds:number;
+  isSalesCalculated:boolean;
+  isCalculatingSales:boolean = false;
+
+  calculatedSales : any = {};
 
   constructor(private apiService:ApiService) { }
 
   ngOnInit(): void {
+    this.isSalesCalculated = false;
+    this.loadInventory();
   }
 
   processDate()
@@ -60,7 +70,91 @@ export class MonthlySalesComponent implements OnInit {
 
   getRequiredSales()
   {
-    console.log(this.selectedOrderTypeForSales);
+    this.isCalculatingSales = true;
+    let orderType = "regular";
+    if(this.selectedOrderTypeForSales.length == 1)
+    {
+      orderType = "custom";
+    }
+
+    let pounds = this.enteredPounds;
+    if(orderType == "custom")
+    {
+      this.getCustomOrderSales(pounds);
+    }
+    else
+    {
+      this.getRegularOrderSales(pounds);
+    }
+    this.isCalculatingSales = false;
+    this.isSalesCalculated = true;
   }
+
+  flavourChanged()
+  {
+    //nothing of any sort.
+  }
+
+  loadInventory()
+  {
+    this.isLoading = true;
+    this.apiService.getInventoryItems().subscribe((allItems)=>{
+      if(allItems == null)
+      {
+        this.isLoading = false;
+        this.items = [];
+        return;
+      }
+      this.isLoading = false;
+      this.items = Object.values(allItems);
+    });
+  }
+
+  orderTypeChanged()
+  {
+    this.isCalculatingSales = false;
+    this.isSalesCalculated = false;
+  }
+
+  getCustomOrderSales(pounds:number)
+  {
+    let customOrders = this.loadedOrders.filter((order:any)=>{
+      return order.orderType == "custom";
+    });
+    if(customOrders == null || customOrders == undefined)
+    {
+      this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0};
+      return;
+    }
+    let filteredCustomOrders = customOrders.filter((order:any)=>{
+      return order.weight == pounds;
+    });
+
+    if(filteredCustomOrders == null || filteredCustomOrders == undefined)
+    {
+      this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0};
+      return;
+    }
+
+    this.calculatedSales['totalAmount'] = this.getTotalOf(filteredCustomOrders);
+    this.calculatedSales['totalQuantity'] = filteredCustomOrders.length;
+  }
+
+  getRegularOrderSales(pounds:number)
+  {
+
+  }
+
+  getTotalOf(orders:any)
+  {
+    let total = 0;
+    for(let i=0;i<orders.length;i++)
+    {
+      total+=orders[i].totalAmount;
+    }
+    return total;
+  }
+
+
 
 }

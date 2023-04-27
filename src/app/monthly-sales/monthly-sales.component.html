@@ -2,6 +2,7 @@
     <h1>Monthly Sales</h1>
     <p>Get total sales you made on regular and custom orders every month!</p>
     <h4>Please select the month below</h4>
+    <p style= "color: red; font-weight: bold;" *ngIf = "loadedOrders.length == 0">No orders available for selected month!</p>
     <p-calendar [(ngModel)]="dateObjectFromUI" view="month" dateFormat="mm/yy" [readonlyInput]="true" (onSelect) = "processDate()"></p-calendar>
     <div class="loader" *ngIf = "isLoading">
 
@@ -12,12 +13,55 @@
         
     <hr>
 
-    <p-checkbox name="orderType" value="custom" label="Custom Cake Sales" [(ngModel)]="selectedOrderTypeForSales"></p-checkbox>
+    <p-checkbox name="orderType" value="custom" label="Custom Cake Sales" [(ngModel)]="selectedOrderTypeForSales" (onChange) = "orderTypeChanged()"></p-checkbox>
 
     <hr>
 
     <h1 *ngIf = "selectedOrderTypeForSales.length == 0">Regular Order Sales</h1>
     <h1 *ngIf = "selectedOrderTypeForSales.length != 0">Custom Order Sales</h1>
 
+    <div class="container">
+    <div class="row">
+        <div class="col-xs-6" *ngIf = "selectedOrderTypeForSales.length == 0">
+            <h4>PLEASE SELECT ITEM (CAKE FLAVOUR)</h4>
+            <p style = "color: red; font-weight: bold;">Leave Empty For All Flavours</p>   
+    <p-dropdown (onChange) = "flavourChanged()" [options]="items" [(ngModel)]="selectedItem" optionLabel="itemName" [filter]="true" filterBy="itemName" [showClear]="true" placeholder="Select an Item">
+        <ng-template pTemplate="selectedItem">
+            <div class="country-item country-item-value" *ngIf="selectedItem">
+                <div>{{selectedItem.itemName}}</div>
+            </div>
+        </ng-template>
+        <ng-template let-country pTemplate="item">
+            <div class="country-item">
+                <div>{{country.itemName}}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+        </div>
+
+        <div class="col-xs-4">
+            <h4>Enter Pounds</h4>
+            <input type = "number" [(ngModel)] = "enteredPounds">
+        </div>
+
+        <div class="col-xs-2">
+            <button class = "btn btn-primary" [disabled] = "!(enteredPounds > 0) || loadedOrders.length == 0" (click) = "getRequiredSales()"><strong>Calculate Sales</strong></button>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="container" *ngIf = "isCalculatingSales">
+        <p style = "color: red; font-weight: bold;">Hold Tight , Sales are being calculated!!</p>
+    </div>
+
+    <div class="container" *ngIf = "isSalesCalculated">
+        <h2>Total Quantity : {{calculatedSales['totalQuantity']}}</h2>
+        <h2>Total Price :Rs. {{calculatedSales['totalAmount']}}</h2>
+    </div>
+    
+
+    </div>
+ 
 
 </div>
