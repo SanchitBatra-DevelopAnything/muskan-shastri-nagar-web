@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {DropdownModule} from 'primeng/dropdown';
 import {TableModule} from 'primeng/table';
+import { CalendarModule } from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -27,6 +29,7 @@ import { DailyReportComponent } from './daily-report/daily-report.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { EditCustomOrderComponent } from './edit-custom-order/edit-custom-order.component';
 import { KotPrintingComponent } from './kot-printing/kot-printing.component';
+import { MonthlySalesComponent } from './monthly-sales/monthly-sales.component';
 
 const appRoutes : Routes = [
   {path : '' , component : OrderTypeSelectionComponent,pathMatch:"full"},
@@ -37,6 +40,7 @@ const appRoutes : Routes = [
   {path : 'editOrder/:date/regular/:key/:type' , component : KotPrintingComponent},
   {path : 'editOrder/:date/custom/:key/:type' , component : EditCustomOrderComponent},
   {path : 'detail/:date/:orderKey' , component : OrderDetailComponent},
+  {path : 'monthlySales' , component : MonthlySalesComponent},
 ]
 @NgModule({
   declarations: [
@@ -55,6 +59,7 @@ const appRoutes : Routes = [
     OrderDetailComponent,
     EditCustomOrderComponent,
     KotPrintingComponent,
+    MonthlySalesComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +73,8 @@ const appRoutes : Routes = [
     MultiSelectModule,
     DropdownModule,
     TableModule,
+    CalendarModule,
+    CheckboxModule,
 
     RouterModule.forRoot(appRoutes,{useHash: true}),
   ],

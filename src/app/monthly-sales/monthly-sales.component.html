@@ -1,0 +1,23 @@
+<div class="container">
+    <h1>Monthly Sales</h1>
+    <p>Get total sales you made on regular and custom orders every month!</p>
+    <h4>Please select the month below</h4>
+    <p-calendar [(ngModel)]="dateObjectFromUI" view="month" dateFormat="mm/yy" [readonlyInput]="true" (onSelect) = "processDate()"></p-calendar>
+    <div class="loader" *ngIf = "isLoading">
+
+    </div>
+    <!-- <button class = "btn btn-primary" (click) = "getRequiredSales()">Get Required Sales</button> -->
+
+
+        
+    <hr>
+
+    <p-checkbox name="orderType" value="custom" label="Custom Cake Sales" [(ngModel)]="selectedOrderTypeForSales"></p-checkbox>
+
+    <hr>
+
+    <h1 *ngIf = "selectedOrderTypeForSales.length == 0">Regular Order Sales</h1>
+    <h1 *ngIf = "selectedOrderTypeForSales.length != 0">Custom Order Sales</h1>
+
+
+</div>

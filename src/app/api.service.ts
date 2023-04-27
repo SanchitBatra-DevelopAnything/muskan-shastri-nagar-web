@@ -146,4 +146,9 @@ export class ApiService {
     let d = date.replace("/","-").split("-");
     return d[2]+"-"+d[1]+"-"+d[0];
   }
+
+  public loadMonthlyOrders(month : string , year : string) : Observable<any>
+  {
+    return this.http.get('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'.json');
+  }
 }
