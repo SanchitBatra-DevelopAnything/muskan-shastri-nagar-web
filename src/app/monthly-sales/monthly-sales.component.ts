@@ -48,6 +48,7 @@ export class MonthlySalesComponent implements OnInit {
   loadMonthlyOrders(modifiedMonth : string,year : number)
   {
     this.isLoading = true;
+    this.loadedOrders = [];
     this.apiService.loadMonthlyOrders(modifiedMonth , year.toString()).subscribe((allOrders)=>{
       if(allOrders == null)
       {
@@ -136,21 +137,92 @@ export class MonthlySalesComponent implements OnInit {
       return;
     }
 
-    this.calculatedSales['totalAmount'] = this.getTotalOf(filteredCustomOrders);
+    this.calculatedSales['totalAmount'] = this.getTotalOf(filteredCustomOrders , 'totalAmount');
     this.calculatedSales['totalQuantity'] = filteredCustomOrders.length;
   }
 
   getRegularOrderSales(pounds:number)
   {
-
+    let regularOrders = this.loadedOrders.filter((order:any)=>{
+      return order.orderType == "regular";
+    });
+    if(regularOrders == null || regularOrders == undefined)
+    {
+      this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0};
+      return;
+    }
+    
+    let filteredRegularOrderItems = regularOrders.map((order:any)=>{
+      return [...order.items];
+    });
+    let fullItems = filteredRegularOrderItems[0];
+    
+    this.regularSalesHelper(fullItems ,  pounds);
   }
 
-  getTotalOf(orders:any)
+  regularSalesHelper(itemList : any , pounds:number)
+  {
+    let filteredItems : any = [];
+    if(this.selectedItem == null || this.selectedItem == undefined)
+    {
+      //means all flavours ke liye dekho bas pound ke hisaab se ab.
+      itemList.forEach((item : any)=>{
+        if(item.weight == pounds)
+        {
+          filteredItems.push(item);
+        }
+      });
+      if(filteredItems == null || filteredItems == undefined)
+      {
+        this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0};
+        return;
+      }
+      this.calculatedSales['totalAmount'] = this.getTotalOf(filteredItems , 'total');
+      this.calculatedSales['totalQuantity'] = this.getTotalOf(filteredItems,'quantity');
+      return;
+    }
+    else
+    {
+      //flavour is selected.
+      itemList.forEach((item : any)=>{
+        if(item.weight == pounds)
+        {
+          filteredItems.push(item);
+        }
+      });
+
+      if(filteredItems == null || filteredItems == undefined)
+      {
+        this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0};
+        return;
+      }
+
+      let filteredItemsOnFlavourToo = [];
+      let formedNameForMatch = pounds+"Pound. "+this.selectedItem.itemName;
+      console.log("Formed Name = "+formedNameForMatch);
+      filteredItemsOnFlavourToo = filteredItems.filter((item : any)=>{
+        return item.name.trim().toLowerCase() == formedNameForMatch.trim().toLowerCase();
+      });
+
+      if(filteredItemsOnFlavourToo == null || filteredItemsOnFlavourToo == undefined)
+      {
+        this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0};
+        return;
+      }
+
+
+      this.calculatedSales['totalAmount'] = this.getTotalOf(filteredItemsOnFlavourToo , 'total');
+      this.calculatedSales['totalQuantity'] = this.getTotalOf(filteredItemsOnFlavourToo,'quantity');
+      return;
+    }
+  }
+
+  getTotalOf(list:any , parameter : any)
   {
     let total = 0;
-    for(let i=0;i<orders.length;i++)
+    for(let i=0;i<list.length;i++)
     {
-      total+=orders[i].totalAmount;
+      total+=list[i][parameter];
     }
     return total;
   }
