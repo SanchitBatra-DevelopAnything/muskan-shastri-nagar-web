@@ -13,6 +13,7 @@ export class ContainerComponent implements OnInit,OnDestroy {
   formChangeSub:Subscription;
   formNumber:number = 1;
   isCustomOrderSelected:boolean = false;
+  isCounterOrder:boolean;
 
   constructor(private activeRoute:ActivatedRoute,private utilityService : UtilityService) { }
 
@@ -21,13 +22,18 @@ export class ContainerComponent implements OnInit,OnDestroy {
       this.formNumber = formNum;
     });
     let orderType = this.activeRoute.snapshot.params['orderType'];
-    if(orderType == "REGULAR")
+    if(orderType == "REGULAR" || orderType == "COUNTER")
     {
       this.isCustomOrderSelected = false;
+      if(orderType == "COUNTER")
+      {
+        this.isCounterOrder = true;
+      }
     }
     else
     {
       this.isCustomOrderSelected = true;
+      this.isCounterOrder = false;
     }
   }
 

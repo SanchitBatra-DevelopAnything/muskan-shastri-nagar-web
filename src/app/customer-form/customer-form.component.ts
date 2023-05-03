@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UtilityService } from '../services/utility.service';
@@ -12,6 +12,8 @@ export class CustomerFormComponent implements OnInit {
 
   customerForm:FormGroup;
   today:any;
+  @Input()
+  isCounterOrder:boolean;
 
   constructor(private utilityService : UtilityService) { }
 
@@ -25,6 +27,11 @@ export class CustomerFormComponent implements OnInit {
       'deliveryTime' : new FormControl('',[Validators.required]),
       'deliveryType' : new FormControl('',[Validators.required]),
    });
+
+   if(this.isCounterOrder)
+   {
+     this.loadInitialValues();
+   }
 
    this.today = new Date().toISOString().split('T')[0];
 
@@ -46,6 +53,19 @@ export class CustomerFormComponent implements OnInit {
       'deliveryTime' : customerInfo.deliveryTime,
     });
    }
+  }
+
+  loadInitialValues()
+  {
+    this.customerForm.patchValue({
+      'customerName' : "COUNTER",
+      'Address' : "SHOP",
+      'Contact' : 'invalid-whatsapp',
+      'bookingDate' : '',
+      'deliveryDate' : '',
+      'deliveryType' : '0',
+      'deliveryTime' : '',
+    });
   }
 
   firstTime()

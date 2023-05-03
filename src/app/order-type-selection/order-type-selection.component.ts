@@ -22,7 +22,7 @@ export class OrderTypeSelectionComponent implements OnInit {
     }
     else
     {
-      this.router.navigate(['/order/REGULAR'])
+      this.router.navigate(['/order/'+orderType])
     }
   }
 
