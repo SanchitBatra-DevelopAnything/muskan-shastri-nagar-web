@@ -74,7 +74,7 @@ export class MonthlySalesComponent implements OnInit {
   {
     this.isCalculatingSales = true;
     let orderType = "regular";
-    if(this.selectedOrderTypeForSales.length == 1)
+    if(!this.isRegular())
     {
       orderType = "custom";
     }
@@ -239,7 +239,7 @@ export class MonthlySalesComponent implements OnInit {
 
   isSalesCalcValid() : boolean
   {
-    if(this.selectedOrderTypeForSales.length == 0)
+    if(this.isRegular())
     {
       //regular order
       if(this.selectedItem == null || this.selectedItem == undefined)
@@ -254,7 +254,18 @@ export class MonthlySalesComponent implements OnInit {
       else if(this.selectedItem!=null && this.selectedItem!=undefined)
       {
         //item selected hai , return true
-        return true;
+        if(this.enteredPounds <= 0)
+        {
+          if(this.hidePound)
+          {
+            return true;
+          }
+          return false;
+        }
+        else
+        {
+          return true;
+        }
       }
       return false;
     }
@@ -268,6 +279,15 @@ export class MonthlySalesComponent implements OnInit {
       }
       return false;
     }
+  }
+
+  isRegular()
+  {
+    if(this.selectedOrderTypeForSales.length == 0)
+    {
+      return true;
+    }
+    return false;
   }
 
 

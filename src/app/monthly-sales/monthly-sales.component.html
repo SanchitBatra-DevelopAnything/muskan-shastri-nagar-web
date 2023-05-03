@@ -17,12 +17,12 @@
 
     <hr>
 
-    <h1 *ngIf = "selectedOrderTypeForSales.length == 0">Regular Order Sales</h1>
-    <h1 *ngIf = "selectedOrderTypeForSales.length != 0">Custom Order Sales</h1>
+    <h1 *ngIf = "isRegular()">Regular Order Sales</h1>
+    <h1 *ngIf = "!isRegular()">Custom Order Sales</h1>
 
     <div class="container">
     <div class="row">
-        <div class="col-xs-6" *ngIf = "selectedOrderTypeForSales.length == 0">
+        <div class="col-xs-6" *ngIf = "isRegular()">
             <h4>PLEASE SELECT ITEM (CAKE FLAVOUR)</h4>
             <p style = "color: red; font-weight: bold;">Leave Empty For All Flavours</p>   
     <p-dropdown (onChange) = "flavourChanged()" [options]="items" [(ngModel)]="selectedItem" optionLabel="itemName" [filter]="true" filterBy="itemName" [showClear]="true" placeholder="Select an Item">
@@ -44,7 +44,7 @@
             <input type = "number" [(ngModel)] = "enteredPounds">
         </div>
 
-        <div class="col-xs-2" *ngIf = "selectedOrderTypeForSales.length == 0">
+        <div class="col-xs-2" *ngIf = "isRegular()">
             <p-checkbox name="poundInput" value = "true" label="Hide pounds" (onChange) = "togglePoundInput()"></p-checkbox>
         </div>
 
