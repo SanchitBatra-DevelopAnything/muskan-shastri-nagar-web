@@ -23,7 +23,7 @@
         <div class="col-xs-12">
             Items:
             <ul>
-                <li *ngFor = "let item of loadedOrder.items"><p>{{item.quantity}} x {{item.name}}</p></li>
+                <li *ngFor = "let item of loadedOrder.items"><p>{{item.quantity}} <span *ngIf = "item.itemType.includes('PANEER')">g</span> x {{item.name}}</p></li>
             </ul>
         </div>  
     </div>
