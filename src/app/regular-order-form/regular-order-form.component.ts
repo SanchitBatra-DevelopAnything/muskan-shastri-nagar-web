@@ -150,7 +150,14 @@ export class RegularOrderFormComponent implements OnInit {
       let productPrice = this.selectedItem.price;
       let quantity = this.currentQuantity;
       let totalPrice = quantity * productPrice;
-      this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice , 'prepared' : 'NO' , "itemType" : "SNACKS"});
+      if(this.selectedItem.type.includes('PANEER'))
+      {
+        this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice , 'prepared' : 'NO' , "itemType" : "PANEER & CHAAP"});  
+      }
+      else
+      {
+        this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice , 'prepared' : 'NO' , "itemType" : "SNACKS"});
+      }
     }
     this.currentQuantity = 0;
     this.currentPound = 0; 

@@ -89,7 +89,8 @@
             <tr *ngIf = "type == 'owner'">
                 <td>{{product.name}}</td>
                 <td>{{product.pricePerProduct}}</td>
-                <td>{{product.quantity}}</td>
+                <td *ngIf = "product.itemType.includes('PANEER')">{{product.quantity}}g</td>
+                <td *ngIf = "!product.itemType.includes('PANEER')">{{product.quantity}}</td>
                 <td>{{product.total}}</td>
                 <td><button class = "btn btn-danger" (click) = "deleteProduct(product)">Delete</button></td>
             </tr>
