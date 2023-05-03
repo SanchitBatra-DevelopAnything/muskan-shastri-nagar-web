@@ -45,6 +45,7 @@ export class RegularOrderFormComponent implements OnInit {
 
   deliveryDate:string;
   deliveryTime:string;
+  showGramLabel:boolean = false;
 
   type:string;
 
@@ -177,10 +178,19 @@ export class RegularOrderFormComponent implements OnInit {
   {
     if(this.selectedItem.type.includes("CAKES"))
     {
+      this.showGramLabel = false;
       this.showPoundInput = true;
     }
     else
     {
+      if(this.selectedItem.type.includes("PANEER"))
+      {
+        this.showGramLabel = true;
+      }
+      else
+      {
+        this.showGramLabel = false;
+      }
       this.showPoundInput = false;
     }
   }

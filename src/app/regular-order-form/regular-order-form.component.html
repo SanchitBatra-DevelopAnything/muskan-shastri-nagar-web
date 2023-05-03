@@ -43,6 +43,7 @@
         <div class="col-xs-6 col-md-2">
             <p>Quantity</p>
             <input type = "number" [(ngModel)] = "currentQuantity" class = "form-control">
+            <span *ngIf = "showGramLabel" style = "color: red;">GRAMS</span>
         </div>
         <div class="col-xs-6 col-md-2" *ngIf = "showPoundInput"> 
             <p>Pounds</p>
