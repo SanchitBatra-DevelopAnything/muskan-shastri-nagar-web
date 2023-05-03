@@ -16,9 +16,10 @@ export class MonthlySalesComponent implements OnInit {
   selectedOrderTypeForSales:any = [];
   items:any;
   selectedItem:any;
-  enteredPounds:number;
+  enteredPounds:number = 0;
   isSalesCalculated:boolean;
   isCalculatingSales:boolean = false;
+  hidePound:boolean = false;
 
   calculatedSales : any = {};
 
@@ -52,7 +53,7 @@ export class MonthlySalesComponent implements OnInit {
     this.apiService.loadMonthlyOrders(modifiedMonth , year.toString()).subscribe((allOrders)=>{
       if(allOrders == null)
       {
-        this.loadedOrders = {};
+        this.loadedOrders = [];
         this.isLoading = false;
         return;
       }
@@ -115,6 +116,9 @@ export class MonthlySalesComponent implements OnInit {
   {
     this.isCalculatingSales = false;
     this.isSalesCalculated = false;
+    this.hidePound = false;
+    this.selectedItem = null;
+    this.enteredPounds = 0;
   }
 
   getCustomOrderSales(pounds:number)
@@ -225,6 +229,45 @@ export class MonthlySalesComponent implements OnInit {
       total+=list[i][parameter];
     }
     return total;
+  }
+
+  togglePoundInput()
+  {
+    this.hidePound = !this.hidePound;
+    this.enteredPounds = 0; //hide - unhide pound 0 hojayga.
+  }
+
+  isSalesCalcValid() : boolean
+  {
+    if(this.selectedOrderTypeForSales.length == 0)
+    {
+      //regular order
+      if(this.selectedItem == null || this.selectedItem == undefined)
+      {
+        //item selected ni hai , to pound selected hona chahiye.
+        if(!this.hidePound && this.enteredPounds>0)
+        {
+          return true;
+        }
+        return false;
+      }
+      else if(this.selectedItem!=null && this.selectedItem!=undefined)
+      {
+        //item selected hai , return true
+        return true;
+      }
+      return false;
+    }
+
+    else
+    {
+      //custom order
+      if(this.enteredPounds > 0)
+      {
+        return true;
+      }
+      return false;
+    }
   }
 
 

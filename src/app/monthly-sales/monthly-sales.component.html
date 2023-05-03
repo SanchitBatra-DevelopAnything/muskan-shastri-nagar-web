@@ -39,21 +39,25 @@
     </p-dropdown>
         </div>
 
-        <div class="col-xs-4">
+        <div class="col-xs-2" *ngIf = "!hidePound">
             <h4>Enter Pounds</h4>
             <input type = "number" [(ngModel)] = "enteredPounds">
         </div>
 
+        <div class="col-xs-2" *ngIf = "selectedOrderTypeForSales.length == 0">
+            <p-checkbox name="poundInput" value = "true" label="Hide pounds" (onChange) = "togglePoundInput()"></p-checkbox>
+        </div>
+
         <div class="col-xs-2">
-            <button class = "btn btn-primary" [disabled] = "!(enteredPounds > 0) || loadedOrders.length == 0" (click) = "getRequiredSales()"><strong>Calculate Sales</strong></button>
+            <button class = "btn btn-primary" [disabled] = "!isSalesCalcValid()" (click) = "getRequiredSales()"><strong>Calculate Sales</strong></button>
         </div>
     </div>
 
     <hr>
 
-    <div class="container" *ngIf = "isCalculatingSales">
+    <!-- <div class="container" *ngIf = "isCalculatingSales">
         <p style = "color: red; font-weight: bold;">Hold Tight , Sales are being calculated!!</p>
-    </div>
+    </div> -->
 
     <div class="container" *ngIf = "isSalesCalculated">
         <h2>Total Quantity : {{calculatedSales['totalQuantity']}}</h2>
