@@ -128,7 +128,7 @@ export class MonthlySalesComponent implements OnInit {
     });
     if(customOrders == null || customOrders == undefined)
     {
-      this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0};
+      this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0 , "totalPounds" : 0};
       return;
     }
     let filteredCustomOrders = customOrders.filter((order:any)=>{
@@ -137,12 +137,13 @@ export class MonthlySalesComponent implements OnInit {
 
     if(filteredCustomOrders == null || filteredCustomOrders == undefined)
     {
-      this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0};
+      this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0 , "totalPounds" : 0};
       return;
     }
 
     this.calculatedSales['totalAmount'] = this.getTotalOf(filteredCustomOrders , 'totalAmount');
     this.calculatedSales['totalQuantity'] = filteredCustomOrders.length;
+    this.calculatedSales['totalPound'] = this.getTotalOf(filteredCustomOrders,'weight');
   }
 
   getRegularOrderSales(pounds:number)
@@ -152,7 +153,7 @@ export class MonthlySalesComponent implements OnInit {
     });
     if(regularOrders == null || regularOrders == undefined)
     {
-      this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0};
+      this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0 , "totalPounds" : 0};
       return;
     }
     
@@ -160,8 +161,35 @@ export class MonthlySalesComponent implements OnInit {
       return [...order.items];
     });
     let fullItems = filteredRegularOrderItems[0];
-    
-    this.regularSalesHelper(fullItems ,  pounds);
+
+    if(pounds == 0)
+    {
+      this.regularSalesHelperOnItemOnly(fullItems);
+    }
+    else
+    {
+      this.regularSalesHelper(fullItems ,  pounds);
+    }
+  }
+
+  regularSalesHelperOnItemOnly(fullItems : any)
+  {
+    if(fullItems == null || fullItems == undefined)
+    {
+      this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0,"totalPounds" : 0};
+      return;
+    }
+    let filteredItems:any = [];
+    fullItems.forEach((item : any)=>{
+      if(item.name.toString().trim().toLowerCase().includes(this.selectedItem.itemName.toString().trim().toLowerCase()))
+      {
+        filteredItems.push(item);
+      }
+    });
+
+    this.calculatedSales['totalAmount'] = this.getTotalOf(filteredItems,'total');
+    this.calculatedSales['totalQuantity'] = this.getTotalOf(filteredItems,'quantity');
+    this.calculatedSales['totalPounds'] = this.getTotalOf(filteredItems,'weight');
   }
 
   regularSalesHelper(itemList : any , pounds:number)
@@ -178,11 +206,12 @@ export class MonthlySalesComponent implements OnInit {
       });
       if(filteredItems == null || filteredItems == undefined)
       {
-        this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0};
+        this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0 , "totalPounds" : 0};
         return;
       }
       this.calculatedSales['totalAmount'] = this.getTotalOf(filteredItems , 'total');
       this.calculatedSales['totalQuantity'] = this.getTotalOf(filteredItems,'quantity');
+      this.calculatedSales['totalPounds'] = this.getTotalOf(filteredItems,'weight');
       return;
     }
     else
@@ -197,7 +226,7 @@ export class MonthlySalesComponent implements OnInit {
 
       if(filteredItems == null || filteredItems == undefined)
       {
-        this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0};
+        this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0,"totalPounds" : 0};
         return;
       }
 
@@ -210,13 +239,14 @@ export class MonthlySalesComponent implements OnInit {
 
       if(filteredItemsOnFlavourToo == null || filteredItemsOnFlavourToo == undefined)
       {
-        this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0};
+        this.calculatedSales = {"totalAmount" : 0 , "totalQuantity" : 0 , "totalPounds" : 0};
         return;
       }
 
 
       this.calculatedSales['totalAmount'] = this.getTotalOf(filteredItemsOnFlavourToo , 'total');
       this.calculatedSales['totalQuantity'] = this.getTotalOf(filteredItemsOnFlavourToo,'quantity');
+      this.calculatedSales['totalPounds'] = this.getTotalOf(filteredItems,'weight');
       return;
     }
   }
