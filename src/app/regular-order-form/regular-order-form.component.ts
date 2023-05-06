@@ -2,6 +2,7 @@ import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { UtilityService } from '../services/utility.service';
 
 // @Pipe({
 //   name: 'indexOf'
@@ -48,10 +49,11 @@ export class RegularOrderFormComponent implements OnInit {
   showGramLabel:boolean = false;
 
   type:string;
+  orderType:string;
 
 
 
-  constructor(private apiService:ApiService , private router : Router , private route:ActivatedRoute) { 
+  constructor(private apiService:ApiService , private router : Router , private route:ActivatedRoute , private utilityService:UtilityService) { 
   }
 
   ngOnInit(): void {
@@ -79,6 +81,19 @@ export class RegularOrderFormComponent implements OnInit {
     {
       this.type = "owner";
     }
+
+    this.orderType = this.route.snapshot.params['orderType'];
+
+  }
+
+  isCounterOrder()
+  {
+    if(this.orderType.toString().toLowerCase() == "counter")
+    {
+      console.log("YES COUNTER ORDER");
+      return true;
+    }
+    return false;
   }
 
   loadOnEditMode(date : any , key : any)
@@ -285,5 +300,10 @@ export class RegularOrderFormComponent implements OnInit {
   getDeliveryDate(date:string)
   {
     return this.apiService.getUserFormatDate(date);
+  }
+
+  goBack()
+  {
+    this.utilityService.formChange.next(1);
   }
 }

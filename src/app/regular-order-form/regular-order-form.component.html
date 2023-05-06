@@ -118,7 +118,7 @@
 
 
     <legend style = "margin-top: 15px;"></legend>
-    <div class="row" *ngIf = "type == 'owner'">
+    <div class="row" *ngIf = "type == 'owner'" >
         <form [formGroup] = "regularOrderForm">
         <div class="col-xs-6 col-md-3">
             <p>Total Amount</p>
@@ -141,6 +141,7 @@
     
     <legend style = "margin-top: 15px;"></legend>
     <button class = "btn btn-success" (click) = "createRegularOrder()" *ngIf = "!isEditMode">Submit</button>
+    <button class = "btn btn-danger" (click) = "goBack()" style = "margin-left:15px;">Back</button>
     <button class = "btn btn-danger" (click) = "updateRegularOrder()" *ngIf = "isEditMode && !isDelivered && !isCancelled && type == 'owner'">Update</button>
     
 </div>

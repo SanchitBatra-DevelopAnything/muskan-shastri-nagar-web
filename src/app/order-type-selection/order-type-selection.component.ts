@@ -12,6 +12,7 @@ export class OrderTypeSelectionComponent implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit(): void {
+    sessionStorage.clear();
   }
 
   openOrder(orderType:any)
