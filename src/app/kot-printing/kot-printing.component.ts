@@ -16,6 +16,10 @@ export class KotPrintingComponent implements OnInit {
   isLoading:boolean = false;
   itemList:any;
   orderReadyForDelivery:boolean = false;
+  visibleDialog:boolean = false;
+  isLoadingInDialog:boolean = false;
+  deliverTo:any;
+  selectedIndex:any;
 
   constructor(private route:ActivatedRoute , private apiService : ApiService) { }
   ngOnInit(): void {
@@ -40,9 +44,18 @@ export class KotPrintingComponent implements OnInit {
       }
       this.order = order;
       this.itemList = this.order.items;
+      this.addIndexToItemList();
       this.checkForDelivery();
       this.isLoading = false;
     })
+  }
+
+  addIndexToItemList()
+  {
+    let index = 0;
+    this.itemList.map((item:any)=>{
+      item['rowIndex'] = index++;
+    });
   }
 
   checkForDelivery()
@@ -91,6 +104,26 @@ export class KotPrintingComponent implements OnInit {
     this.order.status = "C";
     this.apiService.updateOrder(this.date,this.orderKey,this.order).subscribe((_)=>{
       this.apiService.sendCancelMessage(this.orderKey,true,this.order.Contact,this.order.customerName);
+    });
+  }
+
+  showDialog(index:any)
+  {
+    this.selectedIndex = index;
+    this.visibleDialog = true;
+  }
+
+  addDeliveryPersonName()
+  {
+    console.log(this.itemList[this.selectedIndex]);
+    this.itemList[this.selectedIndex]['deliveredTo'] = this.deliverTo;
+    this.order.items = this.itemList;
+    this.isLoadingInDialog = true;
+    this.apiService.updateOrder(this.date, this.orderKey,this.order).subscribe((_)=>{
+      this.deliverTo = undefined;
+      this.isLoadingInDialog = false;
+      this.fetchOrderDetails();
+      this.visibleDialog = false;
     });
   }
 

@@ -32,10 +32,10 @@
             <h5>Snacks seen by : {{order.snacksSeenBy}}</h5>
         </div>
         <div class="col-xs-3" *ngIf = "order.status == 'ND' && orderReadyForDelivery">
-            <button class = "btn btn-success" (click) = "deliverOrder()">Deliver</button>
+            <button class = "btn btn-success" (click) = "deliverOrder()">Deliver Order</button>
         </div>
         <div class="col-xs-3" *ngIf = "order.status == 'ND'">
-            <button class = "btn btn-danger" (click)="cancelOrder()">Cancel</button>
+            <button class = "btn btn-danger" (click)="cancelOrder()">Cancel Order</button>
         </div>
     </div>
 
@@ -48,6 +48,7 @@
                     <th>Quantity</th>
                     <th>Total</th>
                     <th>Status</th>
+                    <th>Delivery</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
@@ -66,10 +67,25 @@
 
                         </div>
                     </td>
+                    <td *ngIf = "item.deliveredTo == null || item.deliveredTo == undefined"><button class = "btn btn-success" (click) = "showDialog(item.rowIndex)">Deliver</button></td>
+                    <td *ngIf = "item.deliveredTo != null && item.deliveredTo != undefined">{{item.deliveredTo}}</td>
                 </tr>
             </ng-template>
         </p-table>
     </div>
+
+    <p-dialog header="Deliver To : " [(visible)]="visibleDialog" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+        <div *ngIf = "!isLoadingInDialog">
+            <input type = "text" style = "margin-right: 10px; height:30px;" [(ngModel)] = "deliverTo"> 
+            <button class = "btn btn-small btn-success" (click) = "addDeliveryPersonName()">OK</button>
+        </div>
+        
+        <div class="loader" *ngIf = "isLoadingInDialog" style = "margin: auto;">
+    
+        </div>
+    </p-dialog>
+
+
     
 
 </div>

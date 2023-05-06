@@ -8,6 +8,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {TableModule} from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
+import {DialogModule} from 'primeng/dialog';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -75,6 +76,7 @@ const appRoutes : Routes = [
     TableModule,
     CalendarModule,
     CheckboxModule,
+    DialogModule,
 
     RouterModule.forRoot(appRoutes,{useHash: true}),
   ],
