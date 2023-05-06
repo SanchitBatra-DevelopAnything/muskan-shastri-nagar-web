@@ -67,7 +67,12 @@
 
                         </div>
                     </td>
-                    <td *ngIf = "item.deliveredTo == null || item.deliveredTo == undefined"><button class = "btn btn-success" (click) = "showDialog(item.rowIndex)">Deliver</button></td>
+                    <td *ngIf = "(item.deliveredTo == null || item.deliveredTo == undefined) && item.prepared == 'YES'"><button class = "btn btn-success" (click) = "showDialog(item.rowIndex)">Deliver</button></td>
+                    <td *ngIf = "(item.deliveredTo == null || item.deliveredTo == undefined) && item.prepared != 'YES'">
+                        <div class = "red-dot">
+
+                        </div>
+                    </td>
                     <td *ngIf = "item.deliveredTo != null && item.deliveredTo != undefined">{{item.deliveredTo}}</td>
                 </tr>
             </ng-template>
