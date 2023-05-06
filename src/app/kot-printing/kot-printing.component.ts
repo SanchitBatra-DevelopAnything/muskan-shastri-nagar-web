@@ -15,6 +15,7 @@ export class KotPrintingComponent implements OnInit {
   orderKey:any;
   isLoading:boolean = false;
   itemList:any;
+  orderReadyForDelivery:boolean = false;
 
   constructor(private route:ActivatedRoute , private apiService : ApiService) { }
   ngOnInit(): void {
@@ -39,8 +40,29 @@ export class KotPrintingComponent implements OnInit {
       }
       this.order = order;
       this.itemList = this.order.items;
+      this.checkForDelivery();
       this.isLoading = false;
     })
+  }
+
+  checkForDelivery()
+  {
+    let totalItems = this.itemList.length;
+    let preparedItems = 0;
+    this.itemList.forEach((item:any)=>{
+      if(item.prepared == "YES")
+      {
+        preparedItems++;
+      }
+    });
+    if(preparedItems == totalItems)
+    {
+      this.orderReadyForDelivery = true;
+    }
+    else
+    {
+      this.orderReadyForDelivery = false;
+    }
   }
 
   updateBalance()
