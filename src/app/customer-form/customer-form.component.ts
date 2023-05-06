@@ -61,11 +61,35 @@ export class CustomerFormComponent implements OnInit {
       'customerName' : "COUNTER",
       'Address' : "SHOP",
       'Contact' : 'invalid-whatsapp',
-      'bookingDate' : '',
-      'deliveryDate' : '',
-      'deliveryType' : '0',
-      'deliveryTime' : '',
+      'bookingDate' : this.getDate(),
+      'deliveryDate' : this.getDate(),
+      'deliveryType':'0',
+      'deliveryTime' : '06:00 PM',
     });
+  }
+
+  getDate()
+  {
+    let d = new Date();
+    let formedDate = d.getFullYear()+"-";
+    if(d.getMonth() + 1 < 10)
+    {
+      formedDate+="0"+(d.getMonth()+1)+'-';
+    }
+    else
+    {
+      formedDate+=(d.getMonth()+1)+"-";
+    }
+
+    if(d.getDate() < 10)
+    {
+      formedDate+="0"+d.getDate();
+    }
+    else
+    {
+      formedDate+=d.getDate();
+    }
+    return formedDate;
   }
 
   firstTime()
