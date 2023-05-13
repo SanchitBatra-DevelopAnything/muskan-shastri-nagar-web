@@ -15,7 +15,7 @@
             <h4>Balance : Rs.{{order.balanceAmount}}</h4>
         </div>
         <div class="col-xs-2">
-            <button class = "btn btn-primary" (click) = "updateBalance()" *ngIf = "order.balanceAmount!=0">Collect Balance</button>
+            <button class = "btn btn-primary" (click) = "showBalanceDialog()" *ngIf = "order.balanceAmount!=0">Collect Balance</button>
         </div>
     </div>
     <div class="row">
@@ -79,10 +79,21 @@
         </p-table>
     </div>
 
-    <p-dialog header="Deliver To : " [(visible)]="visibleDialog" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <p-dialog header="Deliver To : " [(visible)]="visibleDeliveryDialog" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
         <div *ngIf = "!isLoadingInDialog">
             <input type = "text" style = "margin-right: 10px; height:30px;" [(ngModel)] = "deliverTo"> 
             <button class = "btn btn-small btn-success" (click) = "addDeliveryPersonName()">OK</button>
+        </div>
+        
+        <div class="loader" *ngIf = "isLoadingInDialog" style = "margin: auto;">
+    
+        </div>
+    </p-dialog>
+
+    <p-dialog header="Balance Collected Rs. : " [(visible)]="visibleBalanceDialog" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+        <div *ngIf = "!isLoadingInDialog">
+            <input type = "number" style = "margin-right: 10px; height:30px;" [(ngModel)] = "collectedBalance"> 
+            <button class = "btn btn-small btn-success" (click) = "updateBalance()">OK</button>
         </div>
         
         <div class="loader" *ngIf = "isLoadingInDialog" style = "margin: auto;">

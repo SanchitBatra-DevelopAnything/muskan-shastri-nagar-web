@@ -16,10 +16,12 @@ export class KotPrintingComponent implements OnInit {
   isLoading:boolean = false;
   itemList:any;
   orderReadyForDelivery:boolean = false;
-  visibleDialog:boolean = false;
+  visibleDeliveryDialog:boolean = false;
+  visibleBalanceDialog:boolean = false;
   isLoadingInDialog:boolean = false;
   deliverTo:any;
   selectedIndex:any;
+  collectedBalance:number;
 
   constructor(private route:ActivatedRoute , private apiService : ApiService) { }
   ngOnInit(): void {
@@ -47,6 +49,7 @@ export class KotPrintingComponent implements OnInit {
       this.addIndexToItemList();
       this.checkForDelivery();
       this.isLoading = false;
+      this.collectedBalance = this.order.balanceAmount;
     })
   }
 
@@ -80,14 +83,17 @@ export class KotPrintingComponent implements OnInit {
 
   updateBalance()
   {
-    this.isLoading = true;
+    this.isLoadingInDialog = true;
     let originalBalance = this.order.balanceAmount;
-    this.order.balanceAmount = 0;
+    this.order.balanceAmount = originalBalance - this.collectedBalance;
     this.apiService.updateOrder(this.date,this.orderKey,this.order).subscribe((_)=>{
-      this.isLoading = false;
+      this.isLoadingInDialog = false;
+      this.visibleBalanceDialog = false;
+      this.collectedBalance = this.order.balanceAmount;
     } , (err)=>{
       this.order.balanceAmount = originalBalance;
-      this.isLoading = false;
+      this.isLoadingInDialog = false;
+      this.visibleBalanceDialog = false;
     })
   }
 
@@ -110,7 +116,7 @@ export class KotPrintingComponent implements OnInit {
   showDialog(index:any)
   {
     this.selectedIndex = index;
-    this.visibleDialog = true;
+    this.visibleDeliveryDialog = true;
   }
 
   addDeliveryPersonName()
@@ -123,8 +129,13 @@ export class KotPrintingComponent implements OnInit {
       this.deliverTo = undefined;
       this.isLoadingInDialog = false;
       this.fetchOrderDetails();
-      this.visibleDialog = false;
+      this.visibleDeliveryDialog = false;
     });
+  }
+
+  showBalanceDialog()
+  {
+    this.visibleBalanceDialog = true;
   }
 
 }
