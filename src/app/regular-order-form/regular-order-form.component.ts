@@ -219,7 +219,7 @@ export class RegularOrderFormComponent implements OnInit {
 
   createRegularOrder()
   {
-
+    alert("Order will be placed , and whatsapp will be sent on OK");
     console.log(this.regularOrderForm.getRawValue());
     let regularOrderInformation = {...this.regularOrderForm.getRawValue() , 'items' : this.products};
     this.isLoading = true;
@@ -231,9 +231,6 @@ export class RegularOrderFormComponent implements OnInit {
       ...customerInfo,
       ...regularOrderInfo
     };
-
-    
-
 
     this.apiService.addRegularOrder(regularOrder).subscribe((orderId)=>{
       this.isLoading = false;
