@@ -145,6 +145,7 @@ export class ItemFormComponent implements OnInit {
 
   submitForm()
   {
+    alert("Custom order will be placed and whatsapp will be sent on OK");
     this.isLoading = true;
     sessionStorage.setItem("customOrderDetails" , JSON.stringify(this.itemForm.value));
     let customerInfo = JSON.parse(sessionStorage.getItem("customerInfo")+"");
