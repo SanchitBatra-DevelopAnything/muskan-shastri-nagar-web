@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { of } from 'rxjs';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -206,6 +207,80 @@ export class DailyReportComponent implements OnInit {
 
   sendToChef()
   {
-    this.apiService.sendOrdersToWorker();
+    this.isLoading = true;
+    var cakeToken = "";
+    var snacksToken = "";
+    if(this.doOrdersHaveSnacks())
+    {
+      this.apiService.findToken("snacks").subscribe((tokenData : any)=>{
+        if(tokenData == null)
+        {
+          snacksToken = "";
+        }
+        else
+        {
+          snacksToken = tokenData["token"];
+          this.apiService.sendNotificationToParticularDevice("NEW ORDERS AVAILABLE!" , "Please open the application.",snacksToken).subscribe((_)=>{
+            this.isLoading = false;
+          });
+        }
+      });
+    }
+    if(this.doOrdersHaveCakes())
+    {
+      console.log("Orders have cakes , getting cakes token");
+      this.apiService.findToken("cakes").subscribe((tokenData:any)=>{
+        if(tokenData == null)
+        {
+          cakeToken = "";
+        }
+        else
+        {
+          cakeToken = tokenData["token"];
+          this.apiService.sendNotificationToParticularDevice("NEW ORDERS AVAILABLE!" , "Please open the application.",cakeToken).subscribe((_)=>{
+            this.isLoading = false;
+          });
+        }
+      });
+    }
+     
+    
+  }
+
+  doOrdersHaveSnacks()
+  {
+    for(let index = 0;index<this.activeOrders.length;index++)
+    {
+      let itemList = this.activeOrders[index]["items"];
+      for(let i=0;i<itemList.length;i++)
+      {
+        if(!itemList[i]["itemType"].toLowerCase().includes("cake"))
+        {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  doOrdersHaveCakes()
+  {
+    if(this.customOrders.length!=0)
+    {
+      return true;
+    }
+
+    for(let index = 0;index<this.activeOrders.length;index++)
+    {
+      let itemList = this.activeOrders[index]["items"];
+      for(let i=0;i<itemList.length;i++)
+      {
+        if(itemList[i]["itemType"].toLowerCase().includes("cake"))
+        {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }
