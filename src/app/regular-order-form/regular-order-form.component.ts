@@ -169,6 +169,10 @@ export class RegularOrderFormComponent implements OnInit {
       {
         this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice , 'prepared' : 'NO' , "itemType" : "PANEER & CHAAP"});  
       }
+      else if(this.selectedItem.type.includes('PASTRIES'))
+      {
+        this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice , 'prepared' : 'NO' , "itemType" : "CAKES"});  
+      }
       else
       {
         this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice , 'prepared' : 'NO' , "itemType" : "SNACKS"});
