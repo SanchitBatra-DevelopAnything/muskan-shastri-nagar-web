@@ -2,8 +2,8 @@
 
 </div>
 
-<div class = "container jumbotron" style = "margin: 10px;" *ngIf = "isEditMode" style = "text-align: center;">
-    <div *ngIf = "!isDelivered && !isCancelled">
+<!-- <div class = "container jumbotron" style = "margin: 10px;" *ngIf = "isEditMode" style = "text-align: center;"> -->
+    <!-- <div *ngIf = "!isDelivered && !isCancelled">
         <div *ngIf = "type == 'owner'">
             <label>Delivered To :</label>
     <input type = "text" [(ngModel)] = "deliveredTo">
@@ -18,14 +18,14 @@
     
         <button *ngIf = "!isPrepared && type == 'owner'" class = "btn btn-lg btn-danger" style = "margin: 10px;" (click) = "cancelOrder()">CANCEL</button>
     
-    </div>
-    
+    </div> -->
+<!--     
     <p *ngIf = "isDelivered && !isPrepared && !isCancelled" style = "color : green; font-weight: 300; text-align: center;">ORDER IS DELIVERED TO : {{deliveredTo | uppercase}}</p>
     <p *ngIf = "isCancelled && !isDelivered && !isPrepared" style = "color:red; font-weight: 300; text-align: center;">ORDER IS CANCELLED.</p>
-    <p *ngIf = "isPrepared" style = "color:green; font-weight: 300; text-align: center;">ORDER IS PREPARED. READY TO DELIVER.</p>
-</div>
+    <p *ngIf = "isPrepared" style = "color:green; font-weight: 300; text-align: center;">ORDER IS PREPARED. READY TO DELIVER.</p> -->
+<!-- </div> -->
 
-<div class = "container" *ngIf = "isEditMode">
+<!-- <div class = "container" *ngIf = "isEditMode">
     <div class="row">
         <div class="col-xs-12">
             <h5>Delivery Date : {{getDeliveryDate(deliveryDate)}}</h5>
@@ -35,7 +35,7 @@
             <h5>Delivery Time : {{deliveryTime}}</h5>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="container" *ngIf = "!isLoading">
     <h3 *ngIf = "type == 'owner'">Add items for your order.</h3>

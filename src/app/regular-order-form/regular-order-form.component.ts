@@ -209,7 +209,6 @@ export class RegularOrderFormComponent implements OnInit {
       {
         this.showGramLabel = true;
       }
-      else
       {
         this.showGramLabel = false;
       }
@@ -273,11 +272,6 @@ export class RegularOrderFormComponent implements OnInit {
     });
   }
 
-  deliverOrder()
-  {
-    
-  }
-
   markAsPrepared()
   {
     this.isLoading = true;
@@ -287,11 +281,6 @@ export class RegularOrderFormComponent implements OnInit {
       this.loadOnEditMode(selectedDate,orderKey);
       sessionStorage.clear();
     });
-  }
-
-  cancelOrder()
-  {
-    
   }
 
   getDeliveryDate(date:string)
