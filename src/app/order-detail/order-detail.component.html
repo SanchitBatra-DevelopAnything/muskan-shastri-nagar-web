@@ -45,6 +45,12 @@
         </div>
     </div>
 
+    <div class="row" *ngIf = "!isRegularOrder">
+        <div class="col-xs-12">
+            <p style = "font-weight: bold;">Cake Weight : {{loadedOrder.weight}} Pounds</p>
+        </div>
+    </div>
+
     <div class = "row" *ngIf = "!isRegularOrder">
         <div class="col-xs-12 col-md-6">
             Cake Photo : 
@@ -64,5 +70,6 @@
     <div class="row" *ngIf = "!isRegularOrder">
         <h4>Message On Cake : </h4>
         <p>{{loadedOrder.message}}</p>
+        <h4>Cake Flavour : {{loadedOrder.flavour}}</h4>
     </div>
 </div>

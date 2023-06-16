@@ -30,6 +30,7 @@ export class ItemFormComponent implements OnInit {
       'imgUrl' : new FormControl(''),
       'photoUrl' : new FormControl('not-uploaded'),
       'weight' : new FormControl(1,[Validators.required]),
+      'flavour' : new FormControl(null , [Validators.required]),
       'totalAmount' : new FormControl(null,[Validators.required]),
       'balanceAmount' : new FormControl(null,[Validators.required]),
       'advanceAmount' : new FormControl(null,[Validators.required]),
@@ -51,6 +52,7 @@ export class ItemFormComponent implements OnInit {
     }
     this.itemForm.patchValue({
       'weight' : customOrderInfo.weight,
+      'flavour' : customOrderInfo.flavour,
       'totalAmount' : customOrderInfo.totalAmount,
       'balanceAmount' : customOrderInfo.balanceAmount,
       'message' : customOrderInfo.message,
