@@ -57,6 +57,24 @@
         </div>
     </div>
 
+    <div class="row" *ngIf = "!isRegularOrder">
+        <div class="col-xs-12">
+            <p style = "font-weight: bold;">Cake Weight : {{loadedOrder.weight}} Pounds</p>
+        </div>
+    </div>
+
+    <div class="row" *ngIf = "!isRegularOrder">
+        <div class="col-xs-12">
+            <p style = "font-weight: bold;">Flavour Used : {{loadedOrder.flavour}}</p>
+        </div>
+    </div>
+
+    <div class="row" *ngIf = "!isRegularOrder">
+        <div class="col-xs-12">
+            <p>{{loadedOrder.particulars}}</p>
+        </div>
+    </div>
+
     <div class = "row" *ngIf = "!isRegularOrder">
         <div class="col-xs-12 col-md-6">
             Cake Photo : 
