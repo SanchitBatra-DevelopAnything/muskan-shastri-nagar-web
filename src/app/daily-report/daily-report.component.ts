@@ -86,6 +86,7 @@ export class DailyReportComponent implements OnInit {
           this.activeOrderKeys.push(temp_activeOrderKeys[i]);
         }
       }
+      this.markRegularOrdersPrepared();
       this.isLoading = false;
     });
   }
@@ -162,6 +163,32 @@ export class DailyReportComponent implements OnInit {
     });
     this.activeOrders = [...filteredRegularOrders];
     this.activeOrderKeys = [...filteredRegularKeys]; 
+    this.markRegularOrdersPrepared();
+  }
+
+  markRegularOrdersPrepared()
+  {
+    
+    for(let i=0;i<this.activeOrders.length;i++)
+    {
+      let count = 0;
+      let totalItems = this.activeOrders[i].items.length;
+      console.log(this.activeOrders[i].items);
+      for(let j=0;j<this.activeOrders[i].items.length;j++)
+      {
+        if(this.activeOrders[i].items[j].prepared == "YES")
+        {
+          count++;
+        }
+      }
+      if(count == totalItems)
+      {
+        if(this.activeOrders[i].status == "ND")
+        {
+          this.activeOrders[i].status = "P";
+        }
+      }
+    }
   }
 
   filterCustom()
