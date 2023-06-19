@@ -143,6 +143,7 @@ export class DailyReportComponent implements OnInit {
         this.filterRegular();
         this.filterCustom();
       }
+      this.markRegularOrdersPrepared();
       this.isLoading = false;
     });
   }
