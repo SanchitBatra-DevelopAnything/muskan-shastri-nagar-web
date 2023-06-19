@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
+import { interval, of } from 'rxjs';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -28,6 +28,11 @@ export class DailyReportComponent implements OnInit {
   ngOnInit(): void {
     this.todaysDate = this.getTodaysDate();
     this.getActiveOrders();
+    const obs$ = interval(180000);
+    obs$.subscribe((d)=>{
+      this.todaysDate = this.getTodaysDate();
+      this.getActiveOrders();
+    });
     this.selectedDate = this.todaysDate;
     this.mobileNumber = "";
     this.type = this.route.snapshot.params['type'];
