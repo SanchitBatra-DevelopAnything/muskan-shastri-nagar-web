@@ -253,7 +253,7 @@ export class DailyReportComponent implements OnInit {
         else
         {
           snacksToken = tokenData["token"];
-          this.apiService.sendNotificationToParticularDevice("NEW ORDERS AVAILABLE!" , "Please open the application.",snacksToken).subscribe((_)=>{
+          this.apiService.sendNotificationToParticularDevice("NEW REGULAR ORDERS AVAILABLE!" , "Please open the application.",snacksToken).subscribe((_)=>{
             this.isLoading = false;
           });
         }
@@ -270,13 +270,34 @@ export class DailyReportComponent implements OnInit {
         else
         {
           cakeToken = tokenData["token"];
-          this.apiService.sendNotificationToParticularDevice("NEW ORDERS AVAILABLE!" , "Please open the application.",cakeToken).subscribe((_)=>{
+          this.apiService.sendNotificationToParticularDevice("NEW REGULAR ORDERS AVAILABLE!" , "Please open the application.",cakeToken).subscribe((_)=>{
             this.isLoading = false;
           });
         }
       });
     }
      
+    
+  }
+
+  sendCustomToChef()
+  {
+    this.isLoading = true;
+      var cakeToken = "";
+      console.log("Orders have cakes , getting cakes token");
+      this.apiService.findToken("cakes").subscribe((tokenData:any)=>{
+        if(tokenData == null)
+        {
+          cakeToken = "";
+        }
+        else
+        {
+          cakeToken = tokenData["token"];
+          this.apiService.sendNotificationToParticularDevice("NEW CUSTOM ORDERS AVAILABLE!" , "Please open the application.",cakeToken).subscribe((_)=>{
+            this.isLoading = false;
+          });
+        }
+      });
     
   }
 
