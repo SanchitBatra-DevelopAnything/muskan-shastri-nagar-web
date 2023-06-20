@@ -105,7 +105,7 @@ export class ApiService {
   {
     let message = `Hi ${name},\nYour order with ID : ${orderKey} is Cancelled.\n\nThanks for ordering from Muskan Bakers And Sweets`;
     let encoded = encodeURI(message);
-    window.open("https://web.whatsapp.com/+91"+mobile+"/?text="+encoded);
+    window.open("https://web.whatsapp.com/send?phone=+91"+mobile+"/&text="+encoded);
   }
 
   sendOrdersToWorker()
