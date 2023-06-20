@@ -25,6 +25,18 @@
     </div>
 
     <div class="row">
+        <div class="col-xs-12">
+            <h5>Delivery Type : {{order.deliveryType == 1 ? "Home Delivery" : "Self"}}</h5>
+        </div>
+    </div>
+
+    <div class="row" *ngIf = "order.Address!=''">
+        <div class="col-xs-12">
+            <h5>Address : {{order.Address}}</h5>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-xs-3">
             <h5>Cakes seen by : {{order.cakesSeenBy}}</h5>
         </div>

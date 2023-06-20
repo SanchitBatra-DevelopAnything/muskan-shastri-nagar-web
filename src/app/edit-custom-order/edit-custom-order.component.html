@@ -53,7 +53,7 @@
     </div>
     <div class="row" *ngIf = "isRegularOrder">
         <div class="col-xs-12">
-            <p>{{loadedOrder.particulars}}</p>
+           Prticulars :  <p>{{loadedOrder.particulars}}</p>
         </div>
     </div>
 
@@ -71,7 +71,7 @@
 
     <div class="row" *ngIf = "!isRegularOrder">
         <div class="col-xs-12">
-            <p>{{loadedOrder.particulars}}</p>
+            <p> Particulars : {{loadedOrder.particulars}}</p>
         </div>
     </div>
 
@@ -104,6 +104,21 @@
     <div class="row" *ngIf = "!isRegularOrder">
         <h4>Delivery Time : </h4>
         <p>{{loadedOrder.deliveryTime}}</p>
+    </div>
+
+    <div class="row" *ngIf = "!isRegularOrder">
+        <h4>Booking Date : </h4>
+        <p>{{getDeliveryDate(loadedOrder.bookingDate)}}</p>
+    </div>
+
+    <div class="row" *ngIf = "!isRegularOrder">
+        <h4>Delivery Type : </h4>
+        <p>{{loadedOrder.deliveryType == 1 ? "Home Delivery" : "Self"}}</p>
+    </div>
+
+    <div class="row" *ngIf = "!isRegularOrder && loadedOrder.Address!=''">
+        <h4>Address : </h4>
+        <p>{{loadedOrder.Address}}</p>
     </div>
 </div>
 

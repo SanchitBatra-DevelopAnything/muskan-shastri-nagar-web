@@ -19,6 +19,16 @@
             <p>Balance Amount : Rs.{{loadedOrder.balanceAmount}}</p>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <p>Delivery Type : {{loadedOrder.deliveryType == 1 ? "Home Delivery" : "Self"}}</p>
+        </div>
+    </div>
+    <div class="row" *ngIf = "loadedOrder.Address!=''">
+        <div class="col-xs-12">
+            <p>Address : {{loadedOrder.Address}}</p>
+        </div>
+    </div>
     <div class="row" *ngIf = "isRegularOrder">
         <div class="col-xs-12">
             Items:
