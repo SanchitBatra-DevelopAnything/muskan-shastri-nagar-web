@@ -131,7 +131,7 @@ export class ItemFormComponent implements OnInit {
   { 
       var filePath = `customCakes/${this.selectedPhotoOnCake.name}_${new Date().getTime()}`;
       var fileRef = this.storage.ref(filePath);
-      return this.storage.upload(filePath,this.selectedImage).snapshotChanges().pipe(
+      return this.storage.upload(filePath,this.selectedPhotoOnCake).snapshotChanges().pipe(
         finalize(()=>{
           //RETRIEVING THE UPLOADED IMAGE URL.
           fileRef.getDownloadURL().subscribe((url)=>{
