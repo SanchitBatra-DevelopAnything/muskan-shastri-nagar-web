@@ -77,7 +77,7 @@ export class ApiService {
 
 
     let message = `Hi ${name},\nYour order with ID : ${id} is accepted.\nPlease find details.\n\nTotal:Rs.${total}\nAdvance:Rs.${advance}\nBalance:Rs.${balance}\n\nBooked On:${bookingDate}\nDeliver Date:${deliveryDate}\nDelivery Time:${deliveryTime}\nOther Details:${allDetails}\n\nThanks for ordering from Muskan Bakers And Sweets`;
-    window.open(`https://wa.me/+91${phoneNumber}/?text=${encodeURIComponent(message)}`);
+    window.open(`https://web.whatsapp.com/send?phone=+91${phoneNumber}/&text=${encodeURIComponent(message)}`);
   }
 
   public sendUpdateOrderWhatsapp(orderKey:any , isRegular:boolean)
@@ -90,21 +90,22 @@ export class ApiService {
     deliveryDate = deliveryDateArray[2]+"-"+deliveryDateArray[1]+"-"+deliveryDateArray[0];
     let message = `Hi ${name},\nYour order with ID : ${orderKey} is updated.\n\nNew Details:${allDetails}\n\nThanks for ordering from Muskan Bakers And Sweets`;
     let encoded = encodeURIComponent(message);
-    window.open("https://wa.me/+91"+mobile+"/?text="+encoded);
+    window.open("https://web.whatsapp.com/+91"+mobile+"/?text="+encoded);
   }
 
   public sendDeliveryMessage(orderKey : any , isRegular:boolean , mobile:any , name : any)
   {
+    console.log("Starting message for delivery = "+mobile + "and name = "+name);
     let message = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered .\n\nThanks for ordering from Muskan Bakers And Sweets`;
     let encoded = encodeURI(message);
-    window.open("https://web.whatsapp.com/+91"+mobile+"/?text="+encoded);
+    window.open("https://web.whatsapp.com/send?phone=+91"+mobile+"&text="+encoded);
   }
 
   public sendCancelMessage(orderKey : any , isRegular:boolean , mobile:any , name:any)
   {
     let message = `Hi ${name},\nYour order with ID : ${orderKey} is Cancelled.\n\nThanks for ordering from Muskan Bakers And Sweets`;
     let encoded = encodeURI(message);
-    window.open("https://wa.me/+91"+mobile+"/?text="+encoded);
+    window.open("https://web.whatsapp.com/+91"+mobile+"/?text="+encoded);
   }
 
   sendOrdersToWorker()
