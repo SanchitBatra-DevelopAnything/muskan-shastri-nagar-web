@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { throws } from 'assert';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -12,11 +13,12 @@ export class EditCustomOrderComponent implements OnInit {
   isDelivered:boolean = false;
   isCancelled:boolean = false;
   isPrepared:boolean = false;
-  deliveredTo:string;
+  deliverTo:string;
   isLoading:boolean = false;
   loadedOrder:any = {};
   isRegularOrder:boolean = false;
   type:string;
+  visibleDeliveryDialog:boolean = false;
 
 
 
@@ -34,15 +36,20 @@ export class EditCustomOrderComponent implements OnInit {
     }
   }
 
+  showDialog()
+  {
+    this.visibleDeliveryDialog = true;
+  }
+
 
   deliverOrder()
   {
     this.isLoading = true;
     let selectedDate = this.route.snapshot.params['date'];
     let orderKey = this.route.snapshot.params['key'];
-    this.apiService.updateOrder(selectedDate,orderKey,{'status' : "D" , 'deliveredTo' : this.deliveredTo}).subscribe(()=>{
+    this.apiService.updateOrder(selectedDate,orderKey,{'status' : "D" , 'deliveredTo' : this.deliverTo}).subscribe(()=>{
       this.getOrderDetails(selectedDate,orderKey);
-      this.apiService.sendDeliveryMessage(orderKey,false,this.loadedOrder.Contact,this.loadedOrder.customerName);
+      this.apiService.sendDeliveryMessage(orderKey,false,this.loadedOrder.Contact,this.loadedOrder.customerName,this.deliverTo);
       sessionStorage.clear();
     });
   }
@@ -86,7 +93,7 @@ export class EditCustomOrderComponent implements OnInit {
       if(order.status == "D")
       {
         this.isDelivered = true;
-        this.deliveredTo = order.deliveredTo;
+        this.deliverTo = order.deliveredTo;
         this.isPrepared = false;
         this.isCancelled = false;
       }

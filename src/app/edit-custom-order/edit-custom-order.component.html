@@ -4,7 +4,7 @@
     <div *ngIf = "!isDelivered && !isCancelled">
         
     
-    <button *ngIf= "type == 'owner'" class = "btn btn-lg btn-success" style = "margin:10px;" (click) = "deliverOrder()">DELIVER</button>
+    <button *ngIf= "type == 'owner'" class = "btn btn-lg btn-success" style = "margin:10px;" (click) = "showDialog()">DELIVER</button>
     
     
     <button *ngIf = "!isPrepared && type == 'chef'" class = "btn btn-lg btn-primary" style = "margin:10px;" (click) = "markAsPrepared()">PREPARED</button>
@@ -16,6 +16,7 @@
     
     <p *ngIf = "isCancelled && !isDelivered && !isPrepared" style = "color:red; font-weight: 300; text-align: center;">ORDER IS CANCELLED.</p>
     <p *ngIf = "isPrepared" style = "color:green; font-weight: 300; text-align: center;">ORDER IS PREPARED. READY TO DELIVER.</p>
+    <p *ngIf = "isDelivered" style = "color: green;">ORDER IS DELIVERED.</p>
 </div>
 
 <legend style = "margin:10px;"></legend>
@@ -121,4 +122,15 @@
         <p>{{loadedOrder.Address}}</p>
     </div>
 </div>
+
+<p-dialog header="Deliver To : " [(visible)]="visibleDeliveryDialog" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <div *ngIf = "!isLoading">
+        <input type = "text" style = "margin-right: 10px; height:30px;" [(ngModel)] = "deliverTo"> 
+        <button class = "btn btn-small btn-success" (click) = "deliverOrder()">OK</button>
+    </div>
+    
+    <div class="loader" *ngIf = "isLoading" style = "margin: auto;">
+
+    </div>
+</p-dialog>
 

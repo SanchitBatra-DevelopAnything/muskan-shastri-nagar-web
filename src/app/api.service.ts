@@ -93,11 +93,11 @@ export class ApiService {
     window.open("https://web.whatsapp.com/+91"+mobile+"/?text="+encoded);
   }
 
-  public sendDeliveryMessage(orderKey : any , isRegular:boolean , mobile:any , name : any)
+  public sendDeliveryMessage(orderKey : any , isRegular:boolean , mobile:any , name : any , deliverTo :string)
   {
-    console.log("Starting message for delivery = "+mobile + "and name = "+name);
-    let message = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered .\n\nThanks for ordering from Muskan Bakers And Sweets`;
-    let encoded = encodeURI(message);
+    let message_regular = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered.\n\nThanks for ordering from Muskan Bakers And Sweets`;
+    let message = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered to ${deliverTo}.\n\nThanks for ordering from Muskan Bakers And Sweets`;
+    let encoded = isRegular? encodeURI(message_regular) : encodeURI(message);
     window.open("https://web.whatsapp.com/send?phone=+91"+mobile+"&text="+encoded);
   }
 

@@ -101,7 +101,7 @@ export class KotPrintingComponent implements OnInit {
   {
     this.order.status = "D";
     this.apiService.updateOrder(this.date,this.orderKey,this.order).subscribe((_)=>{
-      this.apiService.sendDeliveryMessage(this.orderKey , true,this.order.Contact,this.order.customerName);
+      this.apiService.sendDeliveryMessage(this.orderKey , true,this.order.Contact,this.order.customerName , this.deliverTo);
     });
   }
 
@@ -115,7 +115,10 @@ export class KotPrintingComponent implements OnInit {
 
   showDialog(index:any)
   {
-    this.selectedIndex = index;
+    if(index != "full")
+    {
+      this.selectedIndex = index;
+    }
     this.visibleDeliveryDialog = true;
   }
 
