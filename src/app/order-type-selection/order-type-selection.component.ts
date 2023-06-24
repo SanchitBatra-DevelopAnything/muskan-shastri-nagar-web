@@ -9,6 +9,8 @@ import { of } from 'rxjs';
 })
 export class OrderTypeSelectionComponent implements OnInit {
 
+  showOrders:boolean = false;
+
   constructor(private router:Router) { }
 
   ngOnInit(): void {
@@ -26,5 +28,13 @@ export class OrderTypeSelectionComponent implements OnInit {
       this.router.navigate(['/order/'+orderType])
     }
   }
+
+  setSystem(system:string)
+  {
+    localStorage.setItem('on' , system);
+    this.showOrders = true;
+  }
+
+
 
 }

@@ -77,7 +77,16 @@ export class ApiService {
 
 
     let message = `Hi ${name},\nYour order with ID : ${id} is accepted.\nPlease find details.\n\nTotal:Rs.${total}\nAdvance:Rs.${advance}\nBalance:Rs.${balance}\n\nBooked On:${bookingDate}\nDeliver Date:${deliveryDate}\nDelivery Time:${deliveryTime}\nOther Details:${allDetails}\n\nThanks for ordering from Muskan Bakers And Sweets`;
-    window.open(`https://web.whatsapp.com/send?phone=+91${phoneNumber}/&text=${encodeURIComponent(message)}`);
+    if(localStorage.getItem('on') == "TAB")
+    {
+      console.log("TAB SE MESSAGE GAYA!");
+      window.open(`https://wa.me/+91${phoneNumber}/?text=${encodeURIComponent(message)}`);
+    }
+    else
+    {
+      console.log("LAPTOP SE MESSAGE GAYA");
+      window.open(`https://web.whatsapp.com/send?phone=+91${phoneNumber}/&text=${encodeURIComponent(message)}`);
+    }
   }
 
   public sendUpdateOrderWhatsapp(orderKey:any , isRegular:boolean)
@@ -98,14 +107,30 @@ export class ApiService {
     let message_regular = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered.\n\nThanks for ordering from Muskan Bakers And Sweets`;
     let message = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered to ${deliverTo}.\n\nThanks for ordering from Muskan Bakers And Sweets`;
     let encoded = isRegular? encodeURI(message_regular) : encodeURI(message);
-    window.open("https://web.whatsapp.com/send?phone=+91"+mobile+"&text="+encoded);
+    if(localStorage.getItem('on') == "TAB")
+    {
+      console.log("TAB SE MESSAGE GAYA!");
+      window.open(`https://wa.me/+91${mobile}/?text=${encodeURIComponent(message)}`);
+    }
+    else
+    {
+      window.open("https://web.whatsapp.com/send?phone=+91"+mobile+"&text="+encoded);
+    }
   }
 
   public sendCancelMessage(orderKey : any , isRegular:boolean , mobile:any , name:any)
   {
     let message = `Hi ${name},\nYour order with ID : ${orderKey} is Cancelled.\n\nThanks for ordering from Muskan Bakers And Sweets`;
     let encoded = encodeURI(message);
-    window.open("https://web.whatsapp.com/send?phone=+91"+mobile+"/&text="+encoded);
+    if(localStorage.getItem('on') == "TAB")
+    {
+      console.log("TAB SE MESSAGE GAYA!");
+      window.open(`https://wa.me/+91${mobile}/?text=${encodeURIComponent(message)}`);
+    }
+    else
+    {
+      window.open("https://web.whatsapp.com/send?phone=+91"+mobile+"/&text="+encoded);
+    }
   }
 
   sendOrdersToWorker()
