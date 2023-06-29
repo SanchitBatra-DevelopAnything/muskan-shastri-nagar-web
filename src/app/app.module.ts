@@ -31,6 +31,7 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { EditCustomOrderComponent } from './edit-custom-order/edit-custom-order.component';
 import { KotPrintingComponent } from './kot-printing/kot-printing.component';
 import { MonthlySalesComponent } from './monthly-sales/monthly-sales.component';
+import { PaymentComponent } from './payment/payment.component';
 
 const appRoutes : Routes = [
   {path : '' , component : OrderTypeSelectionComponent,pathMatch:"full"},
@@ -42,6 +43,7 @@ const appRoutes : Routes = [
   {path : 'editOrder/:date/custom/:key/:type' , component : EditCustomOrderComponent},
   {path : 'detail/:date/:orderKey' , component : OrderDetailComponent},
   {path : 'monthlySales' , component : MonthlySalesComponent},
+  {path : 'payment' , component : PaymentComponent},
 ]
 @NgModule({
   declarations: [
@@ -61,6 +63,7 @@ const appRoutes : Routes = [
     EditCustomOrderComponent,
     KotPrintingComponent,
     MonthlySalesComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,

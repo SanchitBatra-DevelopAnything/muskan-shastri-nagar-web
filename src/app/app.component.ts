@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router} from '@angular/router';
-import { throws } from 'assert';
-import {filter} from 'rxjs/operators';
 import { ApiService } from './api.service';
 
 @Component({
@@ -13,7 +11,7 @@ export class AppComponent implements OnInit {
   title = 'muskan-shastri-nagar';
   showHeader:boolean = true;
   dueMessage = "";
-  off = false;
+  off = true;
 
   constructor(private apiService:ApiService,private router:Router) {
     
@@ -30,9 +28,11 @@ export class AppComponent implements OnInit {
       if(mainDetails[0]['showMessage'] == true)
       {
         this.off = mainDetails[0]['off'];
+        console.log(this.off);
         if(this.off)
         {
           //redirect band karo application
+          this.goToPayment();
         }
         else
         {
@@ -43,12 +43,17 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         // Check the current route here
-        if (this.router.url.includes("/detail") || this.router.url.includes("/chef")) {
+        if (this.router.url.includes("/detail") || this.router.url.includes("/chef") || this.router.url.includes('/payment')) {
           this.showHeader = false; // Set a boolean flag to hide something
         } else {
           this.showHeader = true; // Set the flag to show something
         }
       }
     });
+  }
+
+  goToPayment()
+  {
+    this.router.navigate(['payment']);
   }
 }

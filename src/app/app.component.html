@@ -3,9 +3,8 @@
     <h3 style = "color:lightcoral; text-align: center;">{{dueMessage}}</h3>
     <p style = "text-align: center;">If paid after disconnection , it can take up to 6-8 hours to make app functioning again.</p>
     <div>
-        <button style = "position:absolute; left:45%; right:40%; width: 100px;" class = "btn btn-primary">Pay Now</button>
+        <button style = "position:absolute; left:45%; right:40%; width: 100px;" class = "btn btn-primary" (click) = "goToPayment()">Pay Now</button>
     </div>
-    
 </div>
 
 <router-outlet></router-outlet>
