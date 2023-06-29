@@ -32,7 +32,8 @@ export class AppComponent implements OnInit {
         if(this.off)
         {
           //redirect band karo application
-          this.goToPayment();
+          sessionStorage.setItem("disconnected" , "YES");
+          this.goToPayment(true);
         }
         else
         {
@@ -52,8 +53,15 @@ export class AppComponent implements OnInit {
     });
   }
 
-  goToPayment()
+  goToPayment(disconnected : boolean = false)
   {
-    this.router.navigate(['payment']);
+    if(disconnected == true)
+    {
+      this.router.navigate(['payment/disconnected']);
+    }
+    else
+    {
+      this.router.navigate(['payment/connected']);
+    }
   }
 }

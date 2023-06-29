@@ -35,15 +35,15 @@ import { PaymentComponent } from './payment/payment.component';
 
 const appRoutes : Routes = [
   {path : '' , component : OrderTypeSelectionComponent,pathMatch:"full"},
-  {path : 'order/:orderType',component:ContainerComponent},
-  {path : 'inventory' , component : InventoryListComponent},
+  {path : 'order/:orderType',component:ContainerComponent },
+  {path : 'inventory' , component : InventoryListComponent },
   {path : 'inventory/form/:key' , component : InventoryFormComponent},
   {path : 'viewOrders/:type' , component : DailyReportComponent},
   {path : 'editOrder/:date/regular/:key/:type' , component : KotPrintingComponent},
   {path : 'editOrder/:date/custom/:key/:type' , component : EditCustomOrderComponent},
   {path : 'detail/:date/:orderKey' , component : OrderDetailComponent},
   {path : 'monthlySales' , component : MonthlySalesComponent},
-  {path : 'payment' , component : PaymentComponent},
+  {path : 'payment/:type' , component : PaymentComponent},
 ]
 @NgModule({
   declarations: [
