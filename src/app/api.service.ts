@@ -200,4 +200,9 @@ export class ApiService {
     appType +
     ".json");
   }
+
+  public getMaintenanceDetails():Observable<any>
+  {
+    return this.http.get("https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/maintenance.json");
+  }
 }

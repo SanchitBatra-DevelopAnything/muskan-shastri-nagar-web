@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router} from '@angular/router';
+import { throws } from 'assert';
 import {filter} from 'rxjs/operators';
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +12,34 @@ import {filter} from 'rxjs/operators';
 export class AppComponent implements OnInit {
   title = 'muskan-shastri-nagar';
   showHeader:boolean = true;
+  dueMessage = "";
+  off = false;
 
-  constructor(private router:Router) {
+  constructor(private apiService:ApiService,private router:Router) {
     
 }
   ngOnInit()
   {
+    this.apiService.getMaintenanceDetails().subscribe((details)=>{
+      if(details == null)
+      {
+        return;
+      }
+      let mainDetails  : any= Object.values(details);
+      console.log(mainDetails);
+      if(mainDetails[0]['showMessage'] == true)
+      {
+        this.off = mainDetails[0]['off'];
+        if(this.off)
+        {
+          //redirect band karo application
+        }
+        else
+        {
+          this.dueMessage = "Maintenance Payment due in "+mainDetails[0]['due']+" Please pay to avoid disconnection.";
+        }
+      }
+    });
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         // Check the current route here

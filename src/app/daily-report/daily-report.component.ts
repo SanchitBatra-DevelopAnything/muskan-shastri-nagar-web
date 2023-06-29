@@ -168,7 +168,7 @@ export class DailyReportComponent implements OnInit {
       return false;
     });
     this.activeOrders = [...filteredRegularOrders];
-    this.activeOrderKeys = [...filteredRegularKeys]; 
+    this.activeOrderKeys = [...filteredRegularKeys];
     this.markRegularOrdersPrepared();
   }
 
