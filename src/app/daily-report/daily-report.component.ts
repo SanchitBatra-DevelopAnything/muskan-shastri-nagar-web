@@ -316,7 +316,7 @@ export class DailyReportComponent implements OnInit {
         else
         {
           snacksToken = tokenData["token"];
-          this.apiService.sendNotificationToParticularDevice("ORDER MIGHT BE CANCELLED!" , "Check application for your active orders.",snacksToken,"cancel").subscribe((_)=>{
+          this.apiService.sendNotificationToParticularDevice("Check application for your active orders." , "ORDER MIGHT BE CANCELLED!",snacksToken,"cancel").subscribe((_)=>{
             this.isLoading = false;
           });
         }
@@ -333,7 +333,7 @@ export class DailyReportComponent implements OnInit {
         else
         {
           cakeToken = tokenData["token"];
-          this.apiService.sendNotificationToParticularDevice("ORDER MIGHT BE CANCELLED!" , "Check application for your active orders.",cakeToken , "cancel").subscribe((_)=>{
+          this.apiService.sendNotificationToParticularDevice("Check application for your active orders." , "ORDER MIGHT BE CANCELLED!",cakeToken , "cancel").subscribe((_)=>{
             this.isLoading = false;
           });
         }
