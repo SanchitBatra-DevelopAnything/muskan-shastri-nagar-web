@@ -301,6 +301,46 @@ export class DailyReportComponent implements OnInit {
     
   }
 
+  sendCancelToChef()
+  {
+    this.isLoading = true;
+    var cakeToken = "";
+    var snacksToken = "";
+    if(this.doOrdersHaveSnacks())
+    {
+      this.apiService.findToken("snacks").subscribe((tokenData : any)=>{
+        if(tokenData == null)
+        {
+          snacksToken = "";
+        }
+        else
+        {
+          snacksToken = tokenData["token"];
+          this.apiService.sendNotificationToParticularDevice("ORDER MIGHT BE CANCELLED!" , "Check application for your active orders.",snacksToken,"cancel").subscribe((_)=>{
+            this.isLoading = false;
+          });
+        }
+      });
+    }
+    if(this.doOrdersHaveCakes())
+    {
+      console.log("Orders have cakes , getting cakes token");
+      this.apiService.findToken("cakes").subscribe((tokenData:any)=>{
+        if(tokenData == null)
+        {
+          cakeToken = "";
+        }
+        else
+        {
+          cakeToken = tokenData["token"];
+          this.apiService.sendNotificationToParticularDevice("ORDER MIGHT BE CANCELLED!" , "Check application for your active orders.",cakeToken , "cancel").subscribe((_)=>{
+            this.isLoading = false;
+          });
+        }
+      });
+    }
+  }
+
   doOrdersHaveSnacks()
   {
     for(let index = 0;index<this.activeOrders.length;index++)
