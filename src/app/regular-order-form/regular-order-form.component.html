@@ -140,7 +140,7 @@
     </div>
     
     <legend style = "margin-top: 15px;"></legend>
-    <button class = "btn btn-success" (click) = "createRegularOrder()" *ngIf = "!isEditMode">Submit</button>
+    <button class = "btn btn-success" (click) = "createRegularOrder()" *ngIf = "!isEditMode" [disabled] = "products.length == 0">Submit</button>
     <button class = "btn btn-danger" (click) = "goBack()" style = "margin-left:15px;">Back</button>
     <button class = "btn btn-danger" (click) = "updateRegularOrder()" *ngIf = "isEditMode && !isDelivered && !isCancelled && type == 'owner'">Update</button>
     
