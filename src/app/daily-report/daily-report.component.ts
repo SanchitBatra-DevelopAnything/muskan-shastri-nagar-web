@@ -63,7 +63,7 @@ export class DailyReportComponent implements OnInit {
     this.isLoading = true;
     this.activeOrders = [];
     this.activeOrderKeys = [];
-    this.customOrderKeys = [];
+    this.customOrders = [];
     this.customOrderKeys = [];
     this.apiService.getActiveOrders(this.todaysDate).subscribe((orders)=>{
       if(orders == null)
