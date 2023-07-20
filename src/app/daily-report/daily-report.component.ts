@@ -87,8 +87,11 @@ export class DailyReportComponent implements OnInit {
         }
         else
         {
-          this.activeOrders.push(temp_activeOrders[i]);
-          this.activeOrderKeys.push(temp_activeOrderKeys[i]);
+          if(temp_activeOrders[i].items!=null && temp_activeOrders[i].items!=null)
+          {
+            this.activeOrders.push(temp_activeOrders[i]);
+            this.activeOrderKeys.push(temp_activeOrderKeys[i]);
+          }
         }
       }
       this.markRegularOrdersPrepared();
