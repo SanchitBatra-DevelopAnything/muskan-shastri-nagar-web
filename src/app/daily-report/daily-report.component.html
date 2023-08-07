@@ -29,6 +29,7 @@
     <div class="row">
 
         <div *ngFor = "let order of activeOrders; let i = index;" class = "col-md-2 col-xs-4 w3-card pointer order-card" [ngClass] = "{'delivered' : order.status == 'D' , 'inprogress' : order.status == 'ND' , 'cancel' : order.status == 'C' , 'prepared' : order.status == 'P'}" (click) = "editOrder(activeOrders[i] , i)">
+            <div class="tag" *ngIf = "activeOrders[i]['deliveryType'] == 1">HD</div>
             <p style = "font-weight: bold;">{{order.customerName | uppercase}}</p>
             <p style = "font-weight: bold;">{{order.Contact}}</p>
             <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>
@@ -46,6 +47,7 @@
 
     <div class="row">
         <div *ngFor = "let order of customOrders; let i = index;" class = "col-md-2 col-xs-4 w3-card pointer order-card-custom" [ngClass] = "{'delivered' : order.status == 'D' , 'inprogress' : order.status == 'ND' , 'cancel' : order.status == 'C' , 'prepared' : order.status == 'P'}" (click)= "editCustomOrder(customOrders[i] , i)">
+            <div class="tag" *ngIf = "customOrders[i]['deliveryType'] == 1">HD</div>
             <p style = "font-weight: bold;">{{order.customerName | uppercase}}</p>
             <p style = "font-weight: bold;">{{order.Contact | uppercase}}</p>
             <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>
