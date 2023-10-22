@@ -380,4 +380,22 @@ export class DailyReportComponent implements OnInit {
     }
     return false;
   }
+
+  checkForFactoryItems(order:any)
+  {
+    if(order!=null)
+    {
+      if(order['items']!=null)
+      {
+        for(var i=0;i<order['items'].length;i++)
+        {
+          if(order['items'][i]['itemType'].toLowerCase() == "factory items")
+          {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
 }

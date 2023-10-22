@@ -15,7 +15,7 @@ export class InventoryFormComponent implements OnInit {
   isLoading:boolean = false;
   isEditForm:boolean = false;
   itemKey:any = "new";
-  itemTypeOptions:any = [{'type' : 'CAKES'},{type : 'SNACKS & PATTIES'} , {type : 'PANEER & CHAAP'} , {type : "PASTRIES"}];
+  itemTypeOptions:any = [{'type' : 'CAKES'},{type : 'SNACKS & PATTIES'} , {type : 'PANEER & CHAAP'} , {type : "PASTRIES"} , {type : "FACTORY ITEM"}];
   constructor(private apiService:ApiService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
