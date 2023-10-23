@@ -389,7 +389,7 @@ export class DailyReportComponent implements OnInit {
       {
         for(var i=0;i<order['items'].length;i++)
         {
-          if(order['items'][i]['itemType'].toLowerCase() == "factory items")
+          if(order['items'][i]['itemType'].toLowerCase() == "factory item")
           {
             return true;
           }
