@@ -173,6 +173,10 @@ export class RegularOrderFormComponent implements OnInit {
       {
         this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice , 'prepared' : 'NO' , "itemType" : "CAKES"});  
       }
+      else if(this.selectedItem.type.toLowerCase().includes('factory'))
+      {
+        this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice , 'prepared' : 'YES' , "itemType" : "FACTORY ITEM"}); //factory items mobile app par nahi jaayenge , and assumed already prepared as per requirement. taaki green dot aaye.  
+      }
       else
       {
         this.products.push({'name' : formedName , 'pricePerProduct' : productPrice , 'quantity' : quantity , 'total' : totalPrice , 'prepared' : 'NO' , "itemType" : "SNACKS"});
