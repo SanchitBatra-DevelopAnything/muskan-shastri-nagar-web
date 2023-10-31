@@ -18,6 +18,7 @@ export class DailyReportComponent implements OnInit {
   todaysDate : string;
   selectedDate: any;
   mobileNumber:any;
+  dirtyOrders:any= [];
   type : string;
 
 
@@ -65,6 +66,7 @@ export class DailyReportComponent implements OnInit {
     this.activeOrderKeys = [];
     this.customOrders = [];
     this.customOrderKeys = [];
+    this.dirtyOrders = [];
     this.apiService.getActiveOrders(this.todaysDate).subscribe((orders)=>{
       if(orders == null)
       {
@@ -74,6 +76,7 @@ export class DailyReportComponent implements OnInit {
         this.activeOrders = [];
         this.customOrderKeys = [];
         this.customOrders = [];
+        this.dirtyOrders = [];
         return;
       }
       let temp_activeOrders : any = Object.values(orders);
@@ -87,6 +90,10 @@ export class DailyReportComponent implements OnInit {
         }
         else
         {
+          if(temp_activeOrders[i].items == null)
+          {
+            this.dirtyOrders.push({'key' : temp_activeOrderKeys[i] , 'date' : this.selectedDate});
+          }
           if(temp_activeOrders[i].items!=null && temp_activeOrders[i].items!=null)
           {
             this.activeOrders.push(temp_activeOrders[i]);
@@ -397,5 +404,15 @@ export class DailyReportComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  deleteDirtyOrders()
+  {
+    this.isLoading = true;
+    this.apiService.deleteAllDirtyOrders(this.dirtyOrders).subscribe(
+      (_:any)=>{
+        this.getActiveOrders();
+      }
+    );
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -216,5 +216,22 @@ export class ApiService {
   public getMaintenanceDetails():Observable<any>
   {
     return this.http.get("https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/maintenance.json");
+  }
+
+  private deleteOrder(order:any) : Observable<any>
+  {
+    let key = order['key'];
+    console.log("KEY OF DIRTY ORDER IS  = ",key);
+    let tareekh = order['date'].split("-");
+    return this.http.delete('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+tareekh[1]+"/"+tareekh[0]+"/"+tareekh[2]+"/"+key+'.json');
+  }
+
+  public deleteAllDirtyOrders(dirtyOrders:any) : Observable<any>
+  {
+    const requests = dirtyOrders
+    .map((order: any) => this.deleteOrder(order));
+  return forkJoin(
+    ...requests
+  );
   }
 }
