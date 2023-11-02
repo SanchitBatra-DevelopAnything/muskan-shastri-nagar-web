@@ -18,12 +18,13 @@
         <p>Khaali chhod do agar selected date ke saare orders chahiyein</p>
         <input type = "text" [(ngModel)] = "mobileNumber">
 
-        <button type = "button" (click)="deleteDirtyOrders()" class = "btn btn-primary btn-lg">FIX MOBILE APP.</button>
+        
 
         <button type = "button" (click) = "filterOrders()" class = "btn btn-primary" style = "margin: 10px;">Search Orders</button>
         <button type = "button" (click) = "sendToChef()" class = "btn btn-success" style = "margin: 10px;">Regular Order Bell</button>
         <button type = "button" (click) = "sendCustomToChef()" class = "btn btn-primary" style = "margin: 10px;">Custom Order Bell</button>
         <button type = "button" (click) = "sendCancelToChef()" class = "btn btn-danger" style = "margin:10px;">Cancel Order Bell</button>
+        <button type = "button" (click)="deleteDirtyOrders()" class = "btn btn-primary">FIX MOBILE APP.</button>
     </div>
 
     <h3>Regular Orders</h3>
