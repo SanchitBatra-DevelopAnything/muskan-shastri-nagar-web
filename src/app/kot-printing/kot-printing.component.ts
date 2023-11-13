@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { EditorderServiceService } from '../services/editorder-service.service';
 
 @Component({
   selector: 'app-kot-printing',
@@ -23,14 +24,14 @@ export class KotPrintingComponent implements OnInit {
   selectedIndex:any;
   collectedBalance:number;
 
-  constructor(private route:ActivatedRoute , private apiService : ApiService) { }
+  constructor(private route:ActivatedRoute , private apiService : ApiService , private editOrderService:EditorderServiceService , private router:Router) { }
   ngOnInit(): void {
 
     this.date = this.route.snapshot.params['date'];
     this.orderKey = this.route.snapshot.params['key'];
 
     this.fetchOrderDetails();
-
+    this.editOrderService.selectedRegularOrder(this.order); //sets this for edit.
   }
 
   fetchOrderDetails()
@@ -139,6 +140,11 @@ export class KotPrintingComponent implements OnInit {
   showBalanceDialog()
   {
     this.visibleBalanceDialog = true;
+  }
+
+  editOrder()
+  {
+    this.router.navigate(['order/REGULAR/edit']);
   }
 
 }

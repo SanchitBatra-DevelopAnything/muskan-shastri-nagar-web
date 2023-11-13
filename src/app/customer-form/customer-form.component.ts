@@ -15,9 +15,18 @@ export class CustomerFormComponent implements OnInit {
   @Input()
   isCounterOrder:boolean;
 
+  @Input()
+  action:any;
+
   constructor(private utilityService : UtilityService) { }
 
   ngOnInit(): void {
+
+    if(this.action==="edit")
+    {
+      
+    }
+
     this.customerForm = new FormGroup({
       'customerName' : new FormControl('',[Validators.required]),
       'Address' : new FormControl(''),

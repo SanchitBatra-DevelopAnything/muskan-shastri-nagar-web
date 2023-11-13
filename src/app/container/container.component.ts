@@ -14,6 +14,7 @@ export class ContainerComponent implements OnInit,OnDestroy {
   formNumber:number = 1;
   isCustomOrderSelected:boolean = false;
   isCounterOrder:boolean;
+  action:any;
 
   constructor(private activeRoute:ActivatedRoute,private utilityService : UtilityService) { }
 
@@ -22,6 +23,7 @@ export class ContainerComponent implements OnInit,OnDestroy {
       this.formNumber = formNum;
     });
     let orderType = this.activeRoute.snapshot.params['orderType'];
+    this.action = this.activeRoute.snapshot.params['action'];
     if(orderType == "REGULAR" || orderType == "COUNTER")
     {
       this.isCustomOrderSelected = false;
