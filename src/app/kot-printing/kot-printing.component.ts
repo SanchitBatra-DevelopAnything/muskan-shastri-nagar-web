@@ -23,6 +23,7 @@ export class KotPrintingComponent implements OnInit {
   deliverTo:any;
   selectedIndex:any;
   collectedBalance:number;
+  showEditButton:boolean =false;
 
   constructor(private route:ActivatedRoute , private apiService : ApiService , private editOrderService:EditorderServiceService , private router:Router) { }
   ngOnInit(): void {
@@ -31,7 +32,6 @@ export class KotPrintingComponent implements OnInit {
     this.orderKey = this.route.snapshot.params['key'];
 
     this.fetchOrderDetails();
-    this.editOrderService.selectedRegularOrder(this.order); //sets this for edit.
   }
 
   fetchOrderDetails()
@@ -49,6 +49,9 @@ export class KotPrintingComponent implements OnInit {
       this.itemList = this.order.items;
       this.addIndexToItemList();
       this.checkForDelivery();
+      this.editOrderService.setRegularOrder(this.order,this.orderKey); //sets this for edit.
+      console.log("ORDER IS SET FOR EDIT NOW.");
+      this.showEditButton = true;
       this.isLoading = false;
       this.collectedBalance = this.order.balanceAmount;
     })

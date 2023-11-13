@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { EditorderServiceService } from '../services/editorder-service.service';
 import { UtilityService } from '../services/utility.service';
 
 @Component({
@@ -18,25 +19,35 @@ export class CustomerFormComponent implements OnInit {
   @Input()
   action:any;
 
-  constructor(private utilityService : UtilityService) { }
+  constructor(private utilityService : UtilityService , private editOrderService:EditorderServiceService) { }
 
   ngOnInit(): void {
 
     if(this.action==="edit")
     {
-      
+      let order = this.editOrderService.getRegularOrder();
+      this.customerForm = new FormGroup({
+        'customerName' : new FormControl(order['customerName'],[Validators.required]),
+        'Address' : new FormControl(order['Address']),
+        'Contact' : new FormControl(order['Contact'],[Validators.required]),
+        'bookingDate' : new FormControl(order['bookingDate'],[Validators.required]),
+        'deliveryDate' : new FormControl(order['deliveryDate'] , [Validators.required]),
+        'deliveryTime' : new FormControl(order['deliveryTime'],[Validators.required]),
+        'deliveryType' : new FormControl(order['deliveryType'],[Validators.required]),
+     });
     }
-
-    this.customerForm = new FormGroup({
-      'customerName' : new FormControl('',[Validators.required]),
-      'Address' : new FormControl(''),
-      'Contact' : new FormControl('',[Validators.required]),
-      'bookingDate' : new FormControl('',[Validators.required]),
-      'deliveryDate' : new FormControl('' , [Validators.required]),
-      'deliveryTime' : new FormControl('',[Validators.required]),
-      'deliveryType' : new FormControl('',[Validators.required]),
-   });
-
+    else
+    {
+      this.customerForm = new FormGroup({
+        'customerName' : new FormControl('',[Validators.required]),
+        'Address' : new FormControl(''),
+        'Contact' : new FormControl('',[Validators.required]),
+        'bookingDate' : new FormControl('',[Validators.required]),
+        'deliveryDate' : new FormControl('' , [Validators.required]),
+        'deliveryTime' : new FormControl('',[Validators.required]),
+        'deliveryType' : new FormControl('',[Validators.required]),
+     });
+    }
    if(this.isCounterOrder)
    {
      this.loadInitialValues();
@@ -45,7 +56,7 @@ export class CustomerFormComponent implements OnInit {
    this.today = new Date().toISOString().split('T')[0];
 
 
-   if(!this.firstTime())
+   if(!this.firstTime() && this.action!="edit")
    {
     let customerInfo = null;
     if(sessionStorage.getItem("customerInfo")!=null)

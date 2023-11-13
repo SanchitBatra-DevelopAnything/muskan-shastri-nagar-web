@@ -2,6 +2,7 @@ import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { EditorderServiceService } from '../services/editorder-service.service';
 import { UtilityService } from '../services/utility.service';
 
 // @Pipe({
@@ -53,19 +54,40 @@ export class RegularOrderFormComponent implements OnInit {
 
 
 
-  constructor(private apiService:ApiService , private router : Router , private route:ActivatedRoute , private utilityService:UtilityService) { 
+  constructor(private apiService:ApiService , private router : Router , private route:ActivatedRoute , private utilityService:UtilityService , private editOrderService:EditorderServiceService) { 
   }
 
   ngOnInit(): void {
-    this.regularOrderForm = new FormGroup({
-      'totalAmount' : new FormControl({value : 0 , disabled : true},[Validators.required]),
-      'advanceAmount' : new FormControl(null , [Validators.required]),
-      'balanceAmount' : new FormControl({value : 0 , disabled : true},[Validators.required]),
-      'advancePaymentMode' : new FormControl('CARD',[Validators.required]),
-      'particulars' : new FormControl(''),
-    });
-    this.items = [];
-    this.products = [];
+
+    let action = this.route.snapshot.params['action'];
+    if(action === "edit")
+    {
+      let order = this.editOrderService.getRegularOrder();
+      console.log(order);
+      this.regularOrderForm = new FormGroup({
+        'totalAmount' : new FormControl({value : order['totalAmount'] , disabled : true},[Validators.required]),
+        'advanceAmount' : new FormControl(order['advanceAmount'] , [Validators.required]),
+        'balanceAmount' : new FormControl({value : order['balanceAmount'] , disabled : true},[Validators.required]),
+        'advancePaymentMode' : new FormControl(order['advancePaymentMode'],[Validators.required]),
+        'particulars' : new FormControl(order['particulars']),
+      });
+      this.items = [];
+      this.items = order['items'];
+      this.products = [...this.items];
+    }
+    else
+    {
+      this.regularOrderForm = new FormGroup({
+        'totalAmount' : new FormControl({value : 0 , disabled : true},[Validators.required]),
+        'advanceAmount' : new FormControl(null , [Validators.required]),
+        'balanceAmount' : new FormControl({value : 0 , disabled : true},[Validators.required]),
+        'advancePaymentMode' : new FormControl('CARD',[Validators.required]),
+        'particulars' : new FormControl(''),
+      });
+      this.items = [];
+      this.products = [];
+    }
+
     this.paymentOptions = [{'name' : 'CARD'},{'name' : 'ONLINE'},{'name' : 'CASH'}];
     this.loadInventoryItems();
 
@@ -239,13 +261,28 @@ export class RegularOrderFormComponent implements OnInit {
       ...regularOrderInfo
     };
 
-    this.apiService.addRegularOrder(regularOrder).subscribe((orderId)=>{
-      this.isLoading = false;
-      // this.sendWhatsapp(orderId);
-      this.router.navigate(['/']);
-      this.apiService.sendWhatsapp(orderId,true);
-      sessionStorage.clear();
-    })
+    let action = this.route.snapshot.params['action'];
+    if(action === "edit")
+    {
+      let order = this.editOrderService.getRegularOrder();
+      this.apiService.addRegularOrder(regularOrder,true,order['orderKey']).subscribe((orderId)=>{
+        this.isLoading = false;
+        // this.sendWhatsapp(orderId);
+        this.router.navigate(['/']);
+        this.apiService.sendWhatsapp(orderId,true);
+        sessionStorage.clear();
+      });
+    }
+    else
+    {
+      this.apiService.addRegularOrder(regularOrder,false,"").subscribe((orderId)=>{
+        this.isLoading = false;
+        // this.sendWhatsapp(orderId);
+        this.router.navigate(['/']);
+        this.apiService.sendWhatsapp(orderId,true);
+        sessionStorage.clear();
+      });
+    }    
   }
 
   deleteProduct(product:any)
@@ -274,22 +311,22 @@ export class RegularOrderFormComponent implements OnInit {
     this.apiService.updateOrder(selectedDate , orderKey , regularOrderInfo).subscribe(()=>{
       this.isLoading = false;
       this.router.navigate(['/']);
-      this.apiService.sendUpdateOrderWhatsapp(orderKey , true);
+      this.apiService.sendUpdateOrderWhatsapp(orderKey , true , true);
       sessionStorage.clear();
       //send whatsapp here.
     });
   }
 
-  markAsPrepared()
-  {
-    this.isLoading = true;
-    let selectedDate = this.route.snapshot.params['date'];
-    let orderKey = this.route.snapshot.params['key'];
-    this.apiService.updateOrder(selectedDate,orderKey,{'status' : "P"}).subscribe(()=>{
-      this.loadOnEditMode(selectedDate,orderKey);
-      sessionStorage.clear();
-    });
-  }
+  // markAsPrepared()
+  // {
+  //   this.isLoading = true;
+  //   let selectedDate = this.route.snapshot.params['date'];
+  //   let orderKey = this.route.snapshot.params['key'];
+  //   this.apiService.updateOrder(selectedDate,orderKey,{'status' : "P"}).subscribe(()=>{
+  //     this.loadOnEditMode(selectedDate,orderKey);
+  //     sessionStorage.clear();
+  //   });
+  // }
 
   getDeliveryDate(date:string)
   {

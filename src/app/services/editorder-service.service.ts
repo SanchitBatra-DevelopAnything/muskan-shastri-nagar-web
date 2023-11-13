@@ -10,13 +10,23 @@ export class EditorderServiceService {
   selectedRegularOrder:any;
   selectedCustomOrder:any;
 
-  setRegularOrder(order:any)
+  setRegularOrder(order:any , orderKey:any)
   {
-    this.selectedRegularOrder = order;
+    this.selectedRegularOrder = {...order , 'orderKey' : orderKey};
   }
 
-  setCustomOrder(order:any)
+  getRegularOrder()
   {
-    this.selectedCustomOrder = order;
+    return this.selectedRegularOrder;
+  }
+
+  setCustomOrder(order:any , orderKey : any)
+  {
+    this.selectedCustomOrder = {...order , 'orderKey' : orderKey};
+  }
+
+  getCustomOrder()
+  {
+    return this.selectedCustomOrder;
   }
 }

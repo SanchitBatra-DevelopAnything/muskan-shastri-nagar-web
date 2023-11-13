@@ -40,13 +40,17 @@ export class ApiService {
     return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'.json',modifiedOrder);
   }
 
-  public addRegularOrder(order:any) : Observable<any> {
+  public addRegularOrder(order:any , isEdit:boolean,orderKey:string) : Observable<any> {
     let deliveryDate = order.deliveryDate;
     let dateSplitter = deliveryDate.split("-");
     let date = dateSplitter[2];
     let month = dateSplitter[1];
     let year = dateSplitter[0];
     let modifiedOrder = {...order , 'orderType' : "regular" , 'status' : "ND" , "cakesSeenBy" : "" , "snacksSeenBy" : ""};
+    if(isEdit)
+    {
+      return this.http.put('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'/'+orderKey+'.json',modifiedOrder);
+    }
     return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'.json',modifiedOrder);
   }
 
@@ -89,7 +93,7 @@ export class ApiService {
     }
   }
 
-  public sendUpdateOrderWhatsapp(orderKey:any , isRegular:boolean)
+  public sendUpdateOrderWhatsapp(orderKey:any , isRegular:boolean , isEdit:boolean)
   {
     let mobile = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").Contact;
     let name = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").customerName;
