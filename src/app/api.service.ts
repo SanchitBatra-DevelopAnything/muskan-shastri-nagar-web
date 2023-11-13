@@ -54,7 +54,7 @@ export class ApiService {
     return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'.json',modifiedOrder);
   }
 
-  public sendWhatsapp(orderId:any , isRegular:boolean)
+  public sendWhatsapp(orderId:any , isRegular:boolean , isEdit:boolean=false)
   {
     let customerInfo = JSON.parse(sessionStorage.getItem("customerInfo")+"");
     let customerOrderDetails = isRegular ? JSON.parse(sessionStorage.getItem("regularOrderDetails")+"") : JSON.parse(sessionStorage.getItem("customOrderDetails")+"");
@@ -79,8 +79,12 @@ export class ApiService {
     let baseUrl = allDetails.split("#")[0];
     allDetails = baseUrl+`#/detail/${deliveryDate1}/${id}`;
 
-
-    let message = `Hi ${name},\nYour order with ID : ${id} is accepted.\nPlease find details.\n\nTotal:Rs.${total}\nAdvance:Rs.${advance}\nBalance:Rs.${balance}\n\nBooked On:${bookingDate}\nDeliver Date:${deliveryDate}\nDelivery Time:${deliveryTime}\nOther Details:${allDetails}\n\nThanks for ordering from Muskan Bakers And Sweets`;
+    let action = "updated";
+    if(!isEdit)
+    {
+      action = "accepted";
+    }    
+    let message = `Hi ${name},\nYour order with ID : ${id} is ${action}.\nPlease find details.\n\nTotal:Rs.${total}\nAdvance:Rs.${advance}\nBalance:Rs.${balance}\n\nBooked On:${bookingDate}\nDeliver Date:${deliveryDate}\nDelivery Time:${deliveryTime}\nOther Details:${allDetails}\n\nNOTE : ORDER WILL NOT BE CANCELLED OR POSTPONED AFTER 2HRS OF BOOKING.\n\nThanks for ordering from Muskan Bakers And Sweets`;
     if(localStorage.getItem('on') == "TAB")
     {
       console.log("TAB SE MESSAGE GAYA!");

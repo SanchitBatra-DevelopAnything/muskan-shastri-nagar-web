@@ -265,11 +265,12 @@ export class RegularOrderFormComponent implements OnInit {
     if(action === "edit")
     {
       let order = this.editOrderService.getRegularOrder();
-      this.apiService.addRegularOrder(regularOrder,true,order['orderKey']).subscribe((orderId)=>{
+      //this is actually editiing the order.
+      this.apiService.addRegularOrder(regularOrder,true,order['orderKey']).subscribe((_)=>{
         this.isLoading = false;
         // this.sendWhatsapp(orderId);
+        this.apiService.sendWhatsapp({'name' : order['orderKey']},true,true);
         this.router.navigate(['/']);
-        this.apiService.sendWhatsapp(orderId,true);
         sessionStorage.clear();
       });
     }
@@ -279,7 +280,7 @@ export class RegularOrderFormComponent implements OnInit {
         this.isLoading = false;
         // this.sendWhatsapp(orderId);
         this.router.navigate(['/']);
-        this.apiService.sendWhatsapp(orderId,true);
+        this.apiService.sendWhatsapp(orderId,true,false);
         sessionStorage.clear();
       });
     }    
