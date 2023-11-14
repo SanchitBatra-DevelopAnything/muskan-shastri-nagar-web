@@ -21,7 +21,7 @@ export class OrderTypeSelectionComponent implements OnInit {
   {
     if(orderType == "CUSTOM")
     {
-      this.router.navigate(['/order/CUSTOM']);
+      this.router.navigate(['/order/CUSTOM/new']);
     }
     else
     {
