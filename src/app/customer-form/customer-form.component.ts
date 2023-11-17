@@ -26,6 +26,10 @@ export class CustomerFormComponent implements OnInit {
     if(this.action==="edit")
     {
       let order = this.editOrderService.getRegularOrder();
+      if(order==null)
+      {
+        order = this.editOrderService.getCustomOrder();
+      }
       this.customerForm = new FormGroup({
         'customerName' : new FormControl(order['customerName'],[Validators.required]),
         'Address' : new FormControl(order['Address']),

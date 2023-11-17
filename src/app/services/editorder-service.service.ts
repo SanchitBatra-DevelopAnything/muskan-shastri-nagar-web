@@ -12,6 +12,7 @@ export class EditorderServiceService {
 
   setRegularOrder(order:any , orderKey:any)
   {
+    this.selectedCustomOrder = null;
     this.selectedRegularOrder = {...order , 'orderKey' : orderKey};
   }
 
@@ -22,6 +23,7 @@ export class EditorderServiceService {
 
   setCustomOrder(order:any , orderKey : any)
   {
+    this.selectedRegularOrder = null;
     this.selectedCustomOrder = {...order , 'orderKey' : orderKey};
   }
 

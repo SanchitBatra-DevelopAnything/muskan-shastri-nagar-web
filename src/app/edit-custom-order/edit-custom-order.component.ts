@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { throws } from 'assert';
 import { ApiService } from '../api.service';
+import { EditorderServiceService } from '../services/editorder-service.service';
 
 @Component({
   selector: 'app-edit-custom-order',
@@ -22,7 +23,7 @@ export class EditCustomOrderComponent implements OnInit {
 
 
 
-  constructor(private route : ActivatedRoute , private apiService:ApiService) { }
+  constructor(private route : ActivatedRoute , private apiService:ApiService,private editOrderService:EditorderServiceService,private router:Router) { }
 
   ngOnInit(): void {
     let key = this.route.snapshot.params['key'];
@@ -115,6 +116,7 @@ export class EditCustomOrderComponent implements OnInit {
         this.isPrepared = false;
         this.isDelivered = false;
       }
+      this.editOrderService.setCustomOrder(order,key);
       this.isLoading = false;
       this.isLoading = false;
     });
@@ -123,6 +125,11 @@ export class EditCustomOrderComponent implements OnInit {
   getDeliveryDate(date:string)
   {
     return this.apiService.getUserFormatDate(date);
+  }
+
+  editOrder()
+  {
+    this.router.navigate(['order/CUSTOM/edit']);
   }
 
 

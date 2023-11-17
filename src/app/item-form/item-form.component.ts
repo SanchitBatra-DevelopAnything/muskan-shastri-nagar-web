@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, Observable } from 'rxjs';
 import { ApiService } from '../api.service';
+import { EditorderServiceService } from '../services/editorder-service.service';
 import { UtilityService } from '../services/utility.service';
 
 @Component({
@@ -23,22 +24,45 @@ export class ItemFormComponent implements OnInit {
   paymentOptions:any;
 
 
-  constructor(private storage : AngularFireStorage,private utilityService : UtilityService,private apiService : ApiService,private router:Router) { }
+  constructor(private storage : AngularFireStorage,private utilityService : UtilityService,private apiService : ApiService,private router:Router,private route:ActivatedRoute,private editOrderService:EditorderServiceService) { }
 
   ngOnInit(): void {
-    this.itemForm = new FormGroup({
-      'imgUrl' : new FormControl(''),
-      'photoUrl' : new FormControl('not-uploaded'),
-      'weight' : new FormControl(1,[Validators.required]),
-      'flavour' : new FormControl(null , [Validators.required]),
-      'totalAmount' : new FormControl(null,[Validators.required]),
-      'balanceAmount' : new FormControl(null,[Validators.required]),
-      'advanceAmount' : new FormControl(null,[Validators.required]),
-      'message' : new FormControl(''),
-      'particulars' : new FormControl(''),
-      'advancePaymentMode' : new FormControl('CARD' , [Validators.required]),
-    });
-
+    let action = this.route.snapshot.params['action'];
+    if(action === "edit")
+    {
+      let order = this.editOrderService.getCustomOrder();
+      console.log(order);
+      this.itemForm = new FormGroup({
+        'imgUrl' : new FormControl(order['imgUrl']),
+        'photoUrl' : new FormControl(order['photoUrl']),
+        'weight' : new FormControl(order['weight'],[Validators.required]),
+        'flavour' : new FormControl(order['flavour'] , [Validators.required]),
+        'totalAmount' : new FormControl(order['totalAmount'],[Validators.required]),
+        'balanceAmount' : new FormControl(order['balanceAmount'],[Validators.required]),
+        'advanceAmount' : new FormControl(order['advanceAmount'],[Validators.required]),
+        'message' : new FormControl(order['message']),
+        'particulars' : new FormControl(order['particulars']),
+        'advancePaymentMode' : new FormControl(order['advancePaymentMode'] , [Validators.required]),
+      });
+      this.imageUrl=order['imgUrl'];
+      this.photoUrl=order['photoUrl'];
+    }
+    else
+    {
+      this.itemForm = new FormGroup({
+        'imgUrl' : new FormControl(''),
+        'photoUrl' : new FormControl('not-uploaded'),
+        'weight' : new FormControl(1,[Validators.required]),
+        'flavour' : new FormControl(null , [Validators.required]),
+        'totalAmount' : new FormControl(null,[Validators.required]),
+        'balanceAmount' : new FormControl(null,[Validators.required]),
+        'advanceAmount' : new FormControl(null,[Validators.required]),
+        'message' : new FormControl(''),
+        'particulars' : new FormControl(''),
+        'advancePaymentMode' : new FormControl('CARD' , [Validators.required]),
+      });  
+    }
+    
     this.paymentOptions = [{'name' : 'CARD'},{'name' : 'ONLINE'},{'name' : 'CASH'}];
 
     if(!this.firstTime())

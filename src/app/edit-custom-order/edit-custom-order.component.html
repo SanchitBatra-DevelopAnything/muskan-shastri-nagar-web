@@ -11,6 +11,8 @@
     
     
         <button *ngIf = "!isPrepared && type == 'owner'" class = "btn btn-lg btn-danger" style = "margin: 10px;" (click) = "cancelOrder()">CANCEL</button>
+        <button *ngIf = "!isPrepared && type == 'owner'" class = "btn btn-lg btn-primary" style = "margin: 10px;" (click) = "editOrder()">EDIT ORDER</button>
+        
     
     </div>
     
