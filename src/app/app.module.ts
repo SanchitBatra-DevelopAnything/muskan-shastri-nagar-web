@@ -32,6 +32,7 @@ import { EditCustomOrderComponent } from './edit-custom-order/edit-custom-order.
 import { KotPrintingComponent } from './kot-printing/kot-printing.component';
 import { MonthlySalesComponent } from './monthly-sales/monthly-sales.component';
 import { DeactivationGuarded, PaymentComponent } from './payment/payment.component';
+import { HistoryViewerComponent } from './history-viewer/history-viewer.component';
 
 const appRoutes : Routes = [
   {path : '' , component : OrderTypeSelectionComponent,pathMatch:"full"},
@@ -43,6 +44,7 @@ const appRoutes : Routes = [
   {path : 'editOrder/:date/custom/:key/:type' , component : EditCustomOrderComponent},
   {path : 'detail/:date/:orderKey' , component : OrderDetailComponent},
   {path : 'monthlySales' , component : MonthlySalesComponent},
+  {path : 'history/:orderKey' , component : HistoryViewerComponent},
   {path : 'payment/:type' , component : PaymentComponent , canDeactivate: [(comp: DeactivationGuarded) => comp.canDeactivate()],},
 ]
 @NgModule({
@@ -64,6 +66,7 @@ const appRoutes : Routes = [
     KotPrintingComponent,
     MonthlySalesComponent,
     PaymentComponent,
+    HistoryViewerComponent,
   ],
   imports: [
     BrowserModule,

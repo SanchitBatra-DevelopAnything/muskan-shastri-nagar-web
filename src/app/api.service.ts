@@ -251,4 +251,9 @@ export class ApiService {
   {
     return this.http.post("https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/orderHistory/"+orderKey+".json" , order);
   }
+
+  public getHistory(orderKey:string):Observable<any>
+  {
+    return this.http.get("https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/orderHistory/"+orderKey+".json");
+  }
 }

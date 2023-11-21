@@ -150,4 +150,9 @@ export class KotPrintingComponent implements OnInit {
     this.router.navigate(['order/REGULAR/edit']);
   }
 
+  goToHistory()
+  {
+    this.router.navigate(['history/'+this.orderKey]);
+  }
+
 }
