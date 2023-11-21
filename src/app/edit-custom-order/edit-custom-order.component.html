@@ -13,8 +13,11 @@
         <button *ngIf = "!isPrepared && type == 'owner'" class = "btn btn-lg btn-danger" style = "margin: 10px;" (click) = "cancelOrder()">CANCEL</button>
         <button *ngIf = "!isPrepared && type == 'owner'" class = "btn btn-lg btn-primary" style = "margin: 10px;" (click) = "editOrder()">EDIT ORDER</button>
         
+        
+        
     
     </div>
+    <button *ngIf = "type == 'owner'" class = "btn btn-lg btn-success" style = "margin: 10px;" (click) = "viewHistory()">VIEW HISTORY</button>
     
     <p *ngIf = "isCancelled && !isDelivered && !isPrepared" style = "color:red; font-weight: 300; text-align: center;">ORDER IS CANCELLED.</p>
     <p *ngIf = "isPrepared" style = "color:green; font-weight: 300; text-align: center;">ORDER IS PREPARED. READY TO DELIVER.</p>

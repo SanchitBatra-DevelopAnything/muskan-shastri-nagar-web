@@ -132,5 +132,10 @@ export class EditCustomOrderComponent implements OnInit {
     this.router.navigate(['order/CUSTOM/edit']);
   }
 
+  viewHistory()
+  {
+    this.router.navigate(['history/' + this.route.snapshot.params['key']])
+  }
+
 
 }
