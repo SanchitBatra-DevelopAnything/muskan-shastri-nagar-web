@@ -23,7 +23,8 @@ export class HistoryViewerComponent implements OnInit {
     this.orderKey = this.route.snapshot.params['orderKey'];
     this.isLoading = true;
     this.apiService.getHistory(this.orderKey).subscribe((historyObject:any)=>{
-      this.history = Object.values(historyObject);
+      this.history = Object.values(historyObject).reverse();
+
       this.itemsArrays =[];
       for(let i=0;i<this.history.length;i++)
       {
