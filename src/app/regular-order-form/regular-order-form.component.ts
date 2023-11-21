@@ -209,10 +209,13 @@ export class RegularOrderFormComponent implements OnInit {
     this.selectedItem = {};
     this.showPoundInput = false;
     this.updateTotal();
-    this.regularOrderForm.patchValue({
-      'advanceAmount' : 0,
-      'balanceAmount' : this.regularOrderForm.getRawValue().totalAmount,
-    });
+    // this.regularOrderForm.patchValue({
+    //   'advanceAmount' : 0,
+    //   'balanceAmount' : this.regularOrderForm.getRawValue().totalAmount,
+    // });
+     this.regularOrderForm.patchValue({
+       'balanceAmount' : this.regularOrderForm.getRawValue().totalAmount - this.regularOrderForm.getRawValue().advanceAmount,
+     });
   }
 
   updateTotal()
@@ -296,6 +299,9 @@ export class RegularOrderFormComponent implements OnInit {
       return JSON.stringify(p)!=JSON.stringify(product);
     });
     this.updateTotal();
+    this.regularOrderForm.patchValue({
+      'balanceAmount' : this.regularOrderForm.getRawValue().totalAmount - this.regularOrderForm.getRawValue().advanceAmount,
+    });
   }
 
   updateBalance(advancePaid : any)
