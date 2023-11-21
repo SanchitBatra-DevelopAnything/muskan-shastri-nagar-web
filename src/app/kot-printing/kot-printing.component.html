@@ -26,7 +26,7 @@
                     <h4>Advance : Rs.{{order.advanceAmount}}</h4>
                 </div>
                 <div class="col-xs-4" *ngIf="showEditButton">
-                    <button class = "btn btn-primary" (click)="editOrder()">EDIT ORDER!</button>
+                    <button *ngIf="order.status!='D' && order.status!='C'" class = "btn btn-primary" (click)="editOrder()">EDIT ORDER!</button>
                     <button class = "btn btn-success" (click)="goToHistory()">VIEW HISTORY</button>
                 </div>
             </div>
