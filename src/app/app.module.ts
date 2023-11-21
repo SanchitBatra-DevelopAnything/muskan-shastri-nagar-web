@@ -33,6 +33,7 @@ import { KotPrintingComponent } from './kot-printing/kot-printing.component';
 import { MonthlySalesComponent } from './monthly-sales/monthly-sales.component';
 import { DeactivationGuarded, PaymentComponent } from './payment/payment.component';
 import { HistoryViewerComponent } from './history-viewer/history-viewer.component';
+import { JsonParsePipe } from './pipes/json-parse.pipe';
 
 const appRoutes : Routes = [
   {path : '' , component : OrderTypeSelectionComponent,pathMatch:"full"},
@@ -67,6 +68,7 @@ const appRoutes : Routes = [
     MonthlySalesComponent,
     PaymentComponent,
     HistoryViewerComponent,
+    JsonParsePipe,
   ],
   imports: [
     BrowserModule,

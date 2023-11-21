@@ -1,1 +1,25 @@
-<p>history-viewer works!</p>
+<div class="container">
+    <div class="jumbotron">
+        <h4 style = "text-align: center; color: forestgreen;">Order history viewer!</h4>
+        <h6 style = "text-align: center;">Check all the changes made to this order here.</h6>
+        <h6 style = "color: green;">Please note : Delivery Type 0 means Self Delivery , and 1 means Home delivery</h6>
+        <hr>
+        <div *ngFor="let order of history;let i=index">
+            <div *ngFor="let detail of order | keyvalue">
+                <img *ngIf="detail.key=='imgUrl' || (detail.key=='photoUrl' && detail.value!='not-uploaded');else elseBlock" src = {{detail.value}} style = "height: 250px; width: 250px;">
+                <ng-template #elseBlock>
+                    <ng-template #withoutItemBlock>
+                        <b>{{detail.key}} </b> : {{detail.value}}
+                    </ng-template>
+                    <ul *ngIf="detail.key=='items';else withoutItemBlock">
+                        <b>Items : </b>
+                        <li *ngFor="let item of itemsArrays[i]">
+                            {{item.name}} x {{item.quantity}}
+                        </li>
+                    </ul>
+                </ng-template>
+            </div>
+            <hr style = "border: solid 1px red;">
+        </div>
+    </div>
+</div>
