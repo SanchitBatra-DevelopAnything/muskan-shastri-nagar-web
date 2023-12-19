@@ -41,6 +41,7 @@ export class CustomGiftboxFormComponent implements OnInit {
     this.form.patchValue({
       'totalAmount' : customOrderInfo.totalAmount,
       'balanceAmount' : customOrderInfo.balanceAmount,
+      'advanceAmount' : customOrderInfo.advanceAmount,
       'advancePaymentMode' : customOrderInfo.advancePaymentMode,
       'particulars' : customOrderInfo.particulars
     });
@@ -102,7 +103,6 @@ export class CustomGiftboxFormComponent implements OnInit {
             this.router.navigate(['/']);
         });
       });
-     
   }
 
 }

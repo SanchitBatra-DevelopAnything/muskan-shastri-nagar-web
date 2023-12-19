@@ -7,6 +7,7 @@
 </div>
 
 <div class="container" *ngIf="formNumber != 1">
-    <app-item-form *ngIf = "isCustomOrderSelected"></app-item-form>
-    <app-regular-order-form *ngIf = "!isCustomOrderSelected"></app-regular-order-form>
+    <app-item-form *ngIf = "isCustomOrderSelected && !isCounterOrder && !isGiftOrder"></app-item-form>
+    <app-custom-giftbox-form *ngIf = "isGiftOrder && !isCustomOrderSelected && !isCounterOrder"></app-custom-giftbox-form>
+    <app-regular-order-form *ngIf = "!isCustomOrderSelected && !isGiftOrder"></app-regular-order-form>
 </div>

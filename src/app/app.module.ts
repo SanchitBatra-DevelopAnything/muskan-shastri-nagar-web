@@ -34,7 +34,6 @@ import { MonthlySalesComponent } from './monthly-sales/monthly-sales.component';
 import { DeactivationGuarded, PaymentComponent } from './payment/payment.component';
 import { HistoryViewerComponent } from './history-viewer/history-viewer.component';
 import { JsonParsePipe } from './pipes/json-parse.pipe';
-import { CustomGiftBoxFormComponent } from './custom-gift-box-form/custom-gift-box-form.component';
 import { CustomGiftboxFormComponent } from './custom-giftbox-form/custom-giftbox-form.component';
 
 const appRoutes : Routes = [
@@ -71,7 +70,6 @@ const appRoutes : Routes = [
     PaymentComponent,
     HistoryViewerComponent,
     JsonParsePipe,
-    CustomGiftBoxFormComponent,
     CustomGiftboxFormComponent,
   ],
   imports: [
