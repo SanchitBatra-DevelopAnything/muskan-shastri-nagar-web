@@ -44,6 +44,20 @@ export class ApiService {
     return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'.json',modifiedOrder);
   }
 
+  public addGiftOrder(order:any , isEdit:boolean , orderKey:string) : Observable<any> {
+    let deliveryDate = order.deliveryDate;
+    let dateSplitter = deliveryDate.split("-");
+    let date = dateSplitter[2];
+    let month = dateSplitter[1];
+    let year = dateSplitter[0];
+    let modifiedOrder = {...order , 'orderType' : "gift" , 'status' : "ND" , "cakesSeenBy" : "" , "snacksSeenBy" : ""};
+    if(isEdit)
+    {
+      return this.http.put('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'/'+orderKey+'.json',modifiedOrder)
+    }
+    return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'.json',modifiedOrder);
+  }
+
   public addRegularOrder(order:any , isEdit:boolean,orderKey:string) : Observable<any> {
     let deliveryDate = order.deliveryDate;
     let dateSplitter = deliveryDate.split("-");
@@ -58,10 +72,17 @@ export class ApiService {
     return this.http.post('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'.json',modifiedOrder);
   }
 
-  public sendWhatsapp(orderId:any , isRegular:boolean , isEdit:boolean=false)
+  public sendWhatsappForGift(orderId : any)
   {
     let customerInfo = JSON.parse(sessionStorage.getItem("customerInfo")+"");
-    let customerOrderDetails = isRegular ? JSON.parse(sessionStorage.getItem("regularOrderDetails")+"") : JSON.parse(sessionStorage.getItem("customOrderDetails")+"");
+    let giftDetails = JSON.parse(sessionStorage.getItem("giftOrderDetails")+"");
+
+  }
+
+  public sendWhatsapp(orderId:any , orderType:string , isEdit:boolean=false)
+  {
+    let customerInfo = JSON.parse(sessionStorage.getItem("customerInfo")+"");
+    let customerOrderDetails = orderType == "regular" ? JSON.parse(sessionStorage.getItem("regularOrderDetails")+"") : orderType == "custom" ? JSON.parse(sessionStorage.getItem("customOrderDetails")+"") : orderType == "gift" ? JSON.parse(sessionStorage.getItem("giftOrderDetails")+"") : null;
     let name = customerInfo.customerName;
     let phoneNumber = customerInfo.Contact;
 

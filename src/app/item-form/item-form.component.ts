@@ -193,7 +193,7 @@ export class ItemFormComponent implements OnInit {
         this.apiService.addHistory(customOrder , order['orderKey']).subscribe((_)=>{
           this.isLoading = false;
           let action = this.route.snapshot.params['action'];
-          this.apiService.sendWhatsapp({'name' : order['orderKey']},false,true);
+          this.apiService.sendWhatsapp({'name' : order['orderKey']},"custom",true);
           sessionStorage.clear();
           this.router.navigate(['/']);
         });
@@ -205,7 +205,7 @@ export class ItemFormComponent implements OnInit {
         //sessionStorage.clear();
         this.apiService.addHistory(customOrder , orderId['name']).subscribe((_)=>{
             this.isLoading = false;
-            this.apiService.sendWhatsapp(orderId,false,false);
+            this.apiService.sendWhatsapp(orderId,"custom",false);
             sessionStorage.clear();
             this.router.navigate(['/']);
         });

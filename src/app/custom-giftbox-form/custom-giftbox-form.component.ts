@@ -94,11 +94,11 @@ export class CustomGiftboxFormComponent implements OnInit {
     // }
     
     
-      this.apiService.addCustomOrder(giftOrder,false,"").subscribe((orderId)=>{
+      this.apiService.addGiftOrder(giftOrder,false,"").subscribe((orderId)=>{
         //sessionStorage.clear();
         this.apiService.addHistory(giftOrder , orderId['name']).subscribe((_)=>{
             this.isLoading = false;
-            this.apiService.sendWhatsapp(orderId,false,false);
+            this.apiService.sendWhatsapp({'name' : orderId['name']} , "gift" , false);
             sessionStorage.clear();
             this.router.navigate(['/']);
         });

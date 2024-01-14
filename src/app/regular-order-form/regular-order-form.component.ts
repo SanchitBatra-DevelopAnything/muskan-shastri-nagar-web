@@ -273,7 +273,7 @@ export class RegularOrderFormComponent implements OnInit {
         this.apiService.addHistory(regularOrder , order['orderKey']).subscribe((_:any)=>{
           this.isLoading = false;
           // this.sendWhatsapp(orderId);
-          this.apiService.sendWhatsapp({'name' : order['orderKey']},true,true);
+          this.apiService.sendWhatsapp({'name' : order['orderKey']},"regular",true);
           this.router.navigate(['/']);
           sessionStorage.clear();
         });
@@ -286,7 +286,7 @@ export class RegularOrderFormComponent implements OnInit {
           this.isLoading = false;
         // this.sendWhatsapp(orderId);
         this.router.navigate(['/']);
-        this.apiService.sendWhatsapp(orderId,true,false);
+        this.apiService.sendWhatsapp(orderId,"regular",false);
         sessionStorage.clear();
         })
       });
