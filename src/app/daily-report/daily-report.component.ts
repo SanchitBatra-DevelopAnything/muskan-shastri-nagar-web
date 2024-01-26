@@ -131,6 +131,13 @@ export class DailyReportComponent implements OnInit {
     this.router.navigate(['editOrder/'+deliveryDate+'/custom/'+key+"/"+this.type]);
   }
 
+  editGiftOrder(order:any , index:any)
+  {
+    let deliveryDate = order.deliveryDate;
+    let key = this.giftOrderKeys[index];
+    this.router.navigate(['editOrder/'+deliveryDate+'/gift/'+key+"/"+this.type]);
+  }
+
   filterOrders()
   {
     this.isLoading = true;
@@ -138,6 +145,8 @@ export class DailyReportComponent implements OnInit {
     this.activeOrderKeys = [];
     this.customOrders = [];
     this.customOrderKeys = [];
+    this.giftOrders = [];
+    this.giftOrderKeys = [];
     this.apiService.getActiveOrders(this.selectedDate).subscribe((orders)=>{
       if(orders == null)
       {
@@ -147,6 +156,8 @@ export class DailyReportComponent implements OnInit {
         this.activeOrders = [];
         this.customOrderKeys = [];
         this.customOrders = [];
+        this.giftOrders = [];
+        this.giftOrderKeys = [];
         return;
       }
       let temp_activeOrders : any = Object.values(orders);
@@ -157,6 +168,11 @@ export class DailyReportComponent implements OnInit {
         {
           this.customOrders.push(temp_activeOrders[i]);
           this.customOrderKeys.push(temp_activeOrderKeys[i]);
+        }
+        else if(temp_activeOrders[i].orderType!=null && temp_activeOrders[i].orderType.toLowerCase() === "gift")
+        {
+          this.giftOrders.push(temp_activeOrders[i]);
+          this.giftOrderKeys.push(temp_activeOrderKeys[i]);
         }
         else
         {
