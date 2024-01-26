@@ -35,6 +35,7 @@ import { DeactivationGuarded, PaymentComponent } from './payment/payment.compone
 import { HistoryViewerComponent } from './history-viewer/history-viewer.component';
 import { JsonParsePipe } from './pipes/json-parse.pipe';
 import { CustomGiftboxFormComponent } from './custom-giftbox-form/custom-giftbox-form.component';
+import { EditGiftOrderComponent } from './edit-gift-order/edit-gift-order.component';
 
 const appRoutes : Routes = [
   {path : '' , component : OrderTypeSelectionComponent,pathMatch:"full"},
@@ -44,6 +45,7 @@ const appRoutes : Routes = [
   {path : 'viewOrders/:type' , component : DailyReportComponent},
   {path : 'editOrder/:date/regular/:key/:type' , component : KotPrintingComponent},
   {path : 'editOrder/:date/custom/:key/:type' , component : EditCustomOrderComponent},
+  {path : 'editOrder/:date/gift/:key/:type' , component : EditGiftOrderComponent},
   {path : 'detail/:date/:orderKey' , component : OrderDetailComponent},
   {path : 'monthlySales' , component : MonthlySalesComponent},
   {path : 'history/:orderKey' , component : HistoryViewerComponent},
@@ -71,6 +73,7 @@ const appRoutes : Routes = [
     HistoryViewerComponent,
     JsonParsePipe,
     CustomGiftboxFormComponent,
+    EditGiftOrderComponent,
   ],
   imports: [
     BrowserModule,
