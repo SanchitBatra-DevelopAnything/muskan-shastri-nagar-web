@@ -14,6 +14,8 @@ export class DailyReportComponent implements OnInit {
   activeOrderKeys : any = [];
   customOrders  : any= [];
   customOrderKeys : any = [];
+  giftOrders : any = [];
+  giftOrderKeys:any = [];
   isLoading : boolean;
   todaysDate : string;
   selectedDate: any;
@@ -66,6 +68,8 @@ export class DailyReportComponent implements OnInit {
     this.activeOrderKeys = [];
     this.customOrders = [];
     this.customOrderKeys = [];
+    this.giftOrderKeys = [];
+    this.giftOrders = [];
     this.dirtyOrders = [];
     this.apiService.getActiveOrders(this.todaysDate).subscribe((orders)=>{
       if(orders == null)
@@ -77,6 +81,8 @@ export class DailyReportComponent implements OnInit {
         this.customOrderKeys = [];
         this.customOrders = [];
         this.dirtyOrders = [];
+        this.giftOrders = [];
+        this.giftOrderKeys = [];
         return;
       }
       let temp_activeOrders : any = Object.values(orders);
@@ -87,6 +93,11 @@ export class DailyReportComponent implements OnInit {
         {
           this.customOrders.push(temp_activeOrders[i]);
           this.customOrderKeys.push(temp_activeOrderKeys[i]);
+        }
+        else if(temp_activeOrders[i].orderType!=null && temp_activeOrders[i].orderType.toLowerCase() === "gift")
+        {
+          this.giftOrders.push(temp_activeOrders[i]);
+          this.giftOrderKeys.push(temp_activeOrderKeys[i]);
         }
         else
         {

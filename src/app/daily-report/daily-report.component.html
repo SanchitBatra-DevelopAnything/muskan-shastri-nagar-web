@@ -60,5 +60,21 @@
             <p style = "font-size:12px; font-weight: 400;">{{getStatus(order.status)}}</p>
         </div>
     </div>
+
+    <h3>Gift Orders</h3>
+    <hr>
+
+    <div class="row">
+        <div *ngFor = "let order of giftOrders; let i = index;" class = "col-md-2 col-xs-4 w3-card pointer order-card-custom" [ngClass] = "{'delivered' : order.status == 'D' , 'inprogress' : order.status == 'ND' , 'cancel' : order.status == 'C' , 'prepared' : order.status == 'P'}">
+            
+            <p style = "font-weight: bold;">{{order.customerName | uppercase}}</p>
+            <p style = "font-weight: bold;">{{order.Contact | uppercase}}</p>
+            <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>
+            
+            <hr style = "border: 1px solid black; width: 100%;">
+            <p style = "font-size:12px; font-weight: 400;">{{getStatus(order.status)}}</p>
+        </div>
+    </div>
+
     
 </div>

@@ -23,7 +23,7 @@ export class CustomGiftboxFormComponent implements OnInit {
       'balanceAmount' : new FormControl(null,[Validators.required]),
       'advanceAmount' : new FormControl(null,[Validators.required]),
       'particulars' : new FormControl(null),
-      'advancePaymentMode' : new FormControl(null , [Validators.required]),
+      'advancePaymentMode' : new FormControl('CARD' , [Validators.required]),
     });
 
     this.paymentOptions = [{'name' : 'CARD'},{'name' : 'ONLINE'},{'name' : 'CASH'}];
