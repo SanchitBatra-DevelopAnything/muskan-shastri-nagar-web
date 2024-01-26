@@ -29,6 +29,10 @@ export class CustomerFormComponent implements OnInit {
       if(order==null)
       {
         order = this.editOrderService.getCustomOrder();
+        if(order == null)
+        {
+          order= this.editOrderService.getGiftOrder();
+        }
       }
       this.customerForm = new FormGroup({
         'customerName' : new FormControl(order['customerName'],[Validators.required]),

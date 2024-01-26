@@ -1,1 +1,99 @@
-<p>edit-gift-order works!</p>
+<!--isRegularOrder hmesha false hai. chhapke kara hai , ignore karo.-->
+
+<div class = "container jumbotron" style = "margin: 10px;" style = "text-align: center;">
+    <div *ngIf = "!isDelivered && !isCancelled">
+        
+    
+    <button *ngIf= "type == 'owner'" class = "btn btn-lg btn-success" style = "margin:10px;" (click) = "showDialog()">DELIVER</button>
+    
+    
+    <button *ngIf = "!isPrepared && type == 'chef'" class = "btn btn-lg btn-primary" style = "margin:10px;" (click) = "markAsPrepared()">PREPARED</button>
+    
+    
+        <button *ngIf = "!isPrepared && type == 'owner'" class = "btn btn-lg btn-danger" style = "margin: 10px;" (click) = "cancelOrder()">CANCEL</button>
+        <button *ngIf = "!isPrepared && type == 'owner'" class = "btn btn-lg btn-primary" style = "margin: 10px;" (click) = "editOrder()">EDIT ORDER</button>
+        
+        
+        
+    
+    </div>
+    <button *ngIf = "type == 'owner'" class = "btn btn-lg btn-success" style = "margin: 10px;" (click) = "viewHistory()">VIEW HISTORY</button>
+    
+    <p *ngIf = "isCancelled && !isDelivered && !isPrepared" style = "color:red; font-weight: 300; text-align: center;">ORDER IS CANCELLED.</p>
+    <p *ngIf = "isPrepared" style = "color:green; font-weight: 300; text-align: center;">ORDER IS PREPARED. READY TO DELIVER.</p>
+    <p *ngIf = "isDelivered" style = "color: green;">ORDER IS DELIVERED.</p>
+</div>
+
+<legend style = "margin:10px;"></legend>
+
+<!--copy pasted from detailed and isRegular will always be false here.-->
+
+<div style = "text-align: center;"><h3>Order Details</h3></div>
+<div class="loader" *ngIf = "isLoading">
+
+</div>
+
+<div class = "container">
+    <div class="row" *ngIf = "type == 'owner'">
+        <div class="col-xs-12">
+            <p>Total Amount : Rs.{{loadedOrder.totalAmount}}</p>
+        </div>
+    </div>
+    <div class="row" *ngIf = "type == 'owner'">
+        <div class="col-xs-12">
+            <p>Advance Paid : Rs.{{loadedOrder.advanceAmount}}</p>
+        </div>
+    </div>
+    <div class="row" *ngIf = "type == 'owner'">
+        <div class="col-xs-12">
+            <p>Balance Amount : Rs.{{loadedOrder.balanceAmount}}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <p> Particulars : {{loadedOrder.particulars}}</p>
+        </div>
+    </div>
+
+    <legend style = "margin: 10px;"></legend>
+
+
+
+    <div class="row" *ngIf = "!isRegularOrder">
+        <h4>Delivery Date : </h4>
+        <p>{{getDeliveryDate(loadedOrder.deliveryDate)}}</p>
+    </div>
+
+    <div class="row" *ngIf = "!isRegularOrder">
+        <h4>Delivery Time : </h4>
+        <p>{{loadedOrder.deliveryTime}}</p>
+    </div>
+
+    <div class="row" *ngIf = "!isRegularOrder">
+        <h4>Booking Date : </h4>
+        <p>{{getDeliveryDate(loadedOrder.bookingDate)}}</p>
+    </div>
+
+    <div class="row" *ngIf = "!isRegularOrder">
+        <h4>Delivery Type : </h4>
+        <p>{{loadedOrder.deliveryType == 1 ? "Home Delivery" : "Self"}}</p>
+    </div>
+
+    <div class="row" *ngIf = "!isRegularOrder && loadedOrder.Address!=''">
+        <h4>Address : </h4>
+        <p>{{loadedOrder.Address}}</p>
+    </div>
+</div>
+
+<p-dialog header="Deliver To : " [(visible)]="visibleDeliveryDialog" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <div *ngIf = "!isLoading">
+        <input type = "text" style = "margin-right: 10px; height:30px;" [(ngModel)] = "deliverTo"> 
+        <button class = "btn btn-small btn-success" (click) = "deliverOrder()">OK</button>
+    </div>
+    
+    <div class="loader" *ngIf = "isLoading" style = "margin: auto;">
+
+    </div>
+</p-dialog>
+

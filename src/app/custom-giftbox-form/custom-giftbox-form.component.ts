@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { EditorderServiceService } from '../services/editorder-service.service';
 import { UtilityService } from '../services/utility.service';
 
 @Component({
@@ -15,16 +16,33 @@ export class CustomGiftboxFormComponent implements OnInit {
   isLoading:boolean = false;
   paymentOptions:any;
 
-  constructor(private utilityService:UtilityService , private route:ActivatedRoute , private apiService:ApiService , private router:Router) { }
+  constructor(private utilityService:UtilityService , private route:ActivatedRoute , private apiService:ApiService , private router:Router , private editOrderService:EditorderServiceService) { }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      'totalAmount' : new FormControl(null,[Validators.required]),
-      'balanceAmount' : new FormControl(null,[Validators.required]),
-      'advanceAmount' : new FormControl(null,[Validators.required]),
-      'particulars' : new FormControl(null),
-      'advancePaymentMode' : new FormControl('CARD' , [Validators.required]),
-    });
+    let action = this.route.snapshot.params['action'];
+    let order = this.editOrderService.getGiftOrder();
+    console.log(order);
+    if(action == "edit")
+    {
+      this.form = new FormGroup({
+        'totalAmount' : new FormControl(order['totalAmount'],[Validators.required]),
+        'balanceAmount' : new FormControl(order['balanceAmount'],[Validators.required]),
+        'advanceAmount' : new FormControl(order['advanceAmount'],[Validators.required]),
+        'particulars' : new FormControl(order['particulars']),
+        'advancePaymentMode' : new FormControl(order['advancePaymentMode'] , [Validators.required]),
+      })
+    }
+    else
+    {
+      this.form = new FormGroup({
+        'totalAmount' : new FormControl(null,[Validators.required]),
+        'balanceAmount' : new FormControl(null,[Validators.required]),
+        'advanceAmount' : new FormControl(null,[Validators.required]),
+        'particulars' : new FormControl(null),
+        'advancePaymentMode' : new FormControl('CARD' , [Validators.required]),
+      });
+    }
+    
 
     this.paymentOptions = [{'name' : 'CARD'},{'name' : 'ONLINE'},{'name' : 'CASH'}];
 
@@ -75,27 +93,26 @@ export class CustomGiftboxFormComponent implements OnInit {
       ...giftOrderInfo
     };
 
-
-    //let action = this.route.snapshot.params['action'];
-    // if(action === "edit")
-    // {
-    //   let order = this.editOrderService.getCustomOrder();
-    //   //this is actually editiing the order.
-    //   this.apiService.addCustomOrder(customOrder,true,order['orderKey']).subscribe((orderId)=>{
-    //     //sessionStorage.clear();
-    //     this.apiService.addHistory(customOrder , order['orderKey']).subscribe((_)=>{
-    //       this.isLoading = false;
-    //       let action = this.route.snapshot.params['action'];
-    //       this.apiService.sendWhatsapp({'name' : order['orderKey']},false,true);
-    //       sessionStorage.clear();
-    //       this.router.navigate(['/']);
-    //     });
-    //   });
-    // }
-    
-    
-      this.apiService.addGiftOrder(giftOrder,false,"").subscribe((orderId)=>{
+    let action = this.route.snapshot.params['action'];
+    if(action == "edit")
+    {
+      let order = this.editOrderService.getGiftOrder();
+      //this is actually editiing the order.
+      this.apiService.addGiftOrder(giftOrder,true,order['orderKey']).subscribe((orderId)=>{
         //sessionStorage.clear();
+        this.apiService.addHistory(giftOrder , order['orderKey']).subscribe((_)=>{
+          this.isLoading = false;
+          let action = this.route.snapshot.params['action'];
+          this.apiService.sendWhatsapp({'name' : order['orderKey']},"gift",true);
+          sessionStorage.clear();
+          this.router.navigate(['/']);
+        });
+      });
+
+    }
+    else
+    {
+      this.apiService.addGiftOrder(giftOrder,false,"").subscribe((orderId)=>{
         this.apiService.addHistory(giftOrder , orderId['name']).subscribe((_)=>{
             this.isLoading = false;
             this.apiService.sendWhatsapp({'name' : orderId['name']} , "gift" , false);
@@ -103,6 +120,7 @@ export class CustomGiftboxFormComponent implements OnInit {
             this.router.navigate(['/']);
         });
       });
+    }      
   }
 
 }
