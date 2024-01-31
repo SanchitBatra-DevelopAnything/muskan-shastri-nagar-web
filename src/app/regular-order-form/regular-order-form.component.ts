@@ -1,5 +1,5 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { EditorderServiceService } from '../services/editorder-service.service';
@@ -40,7 +40,7 @@ export class RegularOrderFormComponent implements OnInit {
   products:any;
   paymentOptions:any;
 
-  regularOrderForm:FormGroup;
+  regularOrderForm:UntypedFormGroup;
 
   isCancelled:boolean = false;
   isPrepared:boolean = false;
@@ -64,12 +64,12 @@ export class RegularOrderFormComponent implements OnInit {
     {
       let order = this.editOrderService.getRegularOrder();
       console.log(order);
-      this.regularOrderForm = new FormGroup({
-        'totalAmount' : new FormControl({value : order['totalAmount'] , disabled : true},[Validators.required]),
-        'advanceAmount' : new FormControl(order['advanceAmount'] , [Validators.required]),
-        'balanceAmount' : new FormControl({value : order['balanceAmount'] , disabled : true},[Validators.required]),
-        'advancePaymentMode' : new FormControl(order['advancePaymentMode'],[Validators.required]),
-        'particulars' : new FormControl(order['particulars']),
+      this.regularOrderForm = new UntypedFormGroup({
+        'totalAmount' : new UntypedFormControl({value : order['totalAmount'] , disabled : true},[Validators.required]),
+        'advanceAmount' : new UntypedFormControl(order['advanceAmount'] , [Validators.required]),
+        'balanceAmount' : new UntypedFormControl({value : order['balanceAmount'] , disabled : true},[Validators.required]),
+        'advancePaymentMode' : new UntypedFormControl(order['advancePaymentMode'],[Validators.required]),
+        'particulars' : new UntypedFormControl(order['particulars']),
       });
       this.items = [];
       this.items = order['items'];
@@ -77,12 +77,12 @@ export class RegularOrderFormComponent implements OnInit {
     }
     else
     {
-      this.regularOrderForm = new FormGroup({
-        'totalAmount' : new FormControl({value : 0 , disabled : true},[Validators.required]),
-        'advanceAmount' : new FormControl(null , [Validators.required]),
-        'balanceAmount' : new FormControl({value : 0 , disabled : true},[Validators.required]),
-        'advancePaymentMode' : new FormControl('CARD',[Validators.required]),
-        'particulars' : new FormControl(''),
+      this.regularOrderForm = new UntypedFormGroup({
+        'totalAmount' : new UntypedFormControl({value : 0 , disabled : true},[Validators.required]),
+        'advanceAmount' : new UntypedFormControl(null , [Validators.required]),
+        'balanceAmount' : new UntypedFormControl({value : 0 , disabled : true},[Validators.required]),
+        'advancePaymentMode' : new UntypedFormControl('CARD',[Validators.required]),
+        'particulars' : new UntypedFormControl(''),
       });
       this.items = [];
       this.products = [];

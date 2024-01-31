@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { EditorderServiceService } from '../services/editorder-service.service';
 import { UtilityService } from '../services/utility.service';
@@ -11,7 +11,7 @@ import { UtilityService } from '../services/utility.service';
 })
 export class CustomerFormComponent implements OnInit {
 
-  customerForm:FormGroup;
+  customerForm:UntypedFormGroup;
   today:any;
   @Input()
   isCounterOrder:boolean;
@@ -34,26 +34,26 @@ export class CustomerFormComponent implements OnInit {
           order= this.editOrderService.getGiftOrder();
         }
       }
-      this.customerForm = new FormGroup({
-        'customerName' : new FormControl(order['customerName'],[Validators.required]),
-        'Address' : new FormControl(order['Address']),
-        'Contact' : new FormControl(order['Contact'],[Validators.required]),
-        'bookingDate' : new FormControl(order['bookingDate'],[Validators.required]),
-        'deliveryDate' : new FormControl(order['deliveryDate'] , [Validators.required]),
-        'deliveryTime' : new FormControl(order['deliveryTime'],[Validators.required]),
-        'deliveryType' : new FormControl(order['deliveryType'],[Validators.required]),
+      this.customerForm = new UntypedFormGroup({
+        'customerName' : new UntypedFormControl(order['customerName'],[Validators.required]),
+        'Address' : new UntypedFormControl(order['Address']),
+        'Contact' : new UntypedFormControl(order['Contact'],[Validators.required]),
+        'bookingDate' : new UntypedFormControl(order['bookingDate'],[Validators.required]),
+        'deliveryDate' : new UntypedFormControl(order['deliveryDate'] , [Validators.required]),
+        'deliveryTime' : new UntypedFormControl(order['deliveryTime'],[Validators.required]),
+        'deliveryType' : new UntypedFormControl(order['deliveryType'],[Validators.required]),
      });
     }
     else
     {
-      this.customerForm = new FormGroup({
-        'customerName' : new FormControl('',[Validators.required]),
-        'Address' : new FormControl(''),
-        'Contact' : new FormControl('',[Validators.required]),
-        'bookingDate' : new FormControl('',[Validators.required]),
-        'deliveryDate' : new FormControl('' , [Validators.required]),
-        'deliveryTime' : new FormControl('',[Validators.required]),
-        'deliveryType' : new FormControl('',[Validators.required]),
+      this.customerForm = new UntypedFormGroup({
+        'customerName' : new UntypedFormControl('',[Validators.required]),
+        'Address' : new UntypedFormControl(''),
+        'Contact' : new UntypedFormControl('',[Validators.required]),
+        'bookingDate' : new UntypedFormControl('',[Validators.required]),
+        'deliveryDate' : new UntypedFormControl('' , [Validators.required]),
+        'deliveryTime' : new UntypedFormControl('',[Validators.required]),
+        'deliveryType' : new UntypedFormControl('',[Validators.required]),
      });
     }
    if(this.isCounterOrder)

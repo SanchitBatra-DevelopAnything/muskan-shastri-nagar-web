@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 
@@ -10,7 +10,7 @@ import { ApiService } from '../api.service';
 })
 export class InventoryFormComponent implements OnInit {
 
-  inventoryForm:FormGroup;
+  inventoryForm:UntypedFormGroup;
   isInsertingItem:boolean = false;
   isLoading:boolean = false;
   isEditForm:boolean = false;
@@ -19,10 +19,10 @@ export class InventoryFormComponent implements OnInit {
   constructor(private apiService:ApiService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.inventoryForm = new FormGroup({
-      'itemName' : new FormControl(null,[Validators.required]),
-      'price' : new FormControl(null,[Validators.required]),
-      'type' : new FormControl(null,[Validators.required])
+    this.inventoryForm = new UntypedFormGroup({
+      'itemName' : new UntypedFormControl(null,[Validators.required]),
+      'price' : new UntypedFormControl(null,[Validators.required]),
+      'type' : new UntypedFormControl(null,[Validators.required])
     })
 
     this.itemKey = this.route.snapshot.params['key'];

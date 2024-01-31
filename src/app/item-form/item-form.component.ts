@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, Observable } from 'rxjs';
 import { ApiService } from '../api.service';
@@ -14,7 +14,7 @@ import { UtilityService } from '../services/utility.service';
 })
 export class ItemFormComponent implements OnInit {
 
-  itemForm:FormGroup;
+  itemForm:UntypedFormGroup;
   imageUrl:string|ArrayBuffer|null;
   photoUrl:string|ArrayBuffer|null;
   isUploading:boolean = false;
@@ -32,34 +32,34 @@ export class ItemFormComponent implements OnInit {
     {
       let order = this.editOrderService.getCustomOrder();
       console.log(order);
-      this.itemForm = new FormGroup({
-        'imgUrl' : new FormControl(order['imgUrl']),
-        'photoUrl' : new FormControl(order['photoUrl']),
-        'weight' : new FormControl(order['weight'],[Validators.required]),
-        'flavour' : new FormControl(order['flavour'] , [Validators.required]),
-        'totalAmount' : new FormControl(order['totalAmount'],[Validators.required]),
-        'balanceAmount' : new FormControl(order['balanceAmount'],[Validators.required]),
-        'advanceAmount' : new FormControl(order['advanceAmount'],[Validators.required]),
-        'message' : new FormControl(order['message']),
-        'particulars' : new FormControl(order['particulars']),
-        'advancePaymentMode' : new FormControl(order['advancePaymentMode'] , [Validators.required]),
+      this.itemForm = new UntypedFormGroup({
+        'imgUrl' : new UntypedFormControl(order['imgUrl']),
+        'photoUrl' : new UntypedFormControl(order['photoUrl']),
+        'weight' : new UntypedFormControl(order['weight'],[Validators.required]),
+        'flavour' : new UntypedFormControl(order['flavour'] , [Validators.required]),
+        'totalAmount' : new UntypedFormControl(order['totalAmount'],[Validators.required]),
+        'balanceAmount' : new UntypedFormControl(order['balanceAmount'],[Validators.required]),
+        'advanceAmount' : new UntypedFormControl(order['advanceAmount'],[Validators.required]),
+        'message' : new UntypedFormControl(order['message']),
+        'particulars' : new UntypedFormControl(order['particulars']),
+        'advancePaymentMode' : new UntypedFormControl(order['advancePaymentMode'] , [Validators.required]),
       });
       this.imageUrl=order['imgUrl'];
       this.photoUrl=order['photoUrl'];
     }
     else
     {
-      this.itemForm = new FormGroup({
-        'imgUrl' : new FormControl(''),
-        'photoUrl' : new FormControl('not-uploaded'),
-        'weight' : new FormControl(1,[Validators.required]),
-        'flavour' : new FormControl(null , [Validators.required]),
-        'totalAmount' : new FormControl(null,[Validators.required]),
-        'balanceAmount' : new FormControl(null,[Validators.required]),
-        'advanceAmount' : new FormControl(null,[Validators.required]),
-        'message' : new FormControl(''),
-        'particulars' : new FormControl(''),
-        'advancePaymentMode' : new FormControl('CARD' , [Validators.required]),
+      this.itemForm = new UntypedFormGroup({
+        'imgUrl' : new UntypedFormControl(''),
+        'photoUrl' : new UntypedFormControl('not-uploaded'),
+        'weight' : new UntypedFormControl(1,[Validators.required]),
+        'flavour' : new UntypedFormControl(null , [Validators.required]),
+        'totalAmount' : new UntypedFormControl(null,[Validators.required]),
+        'balanceAmount' : new UntypedFormControl(null,[Validators.required]),
+        'advanceAmount' : new UntypedFormControl(null,[Validators.required]),
+        'message' : new UntypedFormControl(''),
+        'particulars' : new UntypedFormControl(''),
+        'advancePaymentMode' : new UntypedFormControl('CARD' , [Validators.required]),
       });  
     }
     

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { EditorderServiceService } from '../services/editorder-service.service';
@@ -12,7 +12,7 @@ import { UtilityService } from '../services/utility.service';
 })
 export class CustomGiftboxFormComponent implements OnInit {
 
-  form:FormGroup;
+  form:UntypedFormGroup;
   isLoading:boolean = false;
   paymentOptions:any;
 
@@ -24,22 +24,22 @@ export class CustomGiftboxFormComponent implements OnInit {
     console.log(order);
     if(action == "edit")
     {
-      this.form = new FormGroup({
-        'totalAmount' : new FormControl(order['totalAmount'],[Validators.required]),
-        'balanceAmount' : new FormControl(order['balanceAmount'],[Validators.required]),
-        'advanceAmount' : new FormControl(order['advanceAmount'],[Validators.required]),
-        'particulars' : new FormControl(order['particulars']),
-        'advancePaymentMode' : new FormControl(order['advancePaymentMode'] , [Validators.required]),
+      this.form = new UntypedFormGroup({
+        'totalAmount' : new UntypedFormControl(order['totalAmount'],[Validators.required]),
+        'balanceAmount' : new UntypedFormControl(order['balanceAmount'],[Validators.required]),
+        'advanceAmount' : new UntypedFormControl(order['advanceAmount'],[Validators.required]),
+        'particulars' : new UntypedFormControl(order['particulars']),
+        'advancePaymentMode' : new UntypedFormControl(order['advancePaymentMode'] , [Validators.required]),
       })
     }
     else
     {
-      this.form = new FormGroup({
-        'totalAmount' : new FormControl(null,[Validators.required]),
-        'balanceAmount' : new FormControl(null,[Validators.required]),
-        'advanceAmount' : new FormControl(null,[Validators.required]),
-        'particulars' : new FormControl(null),
-        'advancePaymentMode' : new FormControl('CARD' , [Validators.required]),
+      this.form = new UntypedFormGroup({
+        'totalAmount' : new UntypedFormControl(null,[Validators.required]),
+        'balanceAmount' : new UntypedFormControl(null,[Validators.required]),
+        'advanceAmount' : new UntypedFormControl(null,[Validators.required]),
+        'particulars' : new UntypedFormControl(null),
+        'advancePaymentMode' : new UntypedFormControl('CARD' , [Validators.required]),
       });
     }
     
