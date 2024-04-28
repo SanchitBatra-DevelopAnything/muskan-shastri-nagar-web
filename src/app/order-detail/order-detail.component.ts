@@ -1,4 +1,4 @@
-import { StringMapWithRename } from '@angular/compiler/src/compiler_facade_interface';
+// import { StringMapWithRename } from '@angular/compiler/src/compiler_facade_interface';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';

@@ -114,5 +114,8 @@
       }
     }
   },
-  "defaultProject": "muskan-shastri-nagar"
+  "defaultProject": "muskan-shastri-nagar",
+  "cli": {
+    "analytics": false
+  }
 }
