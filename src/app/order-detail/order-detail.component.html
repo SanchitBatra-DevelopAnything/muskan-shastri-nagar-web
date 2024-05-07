@@ -31,15 +31,17 @@
     </div>
     <div class="row" *ngIf = "isRegularOrder">
         <div class="col-xs-12">
+            
             Items:
             <ul>
                 <li *ngFor = "let item of loadedOrder.items"><p>{{item.quantity}} <span *ngIf = "item.itemType.includes('PANEER')">g</span> x {{item.name}}</p></li>
             </ul>
+            
         </div>  
     </div>
     <div class="row" *ngIf = "isRegularOrder">
         <div class="col-xs-12">
-            <p>{{loadedOrder.particulars}}</p>
+            Particulars : <p>{{loadedOrder.particulars}}</p>
         </div>
     </div>
 

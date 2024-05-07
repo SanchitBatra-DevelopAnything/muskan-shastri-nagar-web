@@ -1,6 +1,7 @@
 // import { StringMapWithRename } from '@angular/compiler/src/compiler_facade_interface';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { threadId } from 'worker_threads';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -32,7 +33,7 @@ export class OrderDetailComponent implements OnInit {
         return;
       }
       this.loadedOrder = order;
-      if(this.loadedOrder.orderType.toString().toLowerCase() == "regular")
+      if(this.loadedOrder.orderType.toString().toLowerCase() == "regular" || this.loadedOrder.orderType.toString().toLowerCase()== "gift")
       {
         this.isRegularOrder = true;
       }
