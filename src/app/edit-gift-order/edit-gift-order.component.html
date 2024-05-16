@@ -7,7 +7,7 @@
     <button *ngIf= "type == 'owner'" class = "btn btn-lg btn-success" style = "margin:10px;" (click) = "showDialog()">DELIVER</button>
     
     
-    <button *ngIf = "!isPrepared && type == 'chef'" class = "btn btn-lg btn-primary" style = "margin:10px;" (click) = "markAsPrepared()">PREPARED</button>
+    <button *ngIf = "!isPrepared && type == 'owner'" class = "btn btn-lg btn-primary" style = "margin:10px;" (click) = "markAsPrepared()">PREPARED</button>
     
     
         <button *ngIf = "!isPrepared && type == 'owner'" class = "btn btn-lg btn-danger" style = "margin: 10px;" (click) = "cancelOrder()">CANCEL</button>
