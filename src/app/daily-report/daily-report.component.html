@@ -36,6 +36,7 @@
             <div class = "tag" *ngIf = "checkForFactoryItems(activeOrders[i])">FACTORY.</div>
             <p style = "font-weight: bold;">{{order.customerName | uppercase}}</p>
             <p style = "font-weight: bold;">{{order.Contact}}</p>
+            <p style = "font-weight: bold;" *ngIf = "order.alternateContact!=null">{{order.alternateContact}}</p>
             <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>
             <p>Cakes Chef : {{order.cakesSeenBy}}</p>
             <p>Snacks Chef : {{order.snacksSeenBy}}</p>
