@@ -101,11 +101,25 @@ export class CustomGiftboxFormComponent implements OnInit {
       this.apiService.addGiftOrder(giftOrder,true,order['orderKey']).subscribe((orderId)=>{
         //sessionStorage.clear();
         this.apiService.addHistory(giftOrder , order['orderKey']).subscribe((_)=>{
-          this.isLoading = false;
-          let action = this.route.snapshot.params['action'];
-          this.apiService.sendWhatsapp({'name' : order['orderKey']},"gift",true);
-          sessionStorage.clear();
-          this.router.navigate(['/']);
+          let originalOrder = JSON.parse(sessionStorage.getItem('orderOnUpdate') || '{}');
+          if(originalOrder['deliveryDate']!=null && originalOrder['deliveryDate']!=giftOrder['deliveryDate'])
+          {
+            this.apiService.updateOrder(originalOrder['deliveryDate'] , order['orderKey'] , {'status' : 'C'}).subscribe((_)=>{
+              this.isLoading = false;
+              let action = this.route.snapshot.params['action'];
+              this.apiService.sendWhatsapp({'name' : order['orderKey']},"gift",true);
+              sessionStorage.clear();
+              this.router.navigate(['/']);
+            });
+          }
+          else
+          {
+            this.isLoading = false;
+            let action = this.route.snapshot.params['action'];
+            this.apiService.sendWhatsapp({'name' : order['orderKey']},"gift",true);
+            sessionStorage.clear();
+            this.router.navigate(['/']);
+          }
         });
       });
 
