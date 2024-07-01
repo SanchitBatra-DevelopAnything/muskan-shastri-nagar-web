@@ -55,6 +55,7 @@
             <div class="tag" *ngIf = "customOrders[i]['deliveryType'] == 1">HD</div>
             <p style = "font-weight: bold;">{{order.customerName | uppercase}}</p>
             <p style = "font-weight: bold;">{{order.Contact | uppercase}}</p>
+            <p style = "font-weight: bold;" *ngIf = "order.alternateContact!=null">{{order.alternateContact}}</p>
             <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>
             <p>Cakes Chef : {{order.cakesSeenBy}}</p>
             <hr style = "border: 1px solid black; width: 100%;">
@@ -70,6 +71,7 @@
             
             <p style = "font-weight: bold;">{{order.customerName | uppercase}}</p>
             <p style = "font-weight: bold;">{{order.Contact | uppercase}}</p>
+            <p style = "font-weight: bold;" *ngIf = "order.alternateContact!=null">{{order.alternateContact}}</p>
             <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>
             
             <hr style = "border: 1px solid black; width: 100%;">
