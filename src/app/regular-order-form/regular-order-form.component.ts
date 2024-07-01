@@ -271,11 +271,25 @@ export class RegularOrderFormComponent implements OnInit {
       //this is actually editiing the order.
       this.apiService.addRegularOrder(regularOrder,true,order['orderKey']).subscribe((_)=>{
         this.apiService.addHistory(regularOrder , order['orderKey']).subscribe((_:any)=>{
-          this.isLoading = false;
+          let originalOrder = JSON.parse(sessionStorage.getItem('orderOnUpdate') || '{}');
+          if(originalOrder['deliveryDate']!=null && originalOrder['deliveryDate']!=regularOrder['deliveryDate'])
+          {
+              this.apiService.updateOrder(originalOrder['deliveryDate'] , order['orderKey'] , {'status' : 'C'}).subscribe((_)=>{
+              this.isLoading = false;
+              let action = this.route.snapshot.params['action'];
+              this.apiService.sendWhatsapp({'name' : order['orderKey']},"regular",true);
+              sessionStorage.clear();
+              this.router.navigate(['/']);
+            });
+          }
+          else
+          {
+            this.isLoading = false;
           // this.sendWhatsapp(orderId);
-          this.apiService.sendWhatsapp({'name' : order['orderKey']},"regular",true);
-          this.router.navigate(['/']);
-          sessionStorage.clear();
+            this.apiService.sendWhatsapp({'name' : order['orderKey']},"regular",true);
+            this.router.navigate(['/']);
+            sessionStorage.clear();
+          }
         });
       });
     }
