@@ -191,11 +191,25 @@ export class ItemFormComponent implements OnInit {
       this.apiService.addCustomOrder(customOrder,true,order['orderKey']).subscribe((orderId)=>{
         //sessionStorage.clear();
         this.apiService.addHistory(customOrder , order['orderKey']).subscribe((_)=>{
-          this.isLoading = false;
-          let action = this.route.snapshot.params['action'];
-          this.apiService.sendWhatsapp({'name' : order['orderKey']},"custom",true);
-          sessionStorage.clear();
-          this.router.navigate(['/']);
+          let originalOrder = JSON.parse(sessionStorage.getItem('orderOnUpdate') || '{}');
+          if(originalOrder['deliveryDate']!=null && originalOrder['deliveryDate']!=customOrder['deliveryDate'])
+          {
+              this.apiService.updateOrder(originalOrder['deliveryDate'] , order['orderKey'] , {'status' : 'C'}).subscribe((_)=>{
+              this.isLoading = false;
+              let action = this.route.snapshot.params['action'];
+              this.apiService.sendWhatsapp({'name' : order['orderKey']},"custom",true);
+              sessionStorage.clear();
+              this.router.navigate(['/']);
+            });
+          }
+          else
+          {
+            this.isLoading = false;
+            let action = this.route.snapshot.params['action'];
+            this.apiService.sendWhatsapp({'name' : order['orderKey']},"custom",true);
+            sessionStorage.clear();
+            this.router.navigate(['/']);
+          }
         });
       });
     }
