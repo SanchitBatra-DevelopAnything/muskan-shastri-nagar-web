@@ -4,7 +4,7 @@
     <div *ngIf = "!isDelivered && !isCancelled">
         
     
-    <button *ngIf= "type == 'owner'" class = "btn btn-lg btn-success" style = "margin:10px;" (click) = "showDialog()">DELIVER</button>
+    <button *ngIf= "type == 'owner' && isPrepared && !isCancelled && !isDelivered" class = "btn btn-lg btn-success" style = "margin:10px;" (click) = "showDialog()">DELIVER</button>
     
     
     <button *ngIf = "!isPrepared && type == 'owner'" class = "btn btn-lg btn-primary" style = "margin:10px;" (click) = "markAsPrepared()">PREPARED</button>
