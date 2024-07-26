@@ -29,7 +29,7 @@
             <p>Address : {{loadedOrder.Address}}</p>
         </div>
     </div>
-    <div class="row" *ngIf = "isRegularOrder">
+    <div class="row" *ngIf = "isRegularOrder && !showGiftQuantity">
         <div class="col-xs-12">
             
             Items:
@@ -39,6 +39,13 @@
             
         </div>  
     </div>
+
+    <div class="row" *ngIf = "showGiftQuantity">
+        <div class="col-xs-12">
+            Quantity : <p>{{loadedOrder.qty}}</p>
+        </div>
+    </div>
+
     <div class="row" *ngIf = "isRegularOrder">
         <div class="col-xs-12">
             Particulars : <p>{{loadedOrder.particulars}}</p>

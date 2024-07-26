@@ -14,6 +14,7 @@ export class OrderDetailComponent implements OnInit {
   isLoading:boolean = false;
   loadedOrder:any = {};
   isRegularOrder:boolean = true;
+  showGiftQuantity:boolean = false;
 
   constructor(private router:Router , private route:ActivatedRoute , private apiService:ApiService) { }
 
@@ -35,6 +36,14 @@ export class OrderDetailComponent implements OnInit {
       this.loadedOrder = order;
       if(this.loadedOrder.orderType.toString().toLowerCase() == "regular" || this.loadedOrder.orderType.toString().toLowerCase()== "gift")
       {
+        if(this.loadedOrder.orderType.toString().toLowerCase()== "gift")
+        {
+          this.showGiftQuantity = true;
+        }
+        else
+        {
+          this.showGiftQuantity = false;
+        }
         this.isRegularOrder = true;
       }
       else
