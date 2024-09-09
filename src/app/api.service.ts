@@ -215,28 +215,25 @@ export class ApiService {
   {
     console.log("notification call");
     let body = {
-      "to" : token,
-      "notification" : {
-          "body" : Nbody,
-          "title" : title,
-          "android_channel_id" : "Sweet-Shop-App-2",
-          "sound" : "sound.mp3"
-      },
+      "deviceToken" : token,
+      "matter" : Nbody,
+      "title" : title,
+      "android_channel_id" : "Sweet-Shop-App-2", 
   };
-  if(type == "cancel")
-  {
-    body = {
-      "to" : token,
-      "notification" : {
-          "body" : Nbody,
-          "title" : title,
-          "android_channel_id" : "Sweet-Shop-App-2",
-          "sound" : "cancel.mp3"
-      },
-  };
-  }
-    const headers = { 'Authorization': 'key=AAAAaXPIZ2w:APA91bEgPROJFmaweC-pHnP9IMyeVfxBUowqiaiQDQh-WpWUM183m12SEf8uhd-b-u3QnbljavfwKt7riYAKyBZ0pbRMH6KZv1qUiezYocj8Y_lVc8i9zL_ChF6c_ifAQ7ifgn77qJQ4', 'Content-Type': 'application/json' };
-    return this.http.post("https://fcm.googleapis.com/fcm/send" ,body,{headers});
+  // if(type == "cancel")
+  // {
+  //   body = {
+  //     "to" : token,
+  //     "notification" : {
+  //         "body" : Nbody,
+  //         "title" : title,
+  //         "android_channel_id" : "Sweet-Shop-App-2",
+  //         "sound" : "cancel.mp3"
+  //     },
+  // };
+  //}
+    // const headers = { 'Authorization': 'key=AAAAaXPIZ2w:APA91bEgPROJFmaweC-pHnP9IMyeVfxBUowqiaiQDQh-WpWUM183m12SEf8uhd-b-u3QnbljavfwKt7riYAKyBZ0pbRMH6KZv1qUiezYocj8Y_lVc8i9zL_ChF6c_ifAQ7ifgn77qJQ4', 'Content-Type': 'application/json' };
+    return this.http.post("https://us-central1-shastri-nagar-shop-app.cloudfunctions.net/ringOrderBell" ,body);
   }
 
   public findToken(appType:string)
