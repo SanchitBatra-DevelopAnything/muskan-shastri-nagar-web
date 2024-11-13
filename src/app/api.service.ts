@@ -109,7 +109,7 @@ export class ApiService {
     {
       action = "accepted";
     }    
-    let message = `Hi ${name},\nYour order with ID : ${id} is ${action}.\nPlease find details.\n\nTotal:Rs.${total}\nAdvance:Rs.${advance}\nBalance:Rs.${balance}\n\nBooked On:${bookingDate}\nDeliver Date:${deliveryDate}\nDelivery Time:${deliveryTime}\nOther Details:${allDetails}\n\nNOTE : ORDER WILL NOT BE CANCELLED OR POSTPONED AFTER 2HRS OF BOOKING.\n\nThanks for ordering from Muskan Bakers And Sweets`;
+    let message = `Hi ${name},\nYour order with ID : ${id} is ${action}.\nPlease find details.\n\nTotal:Rs.${total}\nAdvance:Rs.${advance}\nBalance:Rs.${balance}\n\nBooked On:${bookingDate}\nDeliver Date:${deliveryDate}\nDelivery Time:${deliveryTime}\nOther Details:${allDetails}\n\nNOTE : ORDER WILL NOT BE CANCELLED OR POSTPONED AFTER 2HRS OF BOOKING.\n\nThanks for ordering from Muskan Bakers And Sweets (PURE VEGETARIAN)`;
     if(localStorage.getItem('on') == "TAB")
     {
       console.log("TAB SE MESSAGE GAYA!");

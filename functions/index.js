@@ -29,6 +29,7 @@ exports.ringOrderBell = functions.https.onRequest((req, res) => {
           body: matter,
         },
         android: {
+          priority : 'high',
           notification: {
             sound : 'sound',
             channel_id : android_channel_id
