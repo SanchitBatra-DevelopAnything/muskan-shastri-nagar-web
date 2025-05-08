@@ -98,6 +98,7 @@ export class ApiService {
     let balance = customerOrderDetails.balanceAmount;
 
     let id = orderId['name'];
+    let shop = localStorage.getItem('shop');
 
     let allDetails = `https://shastri-nagar-shop-app.web.app/#/detail/${deliveryDate1}/${id}`;
 
@@ -109,7 +110,7 @@ export class ApiService {
     {
       action = "accepted";
     }    
-    let message = `Hi ${name},\nYour order with ID : ${id} is ${action}.\nPlease find details.\n\nTotal:Rs.${total}\nAdvance:Rs.${advance}\nBalance:Rs.${balance}\n\nBooked On:${bookingDate}\nDeliver Date:${deliveryDate}\nDelivery Time:${deliveryTime}\nOther Details:${allDetails}\n\nNOTE : ORDER WILL NOT BE CANCELLED OR POSTPONED AFTER 2HRS OF BOOKING.\n\nThanks for ordering from Muskan Bakers And Sweets (PURE VEGETARIAN)`;
+    let message = `Hi ${name},\nYour order with ID : ${id} is ${action}.\nPlease find details.\n\nTotal:Rs.${total}\nAdvance:Rs.${advance}\nBalance:Rs.${balance}\n\nBooked On:${bookingDate}\nDeliver Date:${deliveryDate}\nDelivery Time:${deliveryTime}\nOther Details:${allDetails}\n\nNOTE : ORDER WILL NOT BE CANCELLED OR POSTPONED AFTER 2HRS OF BOOKING.\n\nThanks for ordering from ${shop} (PURE VEGETARIAN)`;
     if(localStorage.getItem('on') == "TAB")
     {
       console.log("TAB SE MESSAGE GAYA!");
@@ -124,21 +125,23 @@ export class ApiService {
 
   public sendUpdateOrderWhatsapp(orderKey:any , isRegular:boolean , isEdit:boolean)
   {
+    let shop = localStorage.getItem('shop');
     let mobile = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").Contact;
     let name = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").customerName;
     let deliveryDate = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").deliveryDate;
     let allDetails = "https://shastri-nagar-shop-app.web.app/#/detail/"+deliveryDate+"/"+orderKey;
     let deliveryDateArray = deliveryDate.split("-");
     deliveryDate = deliveryDateArray[2]+"-"+deliveryDateArray[1]+"-"+deliveryDateArray[0];
-    let message = `Hi ${name},\nYour order with ID : ${orderKey} is updated.\n\nNew Details:${allDetails}\n\nThanks for ordering from Muskan Bakers And Sweets`;
+    let message = `Hi ${name},\nYour order with ID : ${orderKey} is updated.\n\nNew Details:${allDetails}\n\nThanks for ordering from ${shop}`;
     let encoded = encodeURIComponent(message);
     window.open("https://web.whatsapp.com/+91"+mobile+"/?text="+encoded);
   }
 
   public sendDeliveryMessage(orderKey : any , isRegular:boolean , mobile:any , name : any , deliverTo :string)
   {
-    let message_regular = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered.\n\nThanks for ordering from Muskan Bakers And Sweets`;
-    let message = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered to ${deliverTo}.\n\nThanks for ordering from Muskan Bakers And Sweets`;
+    let shop = localStorage.getItem('shop');
+    let message_regular = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered.\n\nThanks for ordering from ${shop}(PURE VEGETARIAN)`;
+    let message = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered to ${deliverTo}.\n\nThanks for ordering from ${shop}(PURE VEGETARIAN)`;
     let encoded = isRegular? encodeURI(message_regular) : encodeURI(message);
     if(localStorage.getItem('on') == "TAB")
     {
@@ -153,7 +156,8 @@ export class ApiService {
 
   public sendCancelMessage(orderKey : any , isRegular:boolean , mobile:any , name:any)
   {
-    let message = `Hi ${name},\nYour order with ID : ${orderKey} is Cancelled.\n\nThanks for ordering from Muskan Bakers And Sweets`;
+    let shop = localStorage.getItem('shop');
+    let message = `Hi ${name},\nYour order with ID : ${orderKey} is Cancelled.\n\nThanks for ordering from ${shop}`;
     let encoded = encodeURI(message);
     if(localStorage.getItem('on') == "TAB")
     {

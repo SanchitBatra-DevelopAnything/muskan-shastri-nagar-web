@@ -10,6 +10,8 @@ import { of } from 'rxjs';
 export class OrderTypeSelectionComponent implements OnInit {
 
   showOrders:boolean = false;
+  showSystems:boolean = true;
+  showShops:boolean = false;
 
   constructor(private router:Router) { }
 
@@ -32,7 +34,17 @@ export class OrderTypeSelectionComponent implements OnInit {
   setSystem(system:string)
   {
     localStorage.setItem('on' , system);
+    this.showOrders = false;
+    this.showSystems = false;
+    this.showShops = true;
+  }
+
+  setShop(shop:string)
+  {
+    localStorage.setItem('shop' , shop);
     this.showOrders = true;
+    this.showSystems = false;
+    this.showShops = false;
   }
 
 

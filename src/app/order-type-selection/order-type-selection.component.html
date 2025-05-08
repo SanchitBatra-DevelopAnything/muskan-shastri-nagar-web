@@ -27,12 +27,21 @@
        
     </div>
 
-    <div *ngIf = "!showOrders" style = "text-align:center;">
+    <div *ngIf = "showSystems" style = "text-align:center;">
         <div class="col-xs-12" style = "margin-bottom: 3px;">
             <button class = "btn btn-primary" (click) = "setSystem('TAB')">I'm On TAB</button>
         </div>
         <div class="col-xs-12" style = "margin-bottom: 3px;">
             <button class = "btn btn-primary" (click) = "setSystem('LAPTOP')">I'm On Laptop</button>
+        </div>
+    </div>
+
+    <div *ngIf = "showShops" style = "text-align:center;">
+        <div class="col-xs-12" style = "margin-bottom: 3px;">
+            <button class = "btn btn-primary" (click) = "setShop('Muskan Bakers And Sweets')">Muskan Shop</button>
+        </div>
+        <div class="col-xs-12" style = "margin-bottom: 3px;">
+            <button class = "btn btn-primary" (click) = "setShop('Lovely Bakers And Sweets')">Lovely Shop</button>
         </div>
     </div>
 
