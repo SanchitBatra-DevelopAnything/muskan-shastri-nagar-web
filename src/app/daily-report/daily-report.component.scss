@@ -34,13 +34,46 @@
     color: white;
 }
 
-.tag {
-    position: absolute;
-    top: 2px;
-    right: 2px;
+// .tag {
+//     position: absolute;
+//     top: 2px;
+//     right: 2px;
+//     background-color: royalblue;
+//     color: #ffffff;
+//     font-weight: bold;
+//     padding: 5px 10px;
+//     border-radius: 5px;
+//   }
+
+//   .tag2 {
+//     position: absolute;
+//     top: 2px;
+//     left: 2px;
+//     background-color: royalblue;
+//     color: #ffffff;
+//     font-weight: bold;
+//     padding: 5px 10px;
+//     border-radius: 5px;
+//   }
+
+//   .tag3 {
+//     position: absolute;
+//     bottom: 2px;
+//     right: 2px;
+//     background-color: royalblue;
+//     color: #ffffff;
+//     font-weight: bold;
+//     padding: 5px 10px;
+//     border-radius: 5px;
+//   }
+
+  .tag, .tag2, .tag3 {
     background-color: royalblue;
     color: #ffffff;
     font-weight: bold;
     padding: 5px 10px;
     border-radius: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
   }
+  

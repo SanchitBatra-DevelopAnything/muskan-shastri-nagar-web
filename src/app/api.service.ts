@@ -36,7 +36,8 @@ export class ApiService {
     let date = dateSplitter[2];
     let month = dateSplitter[1];
     let year = dateSplitter[0];
-    let modifiedOrder = {...order , 'orderType' : "custom" , 'status' : "ND" , "cakesSeenBy" : "" , "snacksSeenBy" : ""};
+    let shop = localStorage.getItem('shop');
+    let modifiedOrder = {...order , 'orderType' : "custom" , 'status' : "ND" , "cakesSeenBy" : "" , "snacksSeenBy" : "" , "shop" : shop};
     if(isEdit)
     {
       return this.http.put('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'/'+orderKey+'.json',modifiedOrder)
@@ -50,7 +51,8 @@ export class ApiService {
     let date = dateSplitter[2];
     let month = dateSplitter[1];
     let year = dateSplitter[0];
-    let modifiedOrder = {...order , 'orderType' : "gift" , 'status' : "ND" , "cakesSeenBy" : "" , "snacksSeenBy" : ""};
+    let shop = localStorage.getItem('shop');
+    let modifiedOrder = {...order , 'orderType' : "gift" , 'status' : "ND" , "cakesSeenBy" : "" , "snacksSeenBy" : "" , "shop" : shop};
     if(isEdit)
     {
       return this.http.put('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'/'+orderKey+'.json',modifiedOrder)
@@ -64,7 +66,8 @@ export class ApiService {
     let date = dateSplitter[2];
     let month = dateSplitter[1];
     let year = dateSplitter[0];
-    let modifiedOrder = {...order , 'orderType' : "regular" , 'status' : "ND" , "cakesSeenBy" : "" , "snacksSeenBy" : ""};
+    let shop = localStorage.getItem('shop');
+    let modifiedOrder = {...order , 'orderType' : "regular" , 'status' : "ND" , "cakesSeenBy" : "" , "snacksSeenBy" : "" , "shop" : shop};
     if(isEdit)
     {
       return this.http.put('https://shastri-nagar-shop-app-default-rtdb.firebaseio.com/activeOrders/'+month+'/'+year+'/'+date+'/'+orderKey+'.json',modifiedOrder);

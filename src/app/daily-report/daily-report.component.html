@@ -10,6 +10,10 @@
 
     </div>
 
+    <hr>
+    <h5 style = "color: red;">NOTE : Order edit agar lovely ka karna hai , to main page pe lovely select kar lena pehle , same for muskan.</h5>
+    <hr>
+
     <div class="container" *ngIf = "type=='owner'">
         <h5>Order Filter</h5>
         <p>Select Date</p>
@@ -32,14 +36,26 @@
     <div class="row">
 
         <div *ngFor = "let order of activeOrders; let i = index;" class = "col-md-2 col-xs-4 w3-card pointer order-card" [ngClass] = "{'delivered' : order.status == 'D' , 'inprogress' : order.status == 'ND' , 'cancel' : order.status == 'C' , 'prepared' : order.status == 'P'}" (click) = "editOrder(activeOrders[i] , i)">
-            <div class="tag" *ngIf = "activeOrders[i]['deliveryType'] == 1">HD</div>
-            <div class = "tag" *ngIf = "checkForFactoryItems(activeOrders[i])">FACTORY.</div>
             <p style = "font-weight: bold;">{{order.customerName | uppercase}}</p>
             <p style = "font-weight: bold;">{{order.Contact}}</p>
             <p style = "font-weight: bold;" *ngIf = "order.alternateContact!=null">{{order.alternateContact}}</p>
             <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>
             <p>Cakes Chef : {{order.cakesSeenBy}}</p>
             <p>Snacks Chef : {{order.snacksSeenBy}}</p>
+            <div class="tags">
+                <div class="tag" *ngIf="order.deliveryType == 1">HD</div>
+                <div class="tag2" *ngIf="checkForFactoryItems(order)">FACTORY.</div>
+                <div
+                  class="tag3"
+                  *ngIf="
+                    order.shop != null &&
+                    order.shop != undefined &&
+                    order.shop == 'LOVELY BAKERS'
+                  "
+                >
+                  LOVELY.
+                </div>
+              </div>
             <hr style = "border: 1px solid black; width: 100%;">
             <p style = "font-size:12px; font-weight: 400;">{{getStatus(order.status)}}</p>
         </div>
@@ -52,12 +68,25 @@
 
     <div class="row">
         <div *ngFor = "let order of customOrders; let i = index;" class = "col-md-2 col-xs-4 w3-card pointer order-card-custom" [ngClass] = "{'delivered' : order.status == 'D' , 'inprogress' : order.status == 'ND' , 'cancel' : order.status == 'C' , 'prepared' : order.status == 'P'}" (click)= "editCustomOrder(customOrders[i] , i)">
-            <div class="tag" *ngIf = "customOrders[i]['deliveryType'] == 1">HD</div>
             <p style = "font-weight: bold;">{{order.customerName | uppercase}}</p>
             <p style = "font-weight: bold;">{{order.Contact | uppercase}}</p>
             <p style = "font-weight: bold;" *ngIf = "order.alternateContact!=null">{{order.alternateContact}}</p>
             <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>
             <p>Cakes Chef : {{order.cakesSeenBy}}</p>
+            <div class="tags">
+                <div class="tag" *ngIf="order.deliveryType == 1">HD</div>
+                <div class="tag2" *ngIf="checkForFactoryItems(order)">FACTORY.</div>
+                <div
+                  class="tag3"
+                  *ngIf="
+                    order.shop != null &&
+                    order.shop != undefined &&
+                    order.shop == 'LOVELY BAKERS'
+                  "
+                >
+                  LOVELY.
+                </div>
+              </div>
             <hr style = "border: 1px solid black; width: 100%;">
             <p style = "font-size:12px; font-weight: 400;">{{getStatus(order.status)}}</p>
         </div>
@@ -68,11 +97,13 @@
 
     <div class="row">
         <div *ngFor = "let order of giftOrders; let i = index;" class = "col-md-2 col-xs-4 w3-card pointer order-card-custom" [ngClass] = "{'delivered' : order.status == 'D' , 'inprogress' : order.status == 'ND' , 'cancel' : order.status == 'C' , 'prepared' : order.status == 'P'}" (click) = "editGiftOrder(giftOrders[i] , i)">
-            
             <p style = "font-weight: bold;">{{order.customerName | uppercase}}</p>
             <p style = "font-weight: bold;">{{order.Contact | uppercase}}</p>
             <p style = "font-weight: bold;" *ngIf = "order.alternateContact!=null">{{order.alternateContact}}</p>
             <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>
+            <hr>
+            <div class = "tag" *ngIf = "giftOrders[i].shop!=null && giftOrders[i].shop!=undefined && giftOrders[i].shop == 'LOVELY BAKERS'">LOVELY.</div>
+            <hr>
             
             <hr style = "border: 1px solid black; width: 100%;">
             <p style = "font-size:12px; font-weight: 400;">{{getStatus(order.status)}}</p>
