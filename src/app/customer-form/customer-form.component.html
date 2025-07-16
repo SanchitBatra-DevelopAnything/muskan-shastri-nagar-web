@@ -61,6 +61,15 @@
 <ngx-material-timepicker #picker></ngx-material-timepicker>
     </div>
     </div>
+
+    <div class="form-group" *ngIf = "!isCounterOrder">
+        <span style = "color: red;">*</span>
+        <span>Delivery Time For Worker</span>
+    <div style = "width:50%;">
+        <input [ngxTimepicker]="picker1" formControlName="deliveryTimeToShow">
+<ngx-material-timepicker #picker1></ngx-material-timepicker>
+    </div>
+    </div>
     
 
     <div class="form-group" *ngIf = "!isCounterOrder">

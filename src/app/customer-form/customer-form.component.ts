@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { EditorderServiceService } from '../services/editorder-service.service';
 import { UtilityService } from '../services/utility.service';
 
@@ -42,6 +41,7 @@ export class CustomerFormComponent implements OnInit {
         'bookingDate' : new FormControl(order['bookingDate'],[Validators.required]),
         'deliveryDate' : new FormControl(order['deliveryDate'] , [Validators.required]),
         'deliveryTime' : new FormControl(order['deliveryTime'],[Validators.required]),
+        'deliveryTimeToShow' : new FormControl(order['deliveryTimeToShow'] , [Validators.required]), 
         'deliveryType' : new FormControl(order['deliveryType'],[Validators.required]),
      });
     }
@@ -55,6 +55,7 @@ export class CustomerFormComponent implements OnInit {
         'bookingDate' : new FormControl('',[Validators.required]),
         'deliveryDate' : new FormControl('' , [Validators.required]),
         'deliveryTime' : new FormControl('',[Validators.required]),
+        'deliveryTimeToShow' : new FormControl('' , [Validators.required]),
         'deliveryType' : new FormControl('',[Validators.required]),
      });
     }
@@ -81,6 +82,7 @@ export class CustomerFormComponent implements OnInit {
       'deliveryDate' : customerInfo.deliveryDate,
       'deliveryType' : customerInfo.deliveryType,
       'deliveryTime' : customerInfo.deliveryTime,
+      'deliveryTimeToShow' : customerInfo.deliveryTimeToShow,
     });
    }
   }
@@ -95,6 +97,7 @@ export class CustomerFormComponent implements OnInit {
       'deliveryDate' : this.getDate(),
       'deliveryType':'0',
       'deliveryTime' : '06:00 PM',
+      'deliveryTimeToShow' : '06:00 PM',
     });
   }
 
