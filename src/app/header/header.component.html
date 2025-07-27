@@ -38,5 +38,10 @@
             <li><a routerLink = "/viewOrders/owner">View Orders</a></li>
             <li><a routerLink = "/monthlySales">Monthly Sales</a></li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+           
+           
+            <li *ngIf = "showLogout()"><a routerLink = "/" (click) = "onLogout()">Logout</a></li>
+        </ul>
     </div>
 </nav>
