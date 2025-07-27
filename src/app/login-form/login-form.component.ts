@@ -83,7 +83,7 @@ export class LoginFormComponent {
   fetchAdmins()
   {
     this.validUsers =[{'username' : "muskan-admin" , 'password' : "muskan@admin@123" , "shop" : "Muskan Bakers and Sweets" , "type":"super-admin"},
-      {'username' : "lovely-admin" , 'password' : "lovely@admin@123" , "shop" : "Lovely Bakers" , "type":"sub-admin"},
+      {'username' : "lovely-admin" , 'password' : "lovely@admin@123" , "shop" : "LOVELY BAKERS" , "type":"sub-admin"},
     ];
   }
 }

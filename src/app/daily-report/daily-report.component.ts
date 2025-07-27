@@ -22,6 +22,7 @@ export class DailyReportComponent implements OnInit {
   mobileNumber:any;
   dirtyOrders:any= [];
   type : string;
+  targetShop : string;
 
 
 
@@ -29,6 +30,8 @@ export class DailyReportComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.targetShop = localStorage.getItem('shop') ?? '';
+    console.log("TARGETTING SHOP : "+this.targetShop);
     this.todaysDate = this.getTodaysDate();
     this.getActiveOrders();
     const obs$ = interval(180000);
@@ -89,6 +92,12 @@ export class DailyReportComponent implements OnInit {
       let temp_activeOrderKeys : any = Object.keys(orders);
       for(let i=0;i<temp_activeOrders.length;i++)
       {
+        if(temp_activeOrders[i].shop!=null && temp_activeOrders[i].shop.toLowerCase()=="muskan bakers and sweets" &&temp_activeOrders[i].shop.toLowerCase() != this.targetShop.toLowerCase())
+        {
+          console.log("Missed order : "+JSON.stringify(temp_activeOrders[i]));
+          //lovely me muskan ke order nahi daalne. muskan me sab daalna hai.
+          continue;
+        }
         if(temp_activeOrders[i].orderType!=null  && temp_activeOrders[i].orderType.toLowerCase() === "custom")
         {
           this.customOrders.push(temp_activeOrders[i]);
