@@ -36,9 +36,11 @@ import { HistoryViewerComponent } from './history-viewer/history-viewer.componen
 import { JsonParsePipe } from './pipes/json-parse.pipe';
 import { CustomGiftboxFormComponent } from './custom-giftbox-form/custom-giftbox-form.component';
 import { EditGiftOrderComponent } from './edit-gift-order/edit-gift-order.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 const appRoutes : Routes = [
-  {path : '' , component : OrderTypeSelectionComponent,pathMatch:"full"},
+  {path : '' , component : LoginFormComponent,pathMatch:"full"},
+  {path : 'orderType' , component : OrderTypeSelectionComponent},
   {path : 'order/:orderType/:action',component:ContainerComponent },
   {path : 'inventory' , component : InventoryListComponent },
   {path : 'inventory/form/:key' , component : InventoryFormComponent},
@@ -74,6 +76,7 @@ const appRoutes : Routes = [
     JsonParsePipe,
     CustomGiftboxFormComponent,
     EditGiftOrderComponent,
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,

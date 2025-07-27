@@ -1,0 +1,33 @@
+<div class="container top-spaced">
+    <div class="jumbotron">
+        <div class = "image-holder">
+        <img src = "../../assets/muskan.png">
+        </div>
+        <h2>Welcome to Admin panel</h2>
+        <p>Please login here.</p>
+
+        <form [formGroup] = "loginForm" (ngSubmit) = "onSubmit()"> 
+        <div class="form-group">
+
+                <label for = "username">UserID</label>
+                <input type = "text"
+                id="username"
+                class = "form-control"
+                formControlName="username">
+        </div>
+
+        <div class="form-group">
+            <label for = "password">Password</label>
+            <input type = "password"
+            id="password"
+            class="form-control"
+            formControlName = "password">
+        </div>
+
+        <button type = "submit" class = "btn btn-success btn-bold-text">LOGIN</button>
+        <p  class = "red" *ngIf="!isLoading && internetProblem">Internet Issues Detected. Not able to login now.</p>
+        </form>
+
+    </div>
+        
+</div>
