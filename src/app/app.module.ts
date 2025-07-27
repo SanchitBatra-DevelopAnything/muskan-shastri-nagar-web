@@ -37,20 +37,21 @@ import { JsonParsePipe } from './pipes/json-parse.pipe';
 import { CustomGiftboxFormComponent } from './custom-giftbox-form/custom-giftbox-form.component';
 import { EditGiftOrderComponent } from './edit-gift-order/edit-gift-order.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { AuthGuardService } from './services/guard.service';
 
 const appRoutes : Routes = [
   {path : '' , component : LoginFormComponent,pathMatch:"full"},
-  {path : 'orderType' , component : OrderTypeSelectionComponent},
-  {path : 'order/:orderType/:action',component:ContainerComponent },
-  {path : 'inventory' , component : InventoryListComponent },
-  {path : 'inventory/form/:key' , component : InventoryFormComponent},
-  {path : 'viewOrders/:type' , component : DailyReportComponent},
-  {path : 'editOrder/:date/regular/:key/:type' , component : KotPrintingComponent},
-  {path : 'editOrder/:date/custom/:key/:type' , component : EditCustomOrderComponent},
-  {path : 'editOrder/:date/gift/:key/:type' , component : EditGiftOrderComponent},
+  {path : 'orderType' , component : OrderTypeSelectionComponent , canActivate:[AuthGuardService]},
+  {path : 'order/:orderType/:action',component:ContainerComponent, canActivate:[AuthGuardService] },
+  {path : 'inventory' , component : InventoryListComponent , canActivate:[AuthGuardService]},
+  {path : 'inventory/form/:key' , component : InventoryFormComponent, canActivate:[AuthGuardService]},
+  {path : 'viewOrders/:type' , component : DailyReportComponent, canActivate:[AuthGuardService]},
+  {path : 'editOrder/:date/regular/:key/:type' , component : KotPrintingComponent, canActivate:[AuthGuardService]},
+  {path : 'editOrder/:date/custom/:key/:type' , component : EditCustomOrderComponent, canActivate:[AuthGuardService]},
+  {path : 'editOrder/:date/gift/:key/:type' , component : EditGiftOrderComponent, canActivate:[AuthGuardService]},
   {path : 'detail/:date/:orderKey' , component : OrderDetailComponent},
-  {path : 'monthlySales' , component : MonthlySalesComponent},
-  {path : 'history/:orderKey' , component : HistoryViewerComponent},
+  {path : 'monthlySales' , component : MonthlySalesComponent, canActivate:[AuthGuardService]},
+  {path : 'history/:orderKey' , component : HistoryViewerComponent, canActivate:[AuthGuardService]},
   {path : 'payment/:type' , component : PaymentComponent , canDeactivate: [(comp: DeactivationGuarded) => comp.canDeactivate()],},
 ]
 @NgModule({
