@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
+import { UtilityService } from '../services/utility.service';
 
 @Component({
   selector: 'app-order-type-selection',
@@ -12,11 +13,15 @@ export class OrderTypeSelectionComponent implements OnInit {
   showOrders:boolean = false;
   showSystems:boolean = true;
 
-  constructor(private router:Router) { }
+  constructor(private router:Router , private util : UtilityService) { }
 
   ngOnInit(): void {
     sessionStorage.clear();
   }
+
+  getShopName()
+  {
+    return localStorage.getItem('shop');  }
 
   openOrder(orderType:any)
   {
@@ -35,5 +40,10 @@ export class OrderTypeSelectionComponent implements OnInit {
     localStorage.setItem('on' , system);
     this.showOrders = true;
     this.showSystems = false;
+  }
+
+  computeLogo()
+  {
+    return this.util.computeLogo();
   }
 }

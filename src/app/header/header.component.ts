@@ -39,8 +39,14 @@ export class HeaderComponent implements OnInit , OnDestroy{
     return false;
   }
 
+  computeLogo()
+  {
+    return this.util.computeLogo();
+  }
+
   ngOnDestroy(): void {
     this.loggedInSub.unsubscribe();
   }
+
 
 }

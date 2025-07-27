@@ -13,4 +13,12 @@ export class UtilityService {
     this.formChange = new Subject<number>();
     this.loggedInSuccessfully = new Subject<boolean>();
   }
+
+  computeLogo(){
+  if(localStorage.getItem('shop') === 'LOVELY BAKERS')
+  {
+    return "../../assets/lovely.jpeg"
+  }
+  return "../../assets/sweetShop.jpeg";
+}
 }
