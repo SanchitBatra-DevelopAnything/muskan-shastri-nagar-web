@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit , OnDestroy{
 
-  targetShop: string;
+  targetShop: string = localStorage.getItem('shop') || '';
   loggedInSub:Subscription;
 
   constructor(private router:Router , private util:UtilityService) { }
