@@ -7,8 +7,10 @@ import { Subject } from 'rxjs';
 export class UtilityService {
 
   formChange:Subject<number>;
+  loggedInSuccessfully:Subject<boolean>;
 
   constructor() { 
     this.formChange = new Subject<number>();
+    this.loggedInSuccessfully = new Subject<boolean>();
   }
 }

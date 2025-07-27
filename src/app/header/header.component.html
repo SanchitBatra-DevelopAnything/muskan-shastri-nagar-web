@@ -41,7 +41,9 @@
         <ul class="nav navbar-nav navbar-right">
            
            
+            <li *ngIf = "showLogout()"><a>Hi , {{targetShop}}</a></li>
             <li *ngIf = "showLogout()"><a routerLink = "/" (click) = "onLogout()">Logout</a></li>
+            
         </ul>
     </div>
 </nav>

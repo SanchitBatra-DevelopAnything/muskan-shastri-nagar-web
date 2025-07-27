@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
+import { UtilityService } from '../services/utility.service';
 
 @Component({
   selector: 'app-login-form',
@@ -15,7 +16,7 @@ export class LoginFormComponent {
   internetProblem : Boolean;
   // @Output() isLoggedIn = new EventEmitter<Boolean>();
 
-  constructor(private apiService : ApiService , private router: Router) {
+  constructor(private apiService : ApiService , private router: Router,private util:UtilityService) {
     if(localStorage.getItem('user')!==null)
     {
       this.router.navigate(['/orderType']);
@@ -76,7 +77,7 @@ export class LoginFormComponent {
     localStorage.setItem('loggedIn' , "true");
     localStorage.setItem('adminType' , this.validUsers[index]['type']);
     localStorage.setItem('shop',this.validUsers[index]['shop']);
-
+    this.util.loggedInSuccessfully.next(true);
     this.router.navigate(['/orderType']);
   }
 
