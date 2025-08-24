@@ -63,7 +63,7 @@ export class RegularOrderFormComponent implements OnInit {
     if(action === "edit")
     {
       let order = this.editOrderService.getRegularOrder();
-      console.log(order);
+      sessionStorage.setItem("orderOnUpdate" , JSON.stringify(order));
       this.regularOrderForm = new FormGroup({
         'totalAmount' : new FormControl({value : order['totalAmount'] , disabled : true},[Validators.required]),
         'advanceAmount' : new FormControl(order['advanceAmount'] , [Validators.required]),
@@ -122,7 +122,6 @@ export class RegularOrderFormComponent implements OnInit {
   {
     this.isLoading = true;
     this.apiService.getOrder(date , key).subscribe((order : any)=>{
-      sessionStorage.setItem("orderOnUpdate",JSON.stringify(order));
       this.regularOrderForm.patchValue({
         'totalAmount' : order.totalAmount,
         'advanceAmount' : order.advanceAmount,

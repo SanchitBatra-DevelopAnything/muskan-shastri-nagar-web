@@ -44,6 +44,7 @@ export class CustomerFormComponent implements OnInit {
         'deliveryTimeToShow' : new FormControl(order['deliveryTimeToShow'] , [Validators.required]), 
         'deliveryType' : new FormControl(order['deliveryType'],[Validators.required]),
      });
+     sessionStorage.setItem("customerInfo", JSON.stringify(this.customerForm.value));
     }
     else
     {
@@ -132,8 +133,21 @@ export class CustomerFormComponent implements OnInit {
 
   nextPage() : void
   {
-    sessionStorage.setItem("customerInfo",JSON.stringify(this.customerForm.value));
-    this.utilityService.formChange.next(2);
+    const previousCustomerInfo = sessionStorage.getItem("customerInfo");
+  const currentCustomerInfo = this.customerForm.value;
+
+  if (this.action === "edit" && previousCustomerInfo) {
+    const previousDeliveryDate = JSON.parse(previousCustomerInfo).deliveryDate;
+    const currentDeliveryDate = currentCustomerInfo.deliveryDate;
+
+    if (previousDeliveryDate !== currentDeliveryDate) {
+      sessionStorage.setItem("deliveryChanged", "true");
+      sessionStorage.setItem("previousDeliveryDate", previousDeliveryDate);
+    }
+  }
+
+  sessionStorage.setItem("customerInfo", JSON.stringify(currentCustomerInfo));
+  this.utilityService.formChange.next(2);
   }
 
 }
