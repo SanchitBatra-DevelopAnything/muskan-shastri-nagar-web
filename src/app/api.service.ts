@@ -225,7 +225,7 @@ export class ApiService {
       "deviceToken" : token,
       "matter" : Nbody,
       "title" : title,
-      "android_channel_id" : "Sweet-Shop-App-2", 
+      "android_channel_id" : "Sweet-Shop-App-3", 
   };
   // if(type == "cancel")
   // {
