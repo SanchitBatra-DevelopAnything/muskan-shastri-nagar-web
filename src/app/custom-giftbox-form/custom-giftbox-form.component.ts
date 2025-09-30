@@ -28,6 +28,7 @@ export class CustomGiftboxFormComponent implements OnInit {
         'totalAmount' : new FormControl(order['totalAmount'],[Validators.required]),
         'balanceAmount' : new FormControl(order['balanceAmount'],[Validators.required]),
         'advanceAmount' : new FormControl(order['advanceAmount'],[Validators.required]),
+        'discount':new FormControl(order['discount'] , [Validators.required]),
         'particulars' : new FormControl(order['particulars']),
         'qty' : new FormControl(order['qty']),
         'advancePaymentMode' : new FormControl(order['advancePaymentMode'] , [Validators.required]),
@@ -39,6 +40,7 @@ export class CustomGiftboxFormComponent implements OnInit {
         'totalAmount' : new FormControl(null,[Validators.required]),
         'balanceAmount' : new FormControl(null,[Validators.required]),
         'advanceAmount' : new FormControl(null,[Validators.required]),
+        'discount' : new FormControl(null , [Validators.required]),
         'particulars' : new FormControl(null),
         'qty' : new FormControl(null),
         'advancePaymentMode' : new FormControl('CARD' , [Validators.required]),
@@ -62,6 +64,8 @@ export class CustomGiftboxFormComponent implements OnInit {
       'totalAmount' : customOrderInfo.totalAmount,
       'balanceAmount' : customOrderInfo.balanceAmount,
       'advanceAmount' : customOrderInfo.advanceAmount,
+      'discount' : customOrderInfo.discount,
+      'qty' : customOrderInfo.qty,
       'advancePaymentMode' : customOrderInfo.advancePaymentMode,
       'particulars' : customOrderInfo.particulars
     });

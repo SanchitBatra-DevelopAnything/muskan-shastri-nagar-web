@@ -35,6 +35,14 @@
 
     <div class="form-group">
         <span style = "color: red;">*</span>
+        <span>Discount</span>
+    <div style = "width:50%;">
+        <input type = "number" class = "form-control" formControlName="discount">
+    </div>
+    </div>
+
+    <div class="form-group">
+        <span style = "color: red;">*</span>
         <span>Payment Mode</span>
     <div style = "width:50%;">
             <p-dropdown [options]="paymentOptions" optionLabel="name" optionValue = "name" formControlName = "advancePaymentMode"></p-dropdown>
