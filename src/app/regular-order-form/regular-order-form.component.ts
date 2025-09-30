@@ -68,12 +68,14 @@ export class RegularOrderFormComponent implements OnInit {
         'totalAmount' : new FormControl({value : order['totalAmount'] , disabled : true},[Validators.required]),
         'advanceAmount' : new FormControl(order['advanceAmount'] , [Validators.required]),
         'balanceAmount' : new FormControl({value : order['balanceAmount'] , disabled : true},[Validators.required]),
+        'discount':new FormControl(order['discount'],[Validators.required]),
         'advancePaymentMode' : new FormControl(order['advancePaymentMode'],[Validators.required]),
         'particulars' : new FormControl(order['particulars']),
       });
       this.items = [];
       this.items = order['items'];
       this.products = [...this.items];
+      console.log("EDIT RECOGNIZED");
     }
     else
     {
@@ -81,6 +83,7 @@ export class RegularOrderFormComponent implements OnInit {
         'totalAmount' : new FormControl({value : 0 , disabled : true},[Validators.required]),
         'advanceAmount' : new FormControl(null , [Validators.required]),
         'balanceAmount' : new FormControl({value : 0 , disabled : true},[Validators.required]),
+        'discount' : new FormControl(0,[Validators.required]),
         'advancePaymentMode' : new FormControl('CARD',[Validators.required]),
         'particulars' : new FormControl(''),
       });
@@ -96,6 +99,7 @@ export class RegularOrderFormComponent implements OnInit {
     if(orderKey!=null || orderKey!=undefined)
     {
       this.isEditMode = true;
+      console.log("orderKey was not null , so edit recognized");
       this.loadOnEditMode(selectedDate , orderKey);
     }
     this.type = this.route.snapshot.params['type'];
@@ -122,10 +126,12 @@ export class RegularOrderFormComponent implements OnInit {
   {
     this.isLoading = true;
     this.apiService.getOrder(date , key).subscribe((order : any)=>{
+      console.log("Load on edit method ne ye order liya : "+JSON.stringify(order));
       this.regularOrderForm.patchValue({
         'totalAmount' : order.totalAmount,
         'advanceAmount' : order.advanceAmount,
         'balanceAmount' : order.balanceAmount,
+        'discount' : order.discount,
         'advancePaymentMode' : order.advancePaymentMode,
         'particulars' : order.particulars,
       });
@@ -317,12 +323,13 @@ export class RegularOrderFormComponent implements OnInit {
     });
   }
 
-  updateBalance(advancePaid : any)
+  updateBalance()
   {
-    let adv = Number(advancePaid.target.value);
+    let adv = Number(this.regularOrderForm.getRawValue().advanceAmount);
+    let discount = Number(this.regularOrderForm.getRawValue().discount);
     let total = this.regularOrderForm.getRawValue().totalAmount;
     this.regularOrderForm.patchValue({
-      'balanceAmount' : total - adv,
+      'balanceAmount' : total - adv - discount,
     });
   }
 

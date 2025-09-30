@@ -99,6 +99,7 @@ export class ApiService {
     let total = customerOrderDetails.totalAmount;
     let advance = customerOrderDetails.advanceAmount;
     let balance = customerOrderDetails.balanceAmount;
+    let discount = customerOrderDetails.discount;
 
     let id = orderId['name'];
     let shop = localStorage.getItem('shop');
@@ -113,7 +114,7 @@ export class ApiService {
     {
       action = "accepted";
     }    
-    let message = `Hi ${name},\nYour order with ID : ${id} is ${action}.\nPlease find details.\n\nTotal:Rs.${total}\nAdvance:Rs.${advance}\nBalance:Rs.${balance}\n\nBooked On:${bookingDate}\nDeliver Date:${deliveryDate}\nDelivery Time:${deliveryTime}\nOther Details:${allDetails}\n\nNOTE : ORDER WILL NOT BE CANCELLED OR POSTPONED AFTER 2HRS OF BOOKING.\n\nThanks for ordering from ${shop} (PURE VEGETARIAN)`;
+    let message = `Hi ${name},\nYour order with ID : ${id} is ${action}.\nPlease find details.\n\nTotal:Rs.${total}\nAdvance:Rs.${advance}\nBalance:Rs.${balance}\nDiscount:Rs.${discount}\n\nBooked On:${bookingDate}\nDeliver Date:${deliveryDate}\nDelivery Time:${deliveryTime}\nOther Details:${allDetails}\n\nNOTE : ORDER WILL NOT BE CANCELLED OR POSTPONED AFTER 2HRS OF BOOKING.\n\nThanks for ordering from ${shop} (PURE VEGETARIAN)`;
     if(localStorage.getItem('on') == "TAB")
     {
       console.log("TAB SE MESSAGE GAYA!");

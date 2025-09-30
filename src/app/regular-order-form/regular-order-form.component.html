@@ -126,13 +126,17 @@
         </div>
         <div class="col-xs-6 col-md-3">
             <p>Advance Amount</p>
-            <input type = "number" class ="form-control" formControlName = "advanceAmount" (input) = "updateBalance($event)">
+            <input type = "number" class ="form-control" formControlName = "advanceAmount" (input) = "updateBalance()">
         </div>
-        <div class = "col-xs-6 col-md-3">
+        <div class = "col-xs-6 col-md-2">
             <p>Payment mode</p>
             <p-dropdown [options]="paymentOptions" optionLabel="name" optionValue = "name" formControlName = "advancePaymentMode"></p-dropdown>
         </div>
         <div class="col-xs-6 col-md-3">
+            <p>Discount</p>
+            <input type = "number" class ="form-control" formControlName = "discount" (input) = "updateBalance()">
+        </div>
+        <div class="col-xs-6 col-md-2">
             <p>Balance Amount</p>
             <input type = "number" class ="form-control" formControlName = "balanceAmount">
         </div>
