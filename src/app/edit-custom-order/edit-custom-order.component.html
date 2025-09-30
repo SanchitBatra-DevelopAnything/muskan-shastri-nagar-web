@@ -49,6 +49,11 @@
             <p>Balance Amount : Rs.{{loadedOrder.balanceAmount}}</p>
         </div>
     </div>
+    <div class="row" *ngIf = "type == 'owner'">
+        <div class="col-xs-12">
+            <p>Discount : Rs.{{loadedOrder.discount}}</p>
+        </div>
+    </div>
     <div class="row" *ngIf = "isRegularOrder">
         <div class="col-xs-12">
             Items:

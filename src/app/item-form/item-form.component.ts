@@ -40,6 +40,7 @@ export class ItemFormComponent implements OnInit {
         'totalAmount' : new FormControl(order['totalAmount'],[Validators.required]),
         'balanceAmount' : new FormControl(order['balanceAmount'],[Validators.required]),
         'advanceAmount' : new FormControl(order['advanceAmount'],[Validators.required]),
+        'discount':new FormControl(order['discount'] , [Validators.required]),
         'message' : new FormControl(order['message']),
         'particulars' : new FormControl(order['particulars']),
         'advancePaymentMode' : new FormControl(order['advancePaymentMode'] , [Validators.required]),
@@ -57,6 +58,7 @@ export class ItemFormComponent implements OnInit {
         'totalAmount' : new FormControl(null,[Validators.required]),
         'balanceAmount' : new FormControl(null,[Validators.required]),
         'advanceAmount' : new FormControl(null,[Validators.required]),
+        'discount' : new FormControl(null , [Validators.required]),
         'message' : new FormControl(''),
         'particulars' : new FormControl(''),
         'advancePaymentMode' : new FormControl('CARD' , [Validators.required]),
@@ -79,6 +81,8 @@ export class ItemFormComponent implements OnInit {
       'flavour' : customOrderInfo.flavour,
       'totalAmount' : customOrderInfo.totalAmount,
       'balanceAmount' : customOrderInfo.balanceAmount,
+      'discount' : customOrderInfo.discount,
+      'advanceAmount' : customOrderInfo.advanceAmount,
       'message' : customOrderInfo.message,
       'particulars' : customOrderInfo.particulars
     });
