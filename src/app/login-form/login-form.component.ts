@@ -85,6 +85,7 @@ export class LoginFormComponent {
   {
     this.validUsers =[{'username' : "muskan-admin" , 'password' : "muskan@admin@123" , "shop" : "Muskan Bakers and Sweets" , "type":"super-admin"},
       {'username' : "lovely-admin" , 'password' : "lovely@admin@123" , "shop" : "LOVELY BAKERS" , "type":"sub-admin"},
+      {'username' : "sona-admin" , 'password' : "sona@admin@123" , "shop" : "SONA BAKERS" , "type":"sub-admin"}
     ];
   }
 }

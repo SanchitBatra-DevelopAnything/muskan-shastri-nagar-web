@@ -92,10 +92,10 @@ export class DailyReportComponent implements OnInit {
       let temp_activeOrderKeys : any = Object.keys(orders);
       for(let i=0;i<temp_activeOrders.length;i++)
       {
-        if(temp_activeOrders[i].shop!=null && temp_activeOrders[i].shop.toLowerCase()=="muskan bakers and sweets" &&temp_activeOrders[i].shop.toLowerCase() != this.targetShop.toLowerCase())
+        if(!this.shouldProcessOrder(temp_activeOrders[i]))
         {
           console.log("Missed order : "+JSON.stringify(temp_activeOrders[i]));
-          //lovely me muskan ke order nahi daalne. muskan me sab daalna hai.
+          //lovely/sona me muskan ke order nahi daalne. muskan me sab daalna hai.
           continue;
         }
         if(temp_activeOrders[i].orderType!=null  && temp_activeOrders[i].orderType.toLowerCase() === "custom")
@@ -173,7 +173,7 @@ export class DailyReportComponent implements OnInit {
       let temp_activeOrderKeys : any = Object.keys(orders);
       for(let i=0;i<temp_activeOrders.length;i++)
       {
-        if(temp_activeOrders[i].shop!=null && temp_activeOrders[i].shop.toLowerCase()=="muskan bakers and sweets" &&temp_activeOrders[i].shop.toLowerCase() != this.targetShop.toLowerCase())
+        if(!this.shouldProcessOrder(temp_activeOrders[i]))
           {
             console.log("Missed order : "+JSON.stringify(temp_activeOrders[i]));
             //lovely me muskan ke order nahi daalne. muskan me sab daalna hai.
@@ -457,4 +457,20 @@ export class DailyReportComponent implements OnInit {
       }
     );
   }
+
+  private shouldProcessOrder(order: any): boolean {
+    if (!this.targetShop) return false;
+  
+    const target = this.targetShop.toLowerCase();
+    const orderShop = order.shop?.toLowerCase();
+  
+    // Muskan processes everything
+    if (target === 'muskan bakers and sweets') {
+      return true;
+    }
+  
+    // Other shops process only their own orders
+    return orderShop === target;
+  }
+  
 }

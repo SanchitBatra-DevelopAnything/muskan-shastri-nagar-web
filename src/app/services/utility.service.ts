@@ -15,7 +15,7 @@ export class UtilityService {
   }
 
   computeLogo(){
-  if(localStorage.getItem('shop') === 'LOVELY BAKERS')
+  if(localStorage.getItem('shop') === 'LOVELY BAKERS' || localStorage.getItem('shop') === 'SONA BAKERS')
   {
     return "../../assets/lovely.jpeg"
   }
