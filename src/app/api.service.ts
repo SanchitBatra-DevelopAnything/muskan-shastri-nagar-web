@@ -103,6 +103,10 @@ export class ApiService {
 
     let id = orderId['name'];
     let shop = localStorage.getItem('shop');
+    if(shop == "SONA BAKERS")
+      {
+        shop = "LOVELY BAKERS , KAVI NAGAR";
+      }
 
     let allDetails = `https://shastri-nagar-shop-app.web.app/#/detail/${deliveryDate1}/${id}`;
 
@@ -130,6 +134,10 @@ export class ApiService {
   public sendUpdateOrderWhatsapp(orderKey:any , isRegular:boolean , isEdit:boolean)
   {
     let shop = localStorage.getItem('shop');
+    if(shop == "SONA BAKERS")
+    {
+      shop = "LOVELY BAKERS , KAVI NAGAR";
+    }
     let mobile = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").Contact;
     let name = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").customerName;
     let deliveryDate = JSON.parse(sessionStorage.getItem("orderOnUpdate")+"").deliveryDate;
@@ -144,6 +152,10 @@ export class ApiService {
   public sendDeliveryMessage(orderKey : any , isRegular:boolean , mobile:any , name : any , deliverTo :string)
   {
     let shop = localStorage.getItem('shop');
+    if(shop == "SONA BAKERS")
+      {
+        shop = "LOVELY BAKERS , KAVI NAGAR";
+      }
     let message_regular = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered.\n\nThanks for ordering from ${shop}(PURE VEGETARIAN)`;
     let message = `Hi ${name},\nYour order with ID : ${orderKey} is Delivered to ${deliverTo}.\n\nThanks for ordering from ${shop}(PURE VEGETARIAN)`;
     let encoded = isRegular? encodeURI(message_regular) : encodeURI(message);
@@ -161,6 +173,10 @@ export class ApiService {
   public sendCancelMessage(orderKey : any , isRegular:boolean , mobile:any , name:any)
   {
     let shop = localStorage.getItem('shop');
+    if(shop == "SONA BAKERS")
+      {
+        shop = "LOVELY BAKERS , KAVI NAGAR";
+      }
     let message = `Hi ${name},\nYour order with ID : ${orderKey} is Cancelled.\n\nThanks for ordering from ${shop}`;
     let encoded = encodeURI(message);
     if(localStorage.getItem('on') == "TAB")
