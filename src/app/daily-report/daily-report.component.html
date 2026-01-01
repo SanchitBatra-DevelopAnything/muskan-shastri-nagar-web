@@ -51,6 +51,16 @@
                 >
                   LOVELY.
                 </div>
+                <div
+                  class="tag3"
+                  *ngIf="
+                    order.shop != null &&
+                    order.shop != undefined &&
+                    order.shop == 'SONA BAKERS'
+                  "
+                >
+                  SONA.
+                </div>
               </div>
             <hr style = "border: 1px solid black; width: 100%;">
             <p style = "font-size:12px; font-weight: 400;">{{getStatus(order.status)}}</p>
@@ -82,6 +92,16 @@
                 >
                   LOVELY.
                 </div>
+                <div
+                  class="tag3"
+                  *ngIf="
+                    order.shop != null &&
+                    order.shop != undefined &&
+                    order.shop == 'SONA BAKERS'
+                  "
+                >
+                  SONA.
+                </div>
               </div>
             <hr style = "border: 1px solid black; width: 100%;">
             <p style = "font-size:12px; font-weight: 400;">{{getStatus(order.status)}}</p>
@@ -99,6 +119,7 @@
             <p style = "font-weight: bold; font-size: 12px;">{{order.deliveryTime}}</p>
             <hr>
             <div class = "tag" *ngIf = "giftOrders[i].shop!=null && giftOrders[i].shop!=undefined && giftOrders[i].shop == 'LOVELY BAKERS'">LOVELY.</div>
+            <div class = "tag" *ngIf = "giftOrders[i].shop!=null && giftOrders[i].shop!=undefined && giftOrders[i].shop == 'SONA BAKERS'">SONA.</div>
             <hr>
             
             <hr style = "border: 1px solid black; width: 100%;">
